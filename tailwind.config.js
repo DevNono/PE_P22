@@ -1,7 +1,6 @@
 module.exports = {
 	content: [
-		'./resources/js/*.js',
-		'./views/*.twig',
+		'./resources/**/*.{twig,js}',
 	],
 	theme: {
 		extend: {},
