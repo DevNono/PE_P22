@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE $APP_PORT
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "start:production" ]

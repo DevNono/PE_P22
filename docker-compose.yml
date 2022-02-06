@@ -30,7 +30,6 @@ services:
     image: node-mysql-app
     ports:
       - $APP_PORT:$APP_PORT
-      - 3000:3000
     stdin_open: true
     tty: true
     networks:
