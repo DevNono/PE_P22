@@ -5,8 +5,10 @@
   "main": "server.js",
   "scripts": {
     "build": "docker-compose build",
+	"build:production": "npm run prod && npm run start:production",
     "clean:cache": "docker-compose rm -f",
     "start": "gulp build",
+	"start:production": "node server.js",
     "start:background": "docker-compose up -d",
     "dev": "npm run development",
     "development": "mix",
