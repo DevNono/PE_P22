@@ -46,5 +46,8 @@
     "laravel-mix": "^6.0.41",
     "nodemon": "^2.0.15",
     "sequelize-cli": "^6.4.1"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }
