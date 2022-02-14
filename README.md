@@ -8,7 +8,7 @@ Vous devez disposer d’au moins :
 - MySQL
 - Git (https://git-scm.com/downloads)
 
-## Installation
+## Installation 
 
 ```jsx
 git clone https://github.com/DevNono/PE_P22
