@@ -5,7 +5,7 @@
 Vous devez disposer d’au moins : 
 
 - NodeJS v16 / v17 (https://nodejs.org/en/)
-- MySQL
+- MySQL (https://dev.mysql.com/downloads/workbench/)
 - Git (https://git-scm.com/downloads)
 
 ## Installation 
