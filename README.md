@@ -5,7 +5,7 @@
 Vous devez disposer d’au moins : 
 
 - NodeJS v16 / v17 (https://nodejs.org/en/)
-- MySQL (https://dev.mysql.com/downloads/workbench/)
+- MySQL (https://laragon.org/download/index.html)
 - Git (https://git-scm.com/downloads)
 
 ## Installation 
