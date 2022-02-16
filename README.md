@@ -25,3 +25,15 @@ npx sequelize-cli db:seed:all // Seeding de la base de donnée
 
 npm run start // Démarrage du projet
 ```
+
+## Extensions VSCode recommandées
+```
+ESLint
+DotENV
+Headwind
+Json
+Material icon theme
+TailwindCSS IntelliSense
+Tailwind Docs
+Twig Language 2
+```
