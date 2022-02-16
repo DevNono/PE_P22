@@ -15,7 +15,7 @@ git clone https://github.com/DevNono/PE_P22
 
 cd ./PE_P22
 
-copy .env.exemple .env 
+copy .env.example .env 
 
 npm install
 
