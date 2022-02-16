@@ -23,5 +23,5 @@ npx sequelize-cli db:migrate // Migration de la base de donnée
 
 npx sequelize-cli db:seed:all // Seeding de la base de donnée
 
-npm start // Démarrage du projet
+npm run start // Démarrage du projet
 ```
