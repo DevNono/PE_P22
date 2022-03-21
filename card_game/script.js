@@ -80,6 +80,12 @@ const pseudo = [
 	},
 ];
 
+let games;
+
+function shuffle(array) {
+	array.sort(() => Math.random() - 0.5);
+}
+
 class Card {
 	constructor(valeur, type, lettre) {
 		this.valeur = valeur;
@@ -102,6 +108,9 @@ class Game {
 		this.time = 0;
 		this.joueurs = [];
 		this.cards = [];
+		this.manche = 0;
+		this.joueurs_en_cours = 0;
+		this.joueurs_en_vie = 3;
 
 		for (let i = 0; i < numeros.length; i++) {
 			const {valeur} = numeros[i];
@@ -117,10 +126,18 @@ class Game {
 			this.joueurs.push(new Joueur(nom));
 		}
 	}
+
+	// Installation(){
+	//     shuffle(games.cards);
+	//     for(let i=0;i<games.joueurs.length;i=i++){
+	//             games.joueurs[i].inventaire.push(games.cards[i])
+	//     };
+	// }
 }
 
-const game = new Game();
-
-console.log(game);
-
-document.querySelector('.test').innerHTML = game.cards.filter(c => c.valeur === 10 && c.type === 'trefle')[0].html;
+function game() {
+	games = new Game();
+	document.querySelector('.test').innerHTML = games.cards.filter(c => c.valeur === 10 && c.type === 'trefle')[0].html;
+	// Games.installation();
+	console.log(games);
+}
