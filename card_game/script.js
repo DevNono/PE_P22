@@ -80,11 +80,8 @@ const pseudo = [
 	},
 ];
 
-let games;
+var games;
 
-function shuffle(array) {
-	array.sort(() => Math.random() - 0.5);
-}
 
 class Card {
 	constructor(valeur, type, lettre) {
@@ -127,17 +124,29 @@ class Game {
 		}
 	}
 
-	// Installation(){
-	//     shuffle(games.cards);
-	//     for(let i=0;i<games.joueurs.length;i=i++){
-	//             games.joueurs[i].inventaire.push(games.cards[i])
-	//     };
-	// }
+	distribution(){
+		games.cards.sort(() => Math.random() - 0.5);
+	    for(let i=0;i<games.joueurs.length;i++){
+	        games.joueurs[i].inventaire.push(games.cards[0]);
+			games.cards.shift();
+			games.joueurs[i].inventaire.push(games.cards[0]);
+			games.cards.shift();
+	    };
+	}
+
+	pioche(joueur_en_cours){
+		games.joueurs[joueur_en_cours].inventaire.push(games.cards[0]);
+		games.cards.shift();
+	}
 }
 
 function game() {
 	games = new Game();
-	document.querySelector('.test').innerHTML = games.cards.filter(c => c.valeur === 10 && c.type === 'trefle')[0].html;
-	// Games.installation();
+	games.distribution();
+
+	// document.querySelector('.test').innerHTML = games.joueurs[0].inventaire[0].html;
+}
+
+function watch(){
 	console.log(games);
 }
