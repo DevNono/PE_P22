@@ -142,7 +142,6 @@ class Card {
 		this.valeur = valeur;
 		this.type = type;
 		this.lettre = lettre;
-		// this.html = (window.listeCartes.filter(c => c.valeur === valeur)[0].html).replace('card--type', 'card--' + type);
 	}
 }
 
@@ -185,12 +184,6 @@ class Game {
 		}
 	}
 
-	// Installation(){
-	//     shuffle(games.cards);
-	//     for(let i=0;i<games.joueurs.length;i=i++){
-	//             games.joueurs[i].inventaire.push(games.cards[i])
-	//     };
-	// }
 	tirer_carte_joueur(id) {
 		this.joueurs[id].inventaire.push(this.cards.shift());
 	}
@@ -263,13 +256,26 @@ class Game {
 
 		console.log(this.croupier.inventaire);
 	}
+
+	distribution() {
+		games.cards.sort(() => Math.random() - 0.5);
+		for (let i = 0; i < games.joueurs.length; i++) {
+			games.joueurs[i].inventaire.push(games.cards[0]);
+			games.cards.shift();
+			games.joueurs[i].inventaire.push(games.cards[0]);
+			games.cards.shift();
+		}
+	}
+
+	pioche(joueur_en_cours) {
+		games.joueurs[joueur_en_cours].inventaire.push(games.cards[0]);
+		games.cards.shift();
+	}
 }
 
 function game() {
 	games = new Game();
-	document.querySelector('.test').innerHTML = games.cards.filter(c => c.valeur === 10 && c.type === 'trefle')[0].html;
-	// Games.installation();
-	console.log(games);
+	games.distribution();
 }
 
 const jeu = new Game();
@@ -277,3 +283,16 @@ const jeu = new Game();
 shuffle_FY(jeu.cards);
 
 console.log(jeu.cards);
+
+function watch() {
+	console.log(games);
+}
+
+// Document.querySelector('.test').innerHTML = games.joueurs[0].inventaire[0].html;
+// Installation(){
+//     shuffle(games.cards);
+//     for(let i=0;i<games.joueurs.length;i=i++){
+//             games.joueurs[i].inventaire.push(games.cards[i])
+//     };
+// }
+// this.html = (window.listeCartes.filter(c => c.valeur === valeur)[0].html).replace('card--type', 'card--' + type);
