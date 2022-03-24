@@ -137,7 +137,7 @@ class Joueur {
 class Croupier {
 	constructor() {
 		this.inventaire = [];
-		this.score;
+		this.score = 0;
 	}
 }
 
@@ -244,7 +244,7 @@ class Game {
 	}
 
 	tour_suivant(joueur_en_cours) {
-		if (joueur_en_cours == games.joueurs.length - 1) {
+		if (joueur_en_cours === games.joueurs.length - 1) {
 			games.decompte_points();
 
 			let nbJoueurEnVie = 0;
@@ -258,7 +258,7 @@ class Game {
 				games.manche_suivante();
 			} else {
 				console.log('FINI');
-				clearInterval(decompte);
+				clearInterval(window.decompte);
 			}
 		} else if (games.joueurs[joueur_en_cours + 1].vie <= 0) {
 			games.tour_suivant(joueur_en_cours + 1);
@@ -295,7 +295,7 @@ class Game {
 	decompte_points() {
 		for (let index = 0; index < pseudo.length; index++) {
 			if (games.joueurs[index].score < games.croupier.score && games.joueurs[index].vie > 0) {
-				games.joueurs[index].vie = games.joueurs[index].vie - 1;
+				games.joueurs[index].vie -= 1;
 			}
 		}
 	}
@@ -307,10 +307,10 @@ function game() {
 	games.tour_croupier();
 }
 
-decompte = setInterval(() => {
+window.decompte = setInterval(() => {
 	games.time--;
 	console.log(games.time);
-	if (games.time == 0) {
+	if (games.time === 0) {
 		games.tour_suivant(games.joueurs_en_cours);
 	}
 }, 1000);
