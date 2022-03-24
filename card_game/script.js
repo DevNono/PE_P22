@@ -184,15 +184,7 @@ class Game {
 		}
 	}
 
-	tirer_carte_joueur(id) {
-		this.joueurs[id].inventaire.push(this.cards.shift());
-	}
-
-	distribuer() {
-		for (let i = 0; i < this.joueurs.length; i++) {
-			this.tirer_carte(i);
-		}
-	}
+	// Viet
 
 	tour_croupier() {
 		let as = 0;
@@ -257,6 +249,8 @@ class Game {
 		console.log(this.croupier.inventaire);
 	}
 
+	// Younes
+
 	distribution() {
 		games.cards.sort(() => Math.random() - 0.5);
 		for (let i = 0; i < games.joueurs.length; i++) {
@@ -278,15 +272,15 @@ function game() {
 	games.distribution();
 }
 
-const jeu = new Game();
-
-shuffle_FY(jeu.cards);
-
-console.log(jeu.cards);
+// const jeu = new Game();
 
 function watch() {
 	console.log(games);
 }
+
+// shuffle_FY(jeu.cards);
+
+// console.log(jeu.cards);
 
 // Document.querySelector('.test').innerHTML = games.joueurs[0].inventaire[0].html;
 // Installation(){
