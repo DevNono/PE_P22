@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 const numeros = [
 	{
 		valeur: 1,
@@ -41,15 +40,15 @@ const numeros = [
 		lettre: '10',
 	},
 	{
-		valeur: 11,
+		valeur: 10,
 		lettre: 'V',
 	},
 	{
-		valeur: 12,
+		valeur: 10,
 		lettre: 'D',
 	},
 	{
-		valeur: 13,
+		valeur: 10,
 		lettre: 'R',
 	},
 ];
@@ -83,13 +82,6 @@ const pseudo = [
 
 let games;
 
-function shuffle_FY(array) {
-	for (let i = array.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1));
-		[array[i], array[j]] = [array[j], array[i]];
-	}
-}
-
 function max(array) {
 	let max = array[0];
 	for (let i = 1; i < array.length; i++) {
@@ -110,18 +102,6 @@ function min(array) {
 	}
 
 	return min;
-}
-
-function valeur_carte(carte) {
-	if (carte.valeur > 10) {
-		return 10;
-	}
-
-	if (carte.valeur === 1) {
-		return 1;
-	}
-
-	return carte.valeur;
 }
 
 function best_under_17(combinaison) {
@@ -149,19 +129,21 @@ class Joueur {
 	constructor(pseudo) {
 		this.identifiant = pseudo;
 		this.inventaire = [];
-		this.vie = 3;
+		this.vie = 1;
+		this.score = 0;
 	}
 }
 
 class Croupier {
 	constructor() {
 		this.inventaire = [];
+		this.score;
 	}
 }
 
 class Game {
 	constructor() {
-		this.time = 0;
+		this.time = 20;
 		this.joueurs = [];
 		this.cards = [];
 		this.manche = 0;
@@ -184,14 +166,12 @@ class Game {
 		}
 	}
 
-	// Viet
-
 	tour_croupier() {
 		let as = 0;
 		const position = [];
 		for (let i = 0; i < 2; i++) {
-			this.croupier.inventaire.push(this.cards.shift());
-			if (this.croupier.inventaire[i].valeur === 1) {
+			games.croupier.inventaire.push(games.cards.shift());
+			if (games.croupier.inventaire[i].valeur === 1) {
 				as += 1;
 			} else {
 				position.push(i);
@@ -208,19 +188,15 @@ class Game {
 			}
 		}
 
-		console.log(combinaison);
-
-		let somme_croupier = valeur_carte(this.croupier.inventaire[0]) + valeur_carte(this.croupier.inventaire[1]);
-		console.log(somme_croupier);
+		let somme_croupier = games.croupier.inventaire[0].valeur + games.croupier.inventaire[1].valeur;
 
 		if (!(arrayEquals(combinaison, []))) {
 			for (const element of position) {
-				[combinaison[0], combinaison[1]] = [combinaison[0] + valeur_carte(this.croupier.inventaire[element]), combinaison[1] + valeur_carte(this.croupier.inventaire[element])];
+				[combinaison[0], combinaison[1]] = [combinaison[0] + games.croupier.inventaire[element].valeur, combinaison[1] + games.croupier.inventaire[element].valeur];
 				somme_croupier = max(combinaison);
 			}
 		}
 
-		console.log(somme_croupier);
 		let a = 1;
 		while (somme_croupier < 17) {
 			a += 1;
@@ -228,57 +204,131 @@ class Game {
 			if (this.croupier.inventaire[a].valeur === 1) {
 				as += 1;
 				if (as === 1) {
-					combinaison.push([somme_croupier + 1, somme_croupier + 11]);
+					const combinaison = [somme_croupier + 1, somme_croupier + 11];
 					somme_croupier = best_under_17(combinaison);
-					console.log(somme_croupier);
 				} else if (as !== 0) {
 					for (let i = 0; i < combinaison.length; i++) {
 						combinaison[i] += 1;
 					}
 
-					console.log(combinaison);
 					somme_croupier = best_under_17(combinaison);
-					console.log(somme_croupier);
 				}
 			} else {
-				somme_croupier += valeur_carte(this.croupier.inventaire[a]);
-				console.log(somme_croupier);
+				somme_croupier += games.croupier.inventaire[a].valeur;
 			}
 		}
 
-		console.log(this.croupier.inventaire);
+		games.croupier.score = somme_croupier;
 	}
-
-	// Younes
 
 	distribution() {
 		games.cards.sort(() => Math.random() - 0.5);
 		for (let i = 0; i < games.joueurs.length; i++) {
-			games.joueurs[i].inventaire.push(games.cards[0]);
-			games.cards.shift();
-			games.joueurs[i].inventaire.push(games.cards[0]);
-			games.cards.shift();
+			for (let k = 0; k < 2; k++) {
+				games.joueurs[i].inventaire.push(games.cards.shift());
+			}
+
+			games.joueurs[i].score = games.joueurs[i].inventaire[0].valeur + games.joueurs[i].inventaire[1].valeur;
 		}
 	}
 
 	pioche(joueur_en_cours) {
-		games.joueurs[joueur_en_cours].inventaire.push(games.cards[0]);
-		games.cards.shift();
+		games.joueurs[joueur_en_cours].inventaire.push(games.cards.shift());
+		const position = games.joueurs[joueur_en_cours].inventaire.length - 1;
+		games.joueurs[joueur_en_cours].score += games.joueurs[joueur_en_cours].inventaire[position].valeur;
+		if (games.joueurs[joueur_en_cours].score > 21) {
+			games.tour_suivant(joueur_en_cours);
+		} else {
+			games.time = 20;
+		}
+	}
+
+	tour_suivant(joueur_en_cours) {
+		if (joueur_en_cours == games.joueurs.length - 1) {
+			games.decompte_points();
+
+			let nbJoueurEnVie = 0;
+			for (let index = 0; index < pseudo.length; index++) {
+				if (games.joueurs[index].vie > 0) {
+					nbJoueurEnVie++;
+				}
+			}
+
+			if (nbJoueurEnVie > 1) {
+				games.manche_suivante();
+			} else {
+				console.log('FINI');
+				clearInterval(decompte);
+			}
+		} else if (games.joueurs[joueur_en_cours + 1].vie <= 0) {
+			games.tour_suivant(joueur_en_cours + 1);
+		} else {
+			games.joueurs_en_cours = joueur_en_cours + 1;
+			games.time = 20;
+		}
+	}
+
+	manche_suivante() {
+		games.time = 20;
+		games.cards = [];
+		games.manche += 1;
+		games.joueurs_en_cours = 0;
+		games.croupier = new Croupier();
+
+		for (let i = 0; i < numeros.length; i++) {
+			const {valeur} = numeros[i];
+			const {lettre} = numeros[i];
+			for (let j = 0; j < symboles.length; j++) {
+				const {type} = symboles[j];
+				games.cards.push(new Card(valeur, type, lettre));
+			}
+		}
+
+		for (let index = 0; index < pseudo.length; index++) {
+			games.joueurs[index].inventaire = [];
+		}
+
+		games.distribution();
+		games.tour_croupier();
+	}
+
+	decompte_points() {
+		for (let index = 0; index < pseudo.length; index++) {
+			if (games.joueurs[index].score < games.croupier.score && games.joueurs[index].vie > 0) {
+				games.joueurs[index].vie = games.joueurs[index].vie - 1;
+			}
+		}
 	}
 }
 
 function game() {
 	games = new Game();
 	games.distribution();
+	games.tour_croupier();
 }
 
-// const jeu = new Game();
+decompte = setInterval(() => {
+	games.time--;
+	console.log(games.time);
+	if (games.time == 0) {
+		games.tour_suivant(games.joueurs_en_cours);
+	}
+}, 1000);
+
+// Const jeu = new Game();
 
 function watch() {
 	console.log(games);
 }
 
-// shuffle_FY(jeu.cards);
+// Shuffle_FY(jeu.cards);
+
+// function shuffle_FY(array) {
+// 	for (let i = array.length - 1; i > 0; i--) {
+// 		const j = Math.floor(Math.random() * (i + 1));
+// 		[array[i], array[j]] = [array[j], array[i]];
+// 	}
+// }
 
 // console.log(jeu.cards);
 
