@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const numeros = [
 	{
 		valeur: 1,
@@ -82,8 +83,58 @@ const pseudo = [
 
 let games;
 
-function shuffle(array) {
-	array.sort(() => Math.random() - 0.5);
+function shuffle_FY(array) {
+	for (let i = array.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[array[i], array[j]] = [array[j], array[i]];
+	}
+}
+
+function max(array) {
+	let max = array[0];
+	for (let i = 1; i < array.length; i++) {
+		if (array[i] > max) {
+			max = array[i];
+		}
+	}
+
+	return max;
+}
+
+function min(array) {
+	let min = array[0];
+	for (let i = 1; i < array.length; i++) {
+		if (array[i] < min) {
+			min = array[i];
+		}
+	}
+
+	return min;
+}
+
+function valeur_carte(carte) {
+	if (carte.valeur > 10) {
+		return 10;
+	}
+
+	if (carte.valeur === 1) {
+		return 1;
+	}
+
+	return carte.valeur;
+}
+
+function best_under_17(combinaison) {
+	if (min(combinaison) > 21) {
+		return min(combinaison);
+	}
+
+	const nouvel_combinaison = combinaison.filter(element => element <= 21);
+	return max(nouvel_combinaison);
+}
+
+function arrayEquals(a, b) {
+	return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((val, index) => val === b[index]);
 }
 
 class Card {
@@ -91,7 +142,6 @@ class Card {
 		this.valeur = valeur;
 		this.type = type;
 		this.lettre = lettre;
-		this.html = (window.listeCartes.filter(c => c.valeur === valeur)[0].html).replace('card--type', 'card--' + type);
 	}
 }
 
@@ -103,6 +153,12 @@ class Joueur {
 	}
 }
 
+class Croupier {
+	constructor() {
+		this.inventaire = [];
+	}
+}
+
 class Game {
 	constructor() {
 		this.time = 0;
@@ -111,6 +167,7 @@ class Game {
 		this.manche = 0;
 		this.joueurs_en_cours = 0;
 		this.joueurs_en_vie = 3;
+		this.croupier = new Croupier();
 
 		for (let i = 0; i < numeros.length; i++) {
 			const {valeur} = numeros[i];
@@ -127,17 +184,109 @@ class Game {
 		}
 	}
 
-	// Installation(){
-	//     shuffle(games.cards);
-	//     for(let i=0;i<games.joueurs.length;i=i++){
-	//             games.joueurs[i].inventaire.push(games.cards[i])
-	//     };
-	// }
+	// Viet
+
+	tour_croupier() {
+		let as = 0;
+		const position = [];
+		for (let i = 0; i < 2; i++) {
+			this.croupier.inventaire.push(this.cards.shift());
+			if (this.croupier.inventaire[i].valeur === 1) {
+				as += 1;
+			} else {
+				position.push(i);
+			}
+		}
+
+		const combinaison = [];
+		if (as !== 0) {
+			combinaison.push(1);
+			combinaison.push(11);
+			for (let i = 1; i < as; i++) {
+				combinaison[0] += 1;
+				combinaison[1] += 1;
+			}
+		}
+
+		console.log(combinaison);
+
+		let somme_croupier = valeur_carte(this.croupier.inventaire[0]) + valeur_carte(this.croupier.inventaire[1]);
+		console.log(somme_croupier);
+
+		if (!(arrayEquals(combinaison, []))) {
+			for (const element of position) {
+				[combinaison[0], combinaison[1]] = [combinaison[0] + valeur_carte(this.croupier.inventaire[element]), combinaison[1] + valeur_carte(this.croupier.inventaire[element])];
+				somme_croupier = max(combinaison);
+			}
+		}
+
+		console.log(somme_croupier);
+		let a = 1;
+		while (somme_croupier < 17) {
+			a += 1;
+			this.croupier.inventaire.push(this.cards.shift());
+			if (this.croupier.inventaire[a].valeur === 1) {
+				as += 1;
+				if (as === 1) {
+					combinaison.push([somme_croupier + 1, somme_croupier + 11]);
+					somme_croupier = best_under_17(combinaison);
+					console.log(somme_croupier);
+				} else if (as !== 0) {
+					for (let i = 0; i < combinaison.length; i++) {
+						combinaison[i] += 1;
+					}
+
+					console.log(combinaison);
+					somme_croupier = best_under_17(combinaison);
+					console.log(somme_croupier);
+				}
+			} else {
+				somme_croupier += valeur_carte(this.croupier.inventaire[a]);
+				console.log(somme_croupier);
+			}
+		}
+
+		console.log(this.croupier.inventaire);
+	}
+
+	// Younes
+
+	distribution() {
+		games.cards.sort(() => Math.random() - 0.5);
+		for (let i = 0; i < games.joueurs.length; i++) {
+			games.joueurs[i].inventaire.push(games.cards[0]);
+			games.cards.shift();
+			games.joueurs[i].inventaire.push(games.cards[0]);
+			games.cards.shift();
+		}
+	}
+
+	pioche(joueur_en_cours) {
+		games.joueurs[joueur_en_cours].inventaire.push(games.cards[0]);
+		games.cards.shift();
+	}
 }
 
 function game() {
 	games = new Game();
-	document.querySelector('.test').innerHTML = games.cards.filter(c => c.valeur === 10 && c.type === 'trefle')[0].html;
-	// Games.installation();
+	games.distribution();
+}
+
+// const jeu = new Game();
+
+function watch() {
 	console.log(games);
 }
+
+// shuffle_FY(jeu.cards);
+
+// console.log(jeu.cards);
+
+// Document.querySelector('.test').innerHTML = games.joueurs[0].inventaire[0].html;
+// Installation(){
+//     shuffle(games.cards);
+//     for(let i=0;i<games.joueurs.length;i=i++){
+//             games.joueurs[i].inventaire.push(games.cards[i])
+//     };
+// }
+// this.html = (window.listeCartes.filter(c => c.valeur === valeur)[0].html).replace('card--type', 'card--' + type);
