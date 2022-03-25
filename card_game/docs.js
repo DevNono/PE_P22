@@ -1,54 +1,54 @@
 window.listeCartes = [
 	{
-		valeur: 1,
+		lettre: 'A',
 		html: '<section class="card card--type" value="A"><div class="card__inner card__inner--centered ace"><div class="card__symbol"></div></div></section>',
 	},
 	{
-		valeur: 2,
+		lettre: '2',
 		html: '<section class="card card--type" value="2"><div class="card__inner card__inner--centered"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>',
 	},
 	{
-		valeur: 3,
+		lettre: '3',
 		html: '<section class="card card--type" value="3"><div class="card__inner card__inner--centered"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>',
 	},
 	{
-		valeur: 4,
+		lettre: '4',
 		html: '<section class="card card--type" value="4"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>',
 	},
 	{
-		valeur: 5,
+		lettre: '5',
 		html: '<section class="card card--type" value="5"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div><div class="card__column card__column--centered"><div class="card__symbol"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>',
 	},
 	{
-		valeur: 6,
+		lettre: '6',
 		html: '<section class="card card--type" value="6"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>',
 	},
 	{
-		valeur: 7,
+		lettre: '7',
 		html: '<section class="card card--type" value="7"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol"></div></div><div class="card__column card__column--centered"><div class="card__symbol card__symbol--huge"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>',
 	},
 	{
-		valeur: 8,
+		lettre: '8',
 		html: '<section class="card card--type" value="8"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol"></div></div><div class="card__column card__column--centered"><div class="card__symbol card__symbol--big"></div><div class="card__symbol card__symbol--big"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>',
 	},
 	{
-		valeur: 9,
+		lettre: '9',
 		html: '<section class="card card--type" value="9"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol card__symbol--rotated"></div><div class="card__symbol"></div></div><div class="card__column card__column--centered"><div class="card__symbol card__symbol"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol card__symbol--rotated"></div><div class="card__symbol"></div></div></div></section>',
 	},
 	{
-		valeur: 10,
+		lettre: '10',
 		html: '<section class="card card--type" value="10"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol card__symbol--rotated"></div><div class="card__symbol"></div></div><div class="card__column card__column--centered"><div class="card__symbol card__symbol--big"></div><div class="card__symbol card__symbol--big"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol card__symbol--rotated"></div><div class="card__symbol"></div></div></div></section></section>',
 	},
 	{
-		valeur: 11,
-		html: '<section class="card card--type" value="1"> <div class="card__inner card__inner--centered"> <div class="card__column card__column--centered"> <div class="card__symbol"></div> </div> </div> </section>',
+		lettre: 'V',
+		html: '<section class="card card--type" value="V"><div class="card__inner card__inner--centered"> <img class="card-svg" src="{{ svg }}" alt="Card SVG"/> </div></section>',
 	},
 	{
-		valeur: 12,
-		html: '<section class="card card--type" value="1"> <div class="card__inner card__inner--centered"> <div class="card__column card__column--centered"> <div class="card__symbol"></div> </div> </div> </section>',
+		lettre: 'D',
+		html: '<section class="card card--type" value="D"> <div class="card__inner card__inner--centered"> <img class="card-svg" src="{{ svg }}" alt="Card SVG"/> </div></section>',
 	},
 	{
-		valeur: 13,
-		html: '<section class="card card--type" value="1"> <div class="card__inner card__inner--centered"> <div class="card__column card__column--centered"> <div class="card__symbol"></div> </div> </div> </section>',
+		lettre: 'R',
+		html: '<section class="card card--type" value="R"> <div class="card__inner card__inner--centered"> <img class="card-svg" src="{{ svg }}" alt="Card SVG"/> </div> </section>',
 	},
 ];

@@ -8,6 +8,12 @@ body {
   max-width: 640px;
   margin: 0 auto;
 }
+
+.card-svg {
+  overflow: visible;
+  transform: scale(1.15);
+}
+
 .card {
   position: relative;
   display: inline-block;

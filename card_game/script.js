@@ -122,6 +122,11 @@ class Card {
 		this.valeur = valeur;
 		this.type = type;
 		this.lettre = lettre;
+		this.html = (window.listeCartes.filter(c => c.lettre === lettre)[0].html).replace('card--type', 'card--' + type);
+
+		if (valeur === 10 && lettre !== '10') {
+			this.html = this.html.replace('{{ svg }}', './assets/' + type + '_' + lettre + '.svg');
+		}
 	}
 }
 
@@ -305,15 +310,17 @@ function game() {
 	games = new Game();
 	games.distribution();
 	games.tour_croupier();
-}
+	document.querySelector('.test').innerHTML = games.joueurs[0].inventaire[0].html;
+	document.querySelector('.test2').innerHTML = games.joueurs[0].inventaire[1].html;
 
-window.decompte = setInterval(() => {
-	games.time--;
-	console.log(games.time);
-	if (games.time === 0) {
-		games.tour_suivant(games.joueurs_en_cours);
-	}
-}, 1000);
+	window.decompte = setInterval(() => {
+		games.time--;
+		console.log(games.time);
+		if (games.time === 0) {
+			games.tour_suivant(games.joueurs_en_cours);
+		}
+	}, 1000);
+}
 
 // Const jeu = new Game();
 
@@ -332,11 +339,9 @@ function watch() {
 
 // console.log(jeu.cards);
 
-// Document.querySelector('.test').innerHTML = games.joueurs[0].inventaire[0].html;
 // Installation(){
 //     shuffle(games.cards);
 //     for(let i=0;i<games.joueurs.length;i=i++){
 //             games.joueurs[i].inventaire.push(games.cards[i])
 //     };
 // }
-// this.html = (window.listeCartes.filter(c => c.valeur === valeur)[0].html).replace('card--type', 'card--' + type);
