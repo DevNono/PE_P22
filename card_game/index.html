@@ -11,12 +11,43 @@
 </head>
 <body>
 
-	<div class="test"></div>
-    <div class="test2"></div>
     <input type="button" value="Lancement" id="button" onclick="game()">
-    <input type="button" value="pioche" id="button" onclick="games.pioche(games.joueurs_en_cours)">
-    <input type="button" value="result" id="button" onclick="watch()">
-    <input type="button" value="Tour suivant" id="button" onclick="games.tour_suivant(games.joueurs_en_cours)">
+    <input type="button" value="Résultat" id="button" onclick="watch()">
+	<div class="container">
+
+        <div class="croupier">
+            
+            <div class="affichageCroupier">
+                <div class="vie" style="display : none"></div>
+                <div class="main"></div>
+                <div class="score"></div>
+            </div>
+        
+
+        </div>
+
+        <div class="joueurs">
+
+            <div class="chrono">
+            </div>
+
+            <div class="affichageJoueurs">
+
+                <div class="vie"></div>
+                <div class="main"></div>
+                <div class="score"></div>
+
+            </div>
+
+            <div class="bouton">
+                <input type="button" value="pioche" id="button" onclick="games.pioche(games.joueurs_en_cours)">
+                <input type="button" value="Tour suivant" id="button" onclick="games.tour_suivant(games.joueurs_en_cours)">
+            </div>
+            
+        </div>
+
+
+    </div>
 
 </body>
 </html>

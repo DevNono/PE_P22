@@ -81,6 +81,9 @@ const pseudo = [
 ];
 
 let games;
+const affichageCroupier = document.querySelector('.croupier .affichageCroupier');
+const scoreCroupier = document.querySelector('.croupier .score');
+const affichageJoueur = document.querySelector('.joueurs .affichageJoueurs');
 
 function max(array) {
 	let max = array[0];
@@ -141,6 +144,7 @@ class Joueur {
 
 class Croupier {
 	constructor() {
+		this.identifiant = 'Croupier';
 		this.inventaire = [];
 		this.score = 0;
 	}
@@ -224,6 +228,7 @@ class Game {
 		}
 
 		games.croupier.score = somme_croupier;
+		games.afficherCartes(affichageCroupier, games.croupier);
 	}
 
 	distribution() {
@@ -235,12 +240,15 @@ class Game {
 
 			games.joueurs[i].score = games.joueurs[i].inventaire[0].valeur + games.joueurs[i].inventaire[1].valeur;
 		}
+
+		games.afficherCartes(affichageJoueur, games.joueurs[games.joueurs_en_cours]);
 	}
 
 	pioche(joueur_en_cours) {
 		games.joueurs[joueur_en_cours].inventaire.push(games.cards.shift());
 		const position = games.joueurs[joueur_en_cours].inventaire.length - 1;
 		games.joueurs[joueur_en_cours].score += games.joueurs[joueur_en_cours].inventaire[position].valeur;
+		games.afficherCartes(affichageJoueur, games.joueurs[joueur_en_cours]);
 		if (games.joueurs[joueur_en_cours].score > 21) {
 			games.tour_suivant(joueur_en_cours);
 		} else {
@@ -263,12 +271,14 @@ class Game {
 				games.manche_suivante();
 			} else {
 				console.log('FINI');
+				games.afficherCartes(affichageJoueur, games.joueurs[joueur_en_cours]);
 				clearInterval(window.decompte);
 			}
 		} else if (games.joueurs[joueur_en_cours + 1].vie <= 0) {
 			games.tour_suivant(joueur_en_cours + 1);
 		} else {
 			games.joueurs_en_cours = joueur_en_cours + 1;
+			games.afficherCartes(affichageJoueur, games.joueurs[joueur_en_cours + 1]);
 			games.time = 20;
 		}
 	}
@@ -279,6 +289,7 @@ class Game {
 		games.manche += 1;
 		games.joueurs_en_cours = 0;
 		games.croupier = new Croupier();
+		games.afficherCartes(affichageJoueur, games.joueurs[games.joueurs_en_cours]);
 
 		for (let i = 0; i < numeros.length; i++) {
 			const {valeur} = numeros[i];
@@ -295,13 +306,29 @@ class Game {
 
 		games.distribution();
 		games.tour_croupier();
+
+		if (games.joueurs[games.joueurs_en_cours].vie <= 0) {
+			games.tour_suivant(games.joueurs_en_cours);
+		}
 	}
 
 	decompte_points() {
 		for (let index = 0; index < pseudo.length; index++) {
-			if (games.joueurs[index].score < games.croupier.score && games.joueurs[index].vie > 0) {
+			if (((games.joueurs[index].score < games.croupier.score) || (games.joueurs[index].score > 21)) && (games.joueurs[index].vie > 0)) {
 				games.joueurs[index].vie -= 1;
 			}
+		}
+	}
+
+	afficherCartes(emplacement, contenu) {
+		emplacement.children[0].innerHTML = contenu.vie;
+		emplacement.children[2].innerHTML = contenu.identifiant + ':' + contenu.score;
+
+		emplacement.children[1].innerHTML = '';
+		for (let k = 0; k < contenu.inventaire.length; k++) {
+			const new_carte_html = document.createElement('carte');
+			new_carte_html.innerHTML = contenu.inventaire[k].html;
+			emplacement.children[1].appendChild(new_carte_html);
 		}
 	}
 }
@@ -310,19 +337,15 @@ function game() {
 	games = new Game();
 	games.distribution();
 	games.tour_croupier();
-	document.querySelector('.test').innerHTML = games.joueurs[0].inventaire[0].html;
-	document.querySelector('.test2').innerHTML = games.joueurs[0].inventaire[1].html;
 
 	window.decompte = setInterval(() => {
 		games.time--;
-		console.log(games.time);
+		document.querySelector('.chrono').innerHTML = games.time;
 		if (games.time === 0) {
 			games.tour_suivant(games.joueurs_en_cours);
 		}
 	}, 1000);
 }
-
-// Const jeu = new Game();
 
 function watch() {
 	console.log(games);
@@ -335,13 +358,4 @@ function watch() {
 // 		const j = Math.floor(Math.random() * (i + 1));
 // 		[array[i], array[j]] = [array[j], array[i]];
 // 	}
-// }
-
-// console.log(jeu.cards);
-
-// Installation(){
-//     shuffle(games.cards);
-//     for(let i=0;i<games.joueurs.length;i=i++){
-//             games.joueurs[i].inventaire.push(games.cards[i])
-//     };
 // }

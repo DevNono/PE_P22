@@ -3,6 +3,52 @@ body {
   margin: 0;
   background: #f0f0f0;
 }
+
+/* CSS lié à l'affichage du jeu*/
+
+.container{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.croupier{
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.affichageCroupier{
+  display: flex;
+  flex-direction: column;
+}
+
+.joueurs{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chrono, .bouton{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.affichageJoueurs{
+  display: flex;
+  flex-direction: column;
+}
+
+.vie,.score,.main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* CSS lié aux carte*/
 .cards {
   text-align: center;
   max-width: 640px;
