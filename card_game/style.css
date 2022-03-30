@@ -1,7 +1,8 @@
 body {
   padding: 0;
   margin: 0;
-  background: #f0f0f0;
+  background: url(assets/background/motif_table.png);
+  background-repeat: repeat;
 }
 
 /* CSS lié à l'affichage du jeu*/

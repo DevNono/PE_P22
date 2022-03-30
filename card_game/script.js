@@ -85,35 +85,13 @@ const affichageCroupier = document.querySelector('.croupier .affichageCroupier')
 const scoreCroupier = document.querySelector('.croupier .score');
 const affichageJoueur = document.querySelector('.joueurs .affichageJoueurs');
 
-function max(array) {
-	let max = array[0];
-	for (let i = 1; i < array.length; i++) {
-		if (array[i] > max) {
-			max = array[i];
-		}
-	}
-
-	return max;
-}
-
-function min(array) {
-	let min = array[0];
-	for (let i = 1; i < array.length; i++) {
-		if (array[i] < min) {
-			min = array[i];
-		}
-	}
-
-	return min;
-}
-
 function best_under_17(combinaison) {
-	if (min(combinaison) > 21) {
-		return min(combinaison);
+	if (Math.min(...combinaison) > 21) {
+		return Math.min(...combinaison);
 	}
 
 	const nouvel_combinaison = combinaison.filter(element => element <= 21);
-	return max(nouvel_combinaison);
+	return Math.max(...nouvel_combinaison);
 }
 
 function arrayEquals(a, b) {
@@ -187,10 +165,9 @@ class Game {
 			}
 		}
 
-		const combinaison = [];
+		let combinaison = [];
 		if (as !== 0) {
-			combinaison.push(1);
-			combinaison.push(11);
+			combinaison = [1, 11];
 			for (let i = 1; i < as; i++) {
 				combinaison[0] += 1;
 				combinaison[1] += 1;
@@ -202,7 +179,7 @@ class Game {
 		if (!(arrayEquals(combinaison, []))) {
 			for (const element of position) {
 				[combinaison[0], combinaison[1]] = [combinaison[0] + games.croupier.inventaire[element].valeur, combinaison[1] + games.croupier.inventaire[element].valeur];
-				somme_croupier = max(combinaison);
+				somme_croupier = Math.max(...combinaison);
 			}
 		}
 
@@ -232,7 +209,7 @@ class Game {
 	}
 
 	distribution() {
-		games.cards.sort(() => Math.random() - 0.5);
+		games.cards.sort(() => Math.random() - 0.5); // A changer car mélange bizarre
 		for (let i = 0; i < games.joueurs.length; i++) {
 			for (let k = 0; k < 2; k++) {
 				games.joueurs[i].inventaire.push(games.cards.shift());
@@ -322,7 +299,7 @@ class Game {
 
 	afficherCartes(emplacement, contenu) {
 		emplacement.children[0].innerHTML = contenu.vie;
-		emplacement.children[2].innerHTML = contenu.identifiant + ':' + contenu.score;
+		emplacement.children[2].innerHTML = contenu.identifiant + ' : ' + contenu.score;
 
 		emplacement.children[1].innerHTML = '';
 		for (let k = 0; k < contenu.inventaire.length; k++) {
