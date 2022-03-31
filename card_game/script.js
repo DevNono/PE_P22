@@ -112,6 +112,18 @@ class Card {
 			this.html = this.html.replace('{{ svg }}', './assets/' + type + '_' + lettre + '.svg');
 		}
 	}
+
+	verso() {
+		this.html = (window.listeCartes.filter(c => c.lettre === 'C')[0].html); // A optimiser je pense, voir docs.js - Viêt
+	}
+
+	recto() {
+		this.html = (window.listeCartes.filter(c => c.lettre === this.lettre)[0].html).replace('card--type', 'card--' + this.type); // Réaffiche le html des cartes
+
+		if (this.valeur === 10 && this.lettre !== '10') {
+			this.html = this.html.replace('{{ svg }}', './assets/' + this.type + '_' + this.lettre + '.svg');
+		}
+	}
 }
 
 class Joueur {
@@ -188,7 +200,7 @@ class Game {
 		}
 
 		let a = 1;
-		while (somme_croupier < 10) {
+		while (somme_croupier < 17) {
 			a += 1;
 			this.croupier.inventaire.push(this.cards.shift());
 			if (this.croupier.inventaire[a].valeur === 1) {
@@ -208,21 +220,26 @@ class Game {
 			}
 		}
 
-		games.croupier.score = somme_croupier;
+		for (let i = 1; i < this.croupier.inventaire.length; i++) {
+			this.croupier.inventaire[i].verso();
+		}
+
+		const somme_croupier_cache = this.croupier.inventaire[0].valeur;
+		games.croupier.score = somme_croupier_cache;
 		games.affichage(affichageCroupier, games.croupier);
 	}
 
-	distribution() {
+	distribution(liste_joueurs) { // Fonction changée pour ne pas distribuer aux morts, seuls changements : games.joueur => liste_joueurs
 		games.cards.sort(() => Math.random() - 0.5); // A changer car mélange bizarre
-		for (let i = 0; i < games.joueurs.length; i++) {
+		for (let i = 0; i < liste_joueurs.length; i++) {
 			for (let k = 0; k < 2; k++) {
-				games.joueurs[i].inventaire.push(games.cards.shift());
+				liste_joueurs[i].inventaire.push(games.cards.shift());
 			}
 
-			games.joueurs[i].score = games.joueurs[i].inventaire[0].valeur + games.joueurs[i].inventaire[1].valeur;
+			liste_joueurs[i].score = liste_joueurs[i].inventaire[0].valeur + liste_joueurs[i].inventaire[1].valeur;
 		}
 
-		games.affichage(affichageJoueur, games.joueurs[games.joueurs_en_cours]);
+		games.affichage(affichageJoueur, liste_joueurs[games.joueurs_en_cours]);
 	}
 
 	pioche(joueur_en_cours) {
@@ -284,11 +301,16 @@ class Game {
 			}
 		}
 
+		const liste_joueurs = games.joueurs.slice(); // A modifier/exploiter pour ne pas afficher les morts
 		for (let index = 0; index < pseudo.length; index++) {
 			games.joueurs[index].inventaire = [];
+			if (games.joueurs[index].vie === 0) {
+				liste_joueurs.splice(index, 1);
+			}
 		}
 
-		games.distribution();
+		console.log(liste_joueurs);
+		games.distribution(liste_joueurs);
 		games.tour_croupier();
 		if (games.joueurs[games.joueurs_en_cours].vie <= 0) {
 			games.tour_suivant(games.joueurs_en_cours);
@@ -310,10 +332,18 @@ class Game {
 		emplacement.children[2].innerHTML = contenu.identifiant + ' : ' + contenu.score;
 
 		emplacement.children[1].innerHTML = '';
-		for (let k = 0; k < contenu.inventaire.length; k++) {
-			const new_carte_html = document.createElement('carte');
-			new_carte_html.innerHTML = contenu.inventaire[k].html;
-			emplacement.children[1].appendChild(new_carte_html);
+		if (contenu.identifiant === 'Croupier') {
+			for (let k = 0; k < 2; k++) {
+				const new_carte_html = document.createElement('carte');
+				new_carte_html.innerHTML = contenu.inventaire[k].html;
+				emplacement.children[1].appendChild(new_carte_html);
+			}
+		} else {
+			for (let k = 0; k < contenu.inventaire.length; k++) {
+				const new_carte_html = document.createElement('carte');
+				new_carte_html.innerHTML = contenu.inventaire[k].html;
+				emplacement.children[1].appendChild(new_carte_html);
+			}
 		}
 	}
 
@@ -373,6 +403,7 @@ class Game {
 		resultathtml += '<div class="pseudo">Croupier</div>';
 		resultathtml += '<div class="cartes">';
 		for (let i = 0; i < games.croupier.inventaire.length; i++) {
+			games.croupier.inventaire[i].recto();
 			resultathtml += games.croupier.inventaire[i].html;
 		}
 
@@ -406,7 +437,7 @@ class Game {
 
 function game() {
 	games = new Game();
-	games.distribution();
+	games.distribution(games.joueurs);
 	games.tour_croupier();
 	games.transition('');
 	affichageJeu.style.display = 'flex';

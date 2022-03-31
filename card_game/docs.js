@@ -51,4 +51,8 @@ window.listeCartes = [
 		lettre: 'R',
 		html: '<section class="card card--type" value="R"> <div class="card__inner card__inner--centered"> <img class="card-svg" src="{{ svg }}" alt="Card SVG"/> </div> </section>',
 	},
+	{
+		lettre: 'C',
+		html: '<section class="card card--type"> <div class="card__inner card__inner--centered"> <img class="card-svg" src="assets/carte_verso.svg" alt="Card SVG"/> </div> </section>',
+	},
 ];
