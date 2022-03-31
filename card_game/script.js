@@ -364,10 +364,10 @@ class Game {
 		let resultathtml = '';
 
 		for (let index = 0; index < pseudo.length; index++) {
-			resultathtml += '<div class="rang">';
-			resultathtml += '<div class="pseudo">' + games.joueurs[index].identifiant + '</div>';
-			resultathtml += '<div class="viefinal">' + games.joueurs[index].vie + '</div>';
-			resultathtml += '</div>';
+			resultathtml += `<div class="rang">
+				<div class="pseudo">${games.joueurs[index].identifiant}</div>;
+				<div class="viefinal">${games.joueurs[index].vie}</div>;
+			</div>`;
 		}
 
 		affichageFin.children[0].innerHTML = resultathtml;
@@ -399,29 +399,29 @@ class Game {
 		affichageFin.children[1].innerHTML = '';
 		affichageFin.children[2].innerHTML = '';
 
-		resultathtml += '<div class="rang">';
-		resultathtml += '<div class="pseudo">Croupier</div>';
-		resultathtml += '<div class="cartes">';
+		resultathtml += `<div class="rang">
+			<div class="pseudo">Croupier</div>
+			<div class="cartes">`;
 		for (let i = 0; i < games.croupier.inventaire.length; i++) {
 			games.croupier.inventaire[i].recto();
 			resultathtml += games.croupier.inventaire[i].html;
 		}
 
-		resultathtml += '</div>';
-		resultathtml += '<div class="scorefinal">' + games.croupier.score + '</div>';
-		resultathtml += '</div>';
+		resultathtml += `</div>
+			<div class="scorefinal">${games.croupier.score}</div>
+		</div>`;
 
 		for (let index = 0; index < pseudo.length; index++) {
-			resultathtml += '<div class="rang">';
-			resultathtml += '<div class="pseudo">' + games.joueurs[index].identifiant + '</div>';
-			resultathtml += '<div class="cartes">';
+			resultathtml += `<div class="rang">
+				<div class="pseudo">${games.joueurs[index].identifiant}</div>
+				<div class="cartes">`;
 			for (let k = 0; k < games.joueurs[index].inventaire.length; k++) {
 				resultathtml += games.joueurs[index].inventaire[k].html;
 			}
 
-			resultathtml += '</div>';
-			resultathtml += '<div class="scorefinal">' + games.joueurs[index].score + '</div>';
-			resultathtml += '</div>';
+			resultathtml += `</div>';
+				<div class="scorefinal">${games.joueurs[index].score}</div>
+			</div>`;
 		}
 
 		affichageFin.children[0].innerHTML = resultathtml;
@@ -446,7 +446,7 @@ function game() {
 	window.decompte = setInterval(() => {
 		games.time--;
 		console.log(games.time);
-		document.querySelector('.chrono').innerHTML = games.time;
+		document.querySelector('.chrono-text').innerHTML = games.time;
 		if (games.time === 0) {
 			games.tour_suivant(games.joueurs_en_cours);
 		}

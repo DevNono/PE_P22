@@ -4,17 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Blackjack.js</title>
     <link rel="stylesheet" href="style.css">
 	<script defer src="docs.js"></script>
     <script defer src="script.js"></script>
 </head>
 <body>
-
-    <input type="button" value="Lancement" id="button" onclick="game()">
-    <input type="button" value="Résultat" id="button" onclick="watch()">
+    <div class="tempBtns" style="position: absolute;">
+        <input type="button" value="Lancement" id="button" onclick="game()">
+        <input type="button" value="Résultat" id="button" onclick="watch()">
+    </div>
 
 	<div class="jeu">
+        <div class="chrono">
+            <div class="chrono-text">
+            
+            </div>
+        </div>
 
         <div class="croupier">
             
@@ -28,10 +34,7 @@
         </div>
 
         <div class="joueurs">
-
-            <div class="chrono">
-            </div>
-
+            <div class="leaderboard"></div>
             <div class="affichageJoueurs">
 
                 <div class="vie"></div>
@@ -40,7 +43,7 @@
 
             </div>
 
-            <div class="bouton">
+            <div class="boutons">
                 <input type="button" value="pioche" id="button" onclick="games.pioche(games.joueurs_en_cours)">
                 <input type="button" value="Tour suivant" id="button" onclick="games.tour_suivant(games.joueurs_en_cours)">
             </div>
