@@ -91,6 +91,52 @@ body {
   text-align: center;
 }
 
+.carte-anim{
+  transition: all 0.5s ease-in-out;
+  animation: flip-card 3s;
+  animation-fill-mode: forwards;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  backdrop-filter: brightness(0.5) blur(5px);
+}
+
+@keyframes flip-card {
+  0%{
+    transform: translate(-50%, -50%) scale(0) rotateY(180deg);
+  }
+  20%{
+    transform: translate(-50%, -50%) scale(1.5) rotateY(180deg);
+  }
+  80%{
+    transform: translate(-50%, -50%) scale(1.5) rotateY(0deg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    backdrop-filter: brightness(0.5) blur(5px);
+  }
+  81%{
+    position: relative;
+  }
+  100%{
+    transform: initial;
+    position: relative;
+    backdrop-filter: none;
+    border-radius: 0;
+    display: block;
+    left: 0;
+    top: 0;
+  }
+}
+
 /* CSS lié aux différentes scène */
 
 .annonce{

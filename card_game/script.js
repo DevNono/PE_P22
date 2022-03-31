@@ -243,12 +243,19 @@ class Game {
 	}
 
 	pioche(joueur_en_cours) {
+		if (games.joueurs[joueur_en_cours].score > 21) {
+			return;
+		}
+
 		games.joueurs[joueur_en_cours].inventaire.push(games.cards.shift());
 		const position = games.joueurs[joueur_en_cours].inventaire.length - 1;
 		games.joueurs[joueur_en_cours].score += games.joueurs[joueur_en_cours].inventaire[position].valeur;
-		games.affichage(affichageJoueur, games.joueurs[joueur_en_cours]);
+		games.ajout_carte(affichageJoueur, games.joueurs[joueur_en_cours]);
 		if (games.joueurs[joueur_en_cours].score > 21) {
-			games.tour_suivant(joueur_en_cours);
+			games.time += 4;
+			setTimeout(() => {
+				games.tour_suivant(joueur_en_cours);
+			}, 3200);
 		} else {
 			games.time = 20;
 		}
@@ -325,6 +332,22 @@ class Game {
 				games.joueurs[index].vie -= 1;
 			}
 		}
+	}
+
+	async ajout_carte(emplacement, contenu) {
+		const new_carte_html = document.createElement('carte');
+		new_carte_html.classList.add('carte-anim');
+		contenu.inventaire[contenu.inventaire.length - 1].verso();
+		new_carte_html.innerHTML = contenu.inventaire[contenu.inventaire.length - 1].html;
+		const carte_html = emplacement.children[1].appendChild(new_carte_html);
+		setTimeout(() => {
+			// Passsage au recto de la carte
+			contenu.inventaire[contenu.inventaire.length - 1].recto();
+			carte_html.innerHTML = contenu.inventaire[contenu.inventaire.length - 1].html;
+
+			// Mise à jour du score
+			emplacement.children[2].innerHTML = contenu.identifiant + ' : ' + contenu.score;
+		}, 1200);
 	}
 
 	affichage(emplacement, contenu) {
@@ -419,7 +442,7 @@ class Game {
 				resultathtml += games.joueurs[index].inventaire[k].html;
 			}
 
-			resultathtml += `</div>';
+			resultathtml += `</div>
 				<div class="scorefinal">${games.joueurs[index].score}</div>
 			</div>`;
 		}
