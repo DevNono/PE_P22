@@ -7,7 +7,7 @@ body {
 
 /* CSS lié à l'affichage du jeu*/
 
-.container{
+.jeu{
   display: flex;
   flex-direction: column;
   
@@ -48,6 +48,38 @@ body {
   align-items: center;
 }
 
+
+/* CSS lié aux différentes scène */
+
+.annonce{
+  display: none;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+}
+.txt{
+  font-size: 60px;
+}
+
+.final{
+  display: none;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.resultat{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rang{
+  display: flex;
+}
 
 /* CSS lié aux carte*/
 .cards {

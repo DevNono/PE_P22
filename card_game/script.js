@@ -84,6 +84,9 @@ let games;
 const affichageCroupier = document.querySelector('.croupier .affichageCroupier');
 const scoreCroupier = document.querySelector('.croupier .score');
 const affichageJoueur = document.querySelector('.joueurs .affichageJoueurs');
+const affichageJeu = document.querySelector('.jeu');
+const affichageTransition = document.querySelector('.annonce');
+const affichageFin = document.querySelector('.final');
 
 function best_under_17(combinaison) {
 	if (Math.min(...combinaison) > 21) {
@@ -137,6 +140,7 @@ class Game {
 		this.joueurs_en_cours = 0;
 		this.joueurs_en_vie = 3;
 		this.croupier = new Croupier();
+		this.nbJoueursEnVie = 0;
 
 		for (let i = 0; i < numeros.length; i++) {
 			const {valeur} = numeros[i];
@@ -184,7 +188,7 @@ class Game {
 		}
 
 		let a = 1;
-		while (somme_croupier < 17) {
+		while (somme_croupier < 10) {
 			a += 1;
 			this.croupier.inventaire.push(this.cards.shift());
 			if (this.croupier.inventaire[a].valeur === 1) {
@@ -205,7 +209,7 @@ class Game {
 		}
 
 		games.croupier.score = somme_croupier;
-		games.afficherCartes(affichageCroupier, games.croupier);
+		games.affichage(affichageCroupier, games.croupier);
 	}
 
 	distribution() {
@@ -218,14 +222,14 @@ class Game {
 			games.joueurs[i].score = games.joueurs[i].inventaire[0].valeur + games.joueurs[i].inventaire[1].valeur;
 		}
 
-		games.afficherCartes(affichageJoueur, games.joueurs[games.joueurs_en_cours]);
+		games.affichage(affichageJoueur, games.joueurs[games.joueurs_en_cours]);
 	}
 
 	pioche(joueur_en_cours) {
 		games.joueurs[joueur_en_cours].inventaire.push(games.cards.shift());
 		const position = games.joueurs[joueur_en_cours].inventaire.length - 1;
 		games.joueurs[joueur_en_cours].score += games.joueurs[joueur_en_cours].inventaire[position].valeur;
-		games.afficherCartes(affichageJoueur, games.joueurs[joueur_en_cours]);
+		games.affichage(affichageJoueur, games.joueurs[joueur_en_cours]);
 		if (games.joueurs[joueur_en_cours].score > 21) {
 			games.tour_suivant(joueur_en_cours);
 		} else {
@@ -244,18 +248,19 @@ class Game {
 				}
 			}
 
+			games.nbJoueursEnVie = nbJoueurEnVie;
+
 			if (nbJoueurEnVie > 1) {
-				games.manche_suivante();
+				games.resultatTour();
 			} else {
-				console.log('FINI');
-				games.afficherCartes(affichageJoueur, games.joueurs[joueur_en_cours]);
-				clearInterval(window.decompte);
+				games.resultatTour();
 			}
 		} else if (games.joueurs[joueur_en_cours + 1].vie <= 0) {
 			games.tour_suivant(joueur_en_cours + 1);
 		} else {
 			games.joueurs_en_cours = joueur_en_cours + 1;
-			games.afficherCartes(affichageJoueur, games.joueurs[joueur_en_cours + 1]);
+			games.affichage(affichageJoueur, games.joueurs[joueur_en_cours + 1]);
+			games.transition('');
 			games.time = 20;
 		}
 	}
@@ -266,7 +271,9 @@ class Game {
 		games.manche += 1;
 		games.joueurs_en_cours = 0;
 		games.croupier = new Croupier();
-		games.afficherCartes(affichageJoueur, games.joueurs[games.joueurs_en_cours]);
+		games.affichage(affichageJoueur, games.joueurs[games.joueurs_en_cours]);
+		affichageJeu.style.display = 'flex';
+		affichageFin.style.display = 'none';
 
 		for (let i = 0; i < numeros.length; i++) {
 			const {valeur} = numeros[i];
@@ -283,10 +290,11 @@ class Game {
 
 		games.distribution();
 		games.tour_croupier();
-
 		if (games.joueurs[games.joueurs_en_cours].vie <= 0) {
 			games.tour_suivant(games.joueurs_en_cours);
 		}
+
+		games.transition('Manche : ' + games.manche + '<br>');
 	}
 
 	decompte_points() {
@@ -297,7 +305,7 @@ class Game {
 		}
 	}
 
-	afficherCartes(emplacement, contenu) {
+	affichage(emplacement, contenu) {
 		emplacement.children[0].innerHTML = contenu.vie;
 		emplacement.children[2].innerHTML = contenu.identifiant + ' : ' + contenu.score;
 
@@ -308,15 +316,105 @@ class Game {
 			emplacement.children[1].appendChild(new_carte_html);
 		}
 	}
+
+	transition(information) {
+		affichageJeu.style.display = 'none';
+		affichageTransition.style.display = 'flex';
+		affichageTransition.children[0].innerHTML = information + 'A toi de jouer ' + games.joueurs[games.joueurs_en_cours].identifiant;
+		setTimeout(() => {
+			affichageJeu.style.display = 'flex';
+			affichageTransition.style.display = 'none';
+			affichageTransition.children[0].innerHTML = '';
+			games.time = 20;
+		}, 1000);
+	}
+
+	conclusion() {
+		clearInterval(window.decompte);
+		let resultathtml = '';
+
+		for (let index = 0; index < pseudo.length; index++) {
+			resultathtml += '<div class="rang">';
+			resultathtml += '<div class="pseudo">' + games.joueurs[index].identifiant + '</div>';
+			resultathtml += '<div class="viefinal">' + games.joueurs[index].vie + '</div>';
+			resultathtml += '</div>';
+		}
+
+		affichageFin.children[0].innerHTML = resultathtml;
+
+		let test = 0;
+		let gagnant;
+		for (let index = 0; index < pseudo.length; index++) {
+			if (games.joueurs[index].vie !== 0) {
+				test = 1;
+				gagnant = games.joueurs[index].identifiant;
+			}
+		}
+
+		if (test === 0) {
+			affichageFin.children[1].innerHTML = 'Il n\'y a pas de gagnant';
+		} else {
+			affichageFin.children[1].innerHTML = 'Le gagnant est : ' + gagnant;
+		}
+
+		affichageFin.children[2].innerHTML = '<input type="button" value="Lancement" id="button" onclick="game()"></input>';
+	}
+
+	resultatTour() {
+		games.time = -1;
+		affichageJeu.style.display = 'none';
+		affichageFin.style.display = 'flex';
+		let resultathtml = '';
+		affichageFin.children[0].innerHTML = '';
+		affichageFin.children[1].innerHTML = '';
+		affichageFin.children[2].innerHTML = '';
+
+		resultathtml += '<div class="rang">';
+		resultathtml += '<div class="pseudo">Croupier</div>';
+		resultathtml += '<div class="cartes">';
+		for (let i = 0; i < games.croupier.inventaire.length; i++) {
+			resultathtml += games.croupier.inventaire[i].html;
+		}
+
+		resultathtml += '</div>';
+		resultathtml += '<div class="scorefinal">' + games.croupier.score + '</div>';
+		resultathtml += '</div>';
+
+		for (let index = 0; index < pseudo.length; index++) {
+			resultathtml += '<div class="rang">';
+			resultathtml += '<div class="pseudo">' + games.joueurs[index].identifiant + '</div>';
+			resultathtml += '<div class="cartes">';
+			for (let k = 0; k < games.joueurs[index].inventaire.length; k++) {
+				resultathtml += games.joueurs[index].inventaire[k].html;
+			}
+
+			resultathtml += '</div>';
+			resultathtml += '<div class="scorefinal">' + games.joueurs[index].score + '</div>';
+			resultathtml += '</div>';
+		}
+
+		affichageFin.children[0].innerHTML = resultathtml;
+
+		console.log(games.nbJoueurEnVie);
+		if (games.nbJoueursEnVie < 2) {
+			affichageFin.children[2].innerHTML = '<input type="button" value="Suivant" id="button" onclick="games.conclusion()"></input>';
+		} else {
+			affichageFin.children[2].innerHTML = '<input type="button" value="Tour suivant" id="button" onclick="games.manche_suivante()"></input>';
+		}
+	}
 }
 
 function game() {
 	games = new Game();
 	games.distribution();
 	games.tour_croupier();
+	games.transition('');
+	affichageJeu.style.display = 'flex';
+	affichageFin.style.display = 'none';
 
 	window.decompte = setInterval(() => {
 		games.time--;
+		console.log(games.time);
 		document.querySelector('.chrono').innerHTML = games.time;
 		if (games.time === 0) {
 			games.tour_suivant(games.joueurs_en_cours);
