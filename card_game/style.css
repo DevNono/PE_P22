@@ -9,7 +9,7 @@ body {
 
 /* CSS lié à l'affichage du jeu*/
 
-.jeu{
+.jeu {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -17,13 +17,13 @@ body {
   justify-content: space-between;
 }
 
-.croupier{
+.croupier {
   display: flex;
   justify-content: center;
   align-items: end;
 }
 
-.affichageCroupier{
+.affichageCroupier {
   display: flex;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.1);
@@ -33,20 +33,20 @@ body {
   border-radius: 20px;
 }
 
-.joueurs{
+.joueurs {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.chrono{
+.chrono {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.chrono-text{
+.chrono-text {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +59,7 @@ body {
   min-width: 30px;
 }
 
-.boutons{
+.boutons {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -67,6 +67,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 5px;
   background-color: rgba(255, 255, 255, 0.1);
   -webkit-backdrop-filter: blur(2px) opacity(50%);
   backdrop-filter: blur(2px) opacity(50%);
@@ -74,12 +75,44 @@ body {
   border-top-left-radius: 20px;
 }
 
-.affichageJoueurs{
+.start-menu {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+}
+
+.start-menu-overlay {
+  flex-direction: column;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  -webkit-backdrop-filter: blur(2px) brightness(0.1);
+  backdrop-filter: blur(2px) brightness(0.1);
+  z-index: 10;
+}
+
+button {
+  width: 120px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #4195e4;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.affichageJoueurs {
   display: flex;
   flex-direction: column;
 }
 
-.vie,.score,.main{
+.vie,
+.score,
+.main {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,9 +124,18 @@ body {
   text-align: center;
 }
 
-.carte-anim{
+.hide {
+  display: none;
+}
+
+.show-anim {
+  opacity: 1 !important;
+  pointer-events: all !important;
+}
+
+.carte-anim {
   transition: all 0.5s ease-in-out;
-  animation: flip-card 3s;
+  animation: flip-card 2.5s;
   animation-fill-mode: forwards;
   position: absolute;
   top: 50%;
@@ -106,13 +148,13 @@ body {
 }
 
 @keyframes flip-card {
-  0%{
+  0% {
     transform: translate(-50%, -50%) scale(0) rotateY(180deg);
   }
-  20%{
+  20% {
     transform: translate(-50%, -50%) scale(1.5) rotateY(180deg);
   }
-  80%{
+  80% {
     transform: translate(-50%, -50%) scale(1.5) rotateY(0deg);
     position: absolute;
     top: 50%;
@@ -123,10 +165,10 @@ body {
     border-radius: 10px;
     backdrop-filter: brightness(0.5) blur(5px);
   }
-  81%{
+  81% {
     position: relative;
   }
-  100%{
+  100% {
     transform: initial;
     position: relative;
     backdrop-filter: none;
@@ -139,33 +181,42 @@ body {
 
 /* CSS lié aux différentes scène */
 
-.annonce{
-  display: none;
+.annonce {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
   height: 100vh;
+  display: flex;
   justify-content: center;
   align-items: center;
-
+  backdrop-filter: brightness(0.2) blur(5px);
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
 }
-.txt{
+
+.txt {
   font-size: 60px;
+  color: #fff;
 }
 
-.final{
-  display: none;
+.final {
+  width: 100%;
   height: 100vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.resultat{
+.resultat {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.rang{
+.rang {
   display: flex;
 }
 

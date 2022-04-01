@@ -1,3 +1,4 @@
+// Configuration
 const numeros = [
 	{
 		valeur: 1,
@@ -80,14 +81,17 @@ const pseudo = [
 	},
 ];
 
+// Variables initiales
 let games;
-const affichageCroupier = document.querySelector('.croupier .affichageCroupier');
-const scoreCroupier = document.querySelector('.croupier .score');
-const affichageJoueur = document.querySelector('.joueurs .affichageJoueurs');
-const affichageJeu = document.querySelector('.jeu');
-const affichageTransition = document.querySelector('.annonce');
-const affichageFin = document.querySelector('.final');
+const menu = document.querySelector('.start-menu'); // Menu de départ
+const affichageCroupier = document.querySelector('.croupier .affichageCroupier'); // Affiche la carte du croupier
+const scoreCroupier = document.querySelector('.croupier .score'); // Affiche le score du croupier
+const affichageJoueur = document.querySelector('.joueurs .affichageJoueurs'); // Affiche le joueur
+const affichageJeu = document.querySelector('.jeu'); // Affiche le jeu
+const affichageTransition = document.querySelector('.annonce'); // Affiche les annonces / les transitions
+const affichageFin = document.querySelector('.final'); // Affiche la fin du jeu
 
+// Teste la meilleur combinaison
 function best_under_17(combinaison) {
 	if (Math.min(...combinaison) > 21) {
 		return Math.min(...combinaison);
@@ -97,136 +101,141 @@ function best_under_17(combinaison) {
 	return Math.max(...nouvel_combinaison);
 }
 
-function arrayEquals(a, b) {
+// Teste si deux listes sont égales
+function array_equals(a, b) {
 	return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((val, index) => val === b[index]);
 }
 
+// Classe de la carte
 class Card {
 	constructor(valeur, type, lettre) {
-		this.valeur = valeur;
-		this.type = type;
-		this.lettre = lettre;
-		this.html = (window.listeCartes.filter(c => c.lettre === lettre)[0].html).replace('card--type', 'card--' + type);
-
-		if (valeur === 10 && lettre !== '10') {
-			this.html = this.html.replace('{{ svg }}', './assets/' + type + '_' + lettre + '.svg');
-		}
+		this.valeur = valeur; // Valeur de la carte
+		this.type = type; // Type de la carte
+		this.lettre = lettre; // Lettre de la carte
+		this.recto(); // On stocke le recto de la carte
 	}
 
+	// Stocke le verso de la carte dans la variable html
 	verso() {
 		this.html = (window.listeCartes.filter(c => c.lettre === 'C')[0].html); // A optimiser je pense, voir docs.js - Viêt
 	}
 
+	// Stocke le recto de la carte dans la variable html
 	recto() {
 		this.html = (window.listeCartes.filter(c => c.lettre === this.lettre)[0].html).replace('card--type', 'card--' + this.type); // Réaffiche le html des cartes
 
-		if (this.valeur === 10 && this.lettre !== '10') {
-			this.html = this.html.replace('{{ svg }}', './assets/' + this.type + '_' + this.lettre + '.svg');
+		if (this.valeur === 10 && this.lettre !== '10') { // Si on est sur une carte "habillée"
+			this.html = this.html.replace('{{ svg }}', './assets/' + this.type + '_' + this.lettre + '.svg'); // On ajoute le bon svg
 		}
 	}
 }
 
+// Classe du joueur
 class Joueur {
 	constructor(pseudo) {
-		this.identifiant = pseudo;
-		this.inventaire = [];
-		this.vie = 1;
-		this.score = 0;
+		this.identifiant = pseudo; // Identifiant du joueur
+		this.inventaire = []; // Inventaire du joueur
+		this.vie = 1; // Vie du joueur
+		this.score = 0; // Score du joueur
 	}
 }
 
 class Croupier {
 	constructor() {
-		this.identifiant = 'Croupier';
-		this.inventaire = [];
-		this.score = 0;
+		this.identifiant = 'Croupier'; // Identifiant du croupier
+		this.inventaire = []; // Inventaire du croupier
+		this.score = 0; // Score du croupier
 	}
 }
 
 class Game {
 	constructor() {
-		this.time = 20;
-		this.joueurs = [];
-		this.cards = [];
-		this.manche = 0;
-		this.joueurs_en_cours = 0;
-		this.joueurs_en_vie = 3;
-		this.croupier = new Croupier();
-		this.nbJoueursEnVie = 0;
+		this.time = 20; // Temps de jeu
+		this.joueurs = []; // Liste des joueurs
+		this.cards = []; // Liste des cartes
+		this.manche = 0; // Numéro de la manche
+		this.joueurs_en_cours = 0; // Numéro du joueur en cours
+		this.joueurs_en_vie = 3; // Nombre de joueurs en vie
+		this.croupier = new Croupier(); // Croupier
+		this.nb_joueurs_en_vie = 0; // Nombre de joueurs en vie
 
+		// On crée le jeu de cartes
 		for (let i = 0; i < numeros.length; i++) {
-			const {valeur} = numeros[i];
-			const {lettre} = numeros[i];
+			const {valeur} = numeros[i]; // Valeur de la carte
+			const {lettre} = numeros[i]; // Lettre de la carte
+			// On crée la carte pour chaque symbole
 			for (let j = 0; j < symboles.length; j++) {
-				const {type} = symboles[j];
-				this.cards.push(new Card(valeur, type, lettre));
+				const {type} = symboles[j]; // Type de la carte
+				this.cards.push(new Card(valeur, type, lettre)); // On ajoute la carte
 			}
 		}
 
+		// On crée les joueurs
 		for (let index = 0; index < pseudo.length; index++) {
-			const nom = pseudo[index].id;
-			this.joueurs.push(new Joueur(nom));
+			const nom = pseudo[index].id; // Identifiant du joueur
+			this.joueurs.push(new Joueur(nom)); // On ajoute le joueur
 		}
 	}
 
+	// Tour du croupier
 	tour_croupier() {
-		let as = 0;
-		const position = [];
-		for (let i = 0; i < 2; i++) {
-			games.croupier.inventaire.push(games.cards.shift());
-			if (games.croupier.inventaire[i].valeur === 1) {
-				as += 1;
+		let as = 0; // Nombre d'as
+		const position = []; // Position des cartes du croupier
+		for (let i = 0; i < 2; i++) { // On prend 2 cartes au hasard
+			games.croupier.inventaire.push(games.cards.shift()); // On ajoute les cartes au croupier
+			if (games.croupier.inventaire[i].valeur === 1) { // Si on a un as
+				as += 1; // On incrémente le nombre d'as
 			} else {
-				position.push(i);
+				position.push(i); // Sinon on ajoute la position de la carte
 			}
 		}
 
-		let combinaison = [];
-		if (as !== 0) {
-			combinaison = [1, 11];
+		let combinaison = []; // On crée la combinaison
+		if (as !== 0) { // Si on a un as
+			combinaison = [1, 11]; // On crée la combinaison
 			for (let i = 1; i < as; i++) {
 				combinaison[0] += 1;
 				combinaison[1] += 1;
 			}
 		}
 
-		let somme_croupier = games.croupier.inventaire[0].valeur + games.croupier.inventaire[1].valeur;
+		let somme_croupier = games.croupier.inventaire[0].valeur + games.croupier.inventaire[1].valeur; // On calcule le score du croupier
 
-		if (!(arrayEquals(combinaison, []))) {
-			for (const element of position) {
+		if (!(array_equals(combinaison, []))) { // Si on a une combinaison qui n'est pas vide
+			for (const element of position) { // Pour chaque position
 				[combinaison[0], combinaison[1]] = [combinaison[0] + games.croupier.inventaire[element].valeur, combinaison[1] + games.croupier.inventaire[element].valeur];
-				somme_croupier = Math.max(...combinaison);
+				somme_croupier = Math.max(...combinaison); // On calcule le score du croupier avec la valeur maximale de la combinaison
 			}
 		}
 
-		let a = 1;
-		while (somme_croupier < 17) {
-			a += 1;
-			this.croupier.inventaire.push(this.cards.shift());
-			if (this.croupier.inventaire[a].valeur === 1) {
-				as += 1;
-				if (as === 1) {
-					const combinaison = [somme_croupier + 1, somme_croupier + 11];
-					somme_croupier = best_under_17(combinaison);
-				} else if (as !== 0) {
-					for (let i = 0; i < combinaison.length; i++) {
-						combinaison[i] += 1;
+		let a = 1; // Nombre de tour de boucle
+		while (somme_croupier < 17) { // Tant que le score du croupier est inférieur à 17
+			a += 1; // On incrémente le nombre de tour de boucle
+			this.croupier.inventaire.push(this.cards.shift()); // On ajoute une carte au croupier
+			if (this.croupier.inventaire[a].valeur === 1) { // Si on a un as
+				as += 1; // On incrémente le nombre d'as
+				if (as === 1) { // Si on a un seul as
+					const combinaison = [somme_croupier + 1, somme_croupier + 11]; // On crée la combinaison
+					somme_croupier = best_under_17(combinaison); // On calcule le score du croupier avec la valeur maximale de la combinaison
+				} else if (as !== 0) { // Si on a zéro as
+					for (let i = 0; i < combinaison.length; i++) { // Pour chaque combinaison
+						combinaison[i] += 1; // On incrémente la combinaison
 					}
 
-					somme_croupier = best_under_17(combinaison);
+					somme_croupier = best_under_17(combinaison); // On calcule le score du croupier avec la valeur maximale de la combinaison
 				}
 			} else {
-				somme_croupier += games.croupier.inventaire[a].valeur;
+				somme_croupier += games.croupier.inventaire[a].valeur; // On calcule le score du croupier
 			}
 		}
 
-		for (let i = 1; i < this.croupier.inventaire.length; i++) {
-			this.croupier.inventaire[i].verso();
+		for (let i = 1; i < this.croupier.inventaire.length; i++) { // Pour chaque carte du croupier
+			this.croupier.inventaire[i].verso(); // On cache la carte
 		}
 
-		const somme_croupier_cache = this.croupier.inventaire[0].valeur;
-		games.croupier.score = somme_croupier_cache;
-		games.affichage(affichageCroupier, games.croupier);
+		const somme_croupier_cache = this.croupier.inventaire[0].valeur; // On calcule le score du croupier
+		games.croupier.score = somme_croupier_cache; // On met à jour le score du croupier
+		games.affichage(affichageCroupier, games.croupier); // On affiche le croupier
 	}
 
 	distribution(liste_joueurs) { // Fonction changée pour ne pas distribuer aux morts, seuls changements : games.joueur => liste_joueurs
@@ -255,7 +264,7 @@ class Game {
 			games.time += 4;
 			setTimeout(() => {
 				games.tour_suivant(joueur_en_cours);
-			}, 3200);
+			}, 2700);
 		} else {
 			games.time = 20;
 		}
@@ -272,7 +281,7 @@ class Game {
 				}
 			}
 
-			games.nbJoueursEnVie = nbJoueurEnVie;
+			games.nb_joueurs_en_vie = nbJoueurEnVie;
 
 			if (nbJoueurEnVie > 1) {
 				games.resultatTour();
@@ -296,8 +305,7 @@ class Game {
 		games.joueurs_en_cours = 0;
 		games.croupier = new Croupier();
 		games.affichage(affichageJoueur, games.joueurs[games.joueurs_en_cours]);
-		affichageJeu.style.display = 'flex';
-		affichageFin.style.display = 'none';
+		affichageFin.classList.add('show-anim');
 
 		for (let i = 0; i < numeros.length; i++) {
 			const {valeur} = numeros[i];
@@ -334,7 +342,7 @@ class Game {
 		}
 	}
 
-	async ajout_carte(emplacement, contenu) {
+	ajout_carte(emplacement, contenu) {
 		const new_carte_html = document.createElement('carte');
 		new_carte_html.classList.add('carte-anim');
 		contenu.inventaire[contenu.inventaire.length - 1].verso();
@@ -347,7 +355,7 @@ class Game {
 
 			// Mise à jour du score
 			emplacement.children[2].innerHTML = contenu.identifiant + ' : ' + contenu.score;
-		}, 1200);
+		}, 1000);
 	}
 
 	affichage(emplacement, contenu) {
@@ -371,12 +379,10 @@ class Game {
 	}
 
 	transition(information) {
-		affichageJeu.style.display = 'none';
-		affichageTransition.style.display = 'flex';
+		affichageTransition.classList.add('show-anim');
 		affichageTransition.children[0].innerHTML = information + 'A toi de jouer ' + games.joueurs[games.joueurs_en_cours].identifiant;
 		setTimeout(() => {
-			affichageJeu.style.display = 'flex';
-			affichageTransition.style.display = 'none';
+			affichageTransition.classList.remove('show-anim');
 			affichageTransition.children[0].innerHTML = '';
 			games.time = 20;
 		}, 1000);
@@ -415,8 +421,8 @@ class Game {
 
 	resultatTour() {
 		games.time = -1;
-		affichageJeu.style.display = 'none';
-		affichageFin.style.display = 'flex';
+		affichageJeu.classList.add('hide');
+		affichageFin.classList.add('show-anim');
 		let resultathtml = '';
 		affichageFin.children[0].innerHTML = '';
 		affichageFin.children[1].innerHTML = '';
@@ -450,7 +456,7 @@ class Game {
 		affichageFin.children[0].innerHTML = resultathtml;
 
 		console.log(games.nbJoueurEnVie);
-		if (games.nbJoueursEnVie < 2) {
+		if (games.nb_joueurs_en_vie < 2) {
 			affichageFin.children[2].innerHTML = '<input type="button" value="Suivant" id="button" onclick="games.conclusion()"></input>';
 		} else {
 			affichageFin.children[2].innerHTML = '<input type="button" value="Tour suivant" id="button" onclick="games.manche_suivante()"></input>';
@@ -459,12 +465,14 @@ class Game {
 }
 
 function game() {
+	menu.classList.remove('start-menu-overlay');
 	games = new Game();
 	games.distribution(games.joueurs);
 	games.tour_croupier();
 	games.transition('');
-	affichageJeu.style.display = 'flex';
-	affichageFin.style.display = 'none';
+	affichageJeu.classList.remove('hide');
+	affichageTransition.classList.remove('show-anim');
+	affichageFin.classList.remove('show-anim');
 
 	window.decompte = setInterval(() => {
 		games.time--;

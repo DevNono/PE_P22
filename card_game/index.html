@@ -10,9 +10,9 @@
     <script defer src="script.js"></script>
 </head>
 <body>
-    <div class="tempBtns" style="position: absolute;">
-        <input type="button" value="Lancement" id="button" onclick="game()">
-        <input type="button" value="Résultat" id="button" onclick="watch()">
+    <div class="start-menu start-menu-overlay">
+        <button type="button" onclick="game()">Lancement</button>
+        <button type="button" onclick="watch()">Résultat</button>
     </div>
 
 	<div class="jeu">
@@ -44,8 +44,8 @@
             </div>
 
             <div class="boutons">
-                <input type="button" value="pioche" id="button" onclick="games.pioche(games.joueurs_en_cours)">
-                <input type="button" value="Tour suivant" id="button" onclick="games.tour_suivant(games.joueurs_en_cours)">
+                <button type="button" onclick="games.pioche(games.joueurs_en_cours)">Piocher</button>
+                <button type="button" onclick="games.tour_suivant(games.joueurs_en_cours)">Terminer le tour</button>
             </div>
             
         </div>
