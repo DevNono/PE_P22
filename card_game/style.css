@@ -1,8 +1,8 @@
 body {
   padding: 0;
   margin: 0;
-  background: url(assets/background/motif_table.png);
-  background-repeat: repeat;
+  background: url(assets/background/poissondavril2019-832x480@2x.jpg);
+  background-position: center;
   height: 100vh;
   width: 100%;
 }
