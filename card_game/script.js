@@ -240,50 +240,52 @@ class Game {
 
 	distribution(liste_joueurs) { // Fonction changée pour ne pas distribuer aux morts, seuls changements : games.joueur => liste_joueurs
 		games.cards.sort(() => Math.random() - 0.5); // A changer car mélange bizarre
-		for (let i = 0; i < liste_joueurs.length; i++) {
-			for (let k = 0; k < 2; k++) {
-				liste_joueurs[i].inventaire.push(games.cards.shift());
+		for (let i = 0; i < liste_joueurs.length; i++) { // Pour chaque joueur 
+			for (let k = 0; k < 2; k++) { // Pour chaque carte
+				liste_joueurs[i].inventaire.push(games.cards.shift()); // On ajoute une carte au joueur
 			}
 
-			liste_joueurs[i].score = liste_joueurs[i].inventaire[0].valeur + liste_joueurs[i].inventaire[1].valeur;
+			liste_joueurs[i].score = liste_joueurs[i].inventaire[0].valeur + liste_joueurs[i].inventaire[1].valeur; // On calcule le score du joueur
 		}
 
-		games.affichage(affichageJoueur, liste_joueurs[games.joueurs_en_cours]);
+		games.affichage(affichageJoueur, liste_joueurs[games.joueurs_en_cours]); // On affiche le joueur
 	}
 
+	// Piocher une carte
 	pioche(joueur_en_cours) {
-		if (games.joueurs[joueur_en_cours].score > 21) {
+		if (games.joueurs[joueur_en_cours].score > 21) { // Si le score du joueur est supérieur à 21
 			return;
 		}
 
-		games.joueurs[joueur_en_cours].inventaire.push(games.cards.shift());
-		const position = games.joueurs[joueur_en_cours].inventaire.length - 1;
-		games.joueurs[joueur_en_cours].score += games.joueurs[joueur_en_cours].inventaire[position].valeur;
-		games.ajout_carte(affichageJoueur, games.joueurs[joueur_en_cours]);
-		if (games.joueurs[joueur_en_cours].score > 21) {
-			games.time += 4;
-			setTimeout(() => {
-				games.tour_suivant(joueur_en_cours);
+		games.joueurs[joueur_en_cours].inventaire.push(games.cards.shift()); // On ajoute une carte au joueur
+		const position = games.joueurs[joueur_en_cours].inventaire.length - 1; // On calcule la position de la carte
+		games.joueurs[joueur_en_cours].score += games.joueurs[joueur_en_cours].inventaire[position].valeur; // On calcule le score du joueur
+		games.ajout_carte(affichageJoueur, games.joueurs[joueur_en_cours]); // On affiche le joueur
+		if (games.joueurs[joueur_en_cours].score > 21) { // Si le score du joueur est supérieur à 21
+			games.time += 4; // On augmente le temps
+			setTimeout(() => { // On attend 2,7 secondes
+				games.tour_suivant(joueur_en_cours); // On passe au tour suivant
 			}, 2700);
 		} else {
-			games.time = 20;
+			games.time = 20; // On remet le temps à 20
 		}
 	}
 
+	// Tour suivant
 	tour_suivant(joueur_en_cours) {
-		if (joueur_en_cours === games.joueurs.length - 1) {
-			games.decompte_points();
+		if (joueur_en_cours === games.joueurs.length - 1) { // Si on est au dernier joueur
+			games.decompte_points(); // On décompte les points
 
-			let nbJoueurEnVie = 0;
-			for (let index = 0; index < pseudo.length; index++) {
-				if (games.joueurs[index].vie > 0) {
-					nbJoueurEnVie++;
+			let nb_joueurs_en_vie = 0; // Nombre de joueur en vie
+			for (let index = 0; index < pseudo.length; index++) { // Pour chaque joueur
+				if (games.joueurs[index].vie > 0) { // Si le joueur est en vie
+					nb_joueurs_en_vie++; // On incrémente le nombre de joueur en vie
 				}
 			}
 
-			games.nb_joueurs_en_vie = nbJoueurEnVie;
+			games.nb_joueurs_en_vie = nb_joueurs_en_vie; // On met à jour le nombre de joueur en vie
 
-			if (nbJoueurEnVie > 1) {
+			if (nb_joueurs_en_vie > 1) {
 				games.resultatTour();
 			} else {
 				games.resultatTour();
@@ -455,7 +457,7 @@ class Game {
 
 		affichageFin.children[0].innerHTML = resultathtml;
 
-		console.log(games.nbJoueurEnVie);
+		console.log(games.nb_joueurs_en_vie);
 		if (games.nb_joueurs_en_vie < 2) {
 			affichageFin.children[2].innerHTML = '<input type="button" value="Suivant" id="button" onclick="games.conclusion()"></input>';
 		} else {
