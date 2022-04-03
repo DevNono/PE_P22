@@ -90,6 +90,7 @@ const affichageJoueur = document.querySelector('.joueurs .affichageJoueurs'); //
 const affichageJeu = document.querySelector('.jeu'); // Affiche le jeu
 const affichageTransition = document.querySelector('.annonce'); // Affiche les annonces / les transitions
 const affichageFin = document.querySelector('.final'); // Affiche la fin du jeu
+const affichageCorps = document.querySelector('.corps_croupier'); // Affiche Corps Croupier
 
 // Teste la meilleur combinaison
 function best_under_17(combinaison) {
@@ -145,6 +146,8 @@ class Croupier {
 		this.identifiant = 'Croupier'; // Identifiant du croupier
 		this.inventaire = []; // Inventaire du croupier
 		this.score = 0; // Score du croupier
+		this.score_affiche = 0; // Score du croupier
+		this.html = '<div class="corps"> <div class="background-circle"> <div class="body"></div><div class="habit"><div class="bouttons"><div class="boutton"></div><div class="boutton"></div><div class="boutton"></div></div><div class="chemise"><div class="triangle_cravate"></div><div class="cravate_bout"></div></div><div class="bouttons"><div class="boutton"></div><div class="boutton"></div><div class="boutton"></div></div></div></div><div class="head"><div class="ear" id="left"></div><div class="ear" id="right"></div><div class="hair-main"><div class="sideburn" id="left"></div><div class="sideburn" id="right"></div><div class="hair-top"></div></div><div class="face"><div class="hair-bottom"></div><div class="nose"></div><div class="eye-shadow" id="left"><div class="eyebrow"></div><div class="eye"></div></div><div class="eye-shadow" id="right"><div class="eyebrow"></div><div class="eye"></div></div><div class="mouth"></div></div></div></div>';
 	}
 }
 
@@ -233,14 +236,18 @@ class Game {
 			this.croupier.inventaire[i].verso(); // On cache la carte
 		}
 
-		const somme_croupier_cache = this.croupier.inventaire[0].valeur; // On calcule le score du croupier
-		games.croupier.score = somme_croupier_cache; // On met à jour le score du croupier
+		games.croupier.score = somme_croupier; // On calcule le score du croupier
+		games.croupier.score_affiche = this.croupier.inventaire[0].valeur; // On met à jour le score du croupier
 		games.affichage(affichageCroupier, games.croupier); // On affiche le croupier
 	}
 
 	distribution(liste_joueurs) { // Fonction changée pour ne pas distribuer aux morts, seuls changements : games.joueur => liste_joueurs
-		games.cards.sort(() => Math.random() - 0.5); // A changer car mélange bizarre
-		for (let i = 0; i < liste_joueurs.length; i++) { // Pour chaque joueur 
+		for (let i = games.cards.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[games.cards[i], games.cards[j]] = [games.cards[j], games.cards[i]];
+		}
+
+		for (let i = 0; i < liste_joueurs.length; i++) { // Pour chaque joueur
 			for (let k = 0; k < 2; k++) { // Pour chaque carte
 				liste_joueurs[i].inventaire.push(games.cards.shift()); // On ajoute une carte au joueur
 			}
@@ -301,6 +308,8 @@ class Game {
 	}
 
 	manche_suivante() {
+		document.querySelector('.final').classList.add('hide');
+		affichageJeu.classList.remove('hide');
 		games.time = 20;
 		games.cards = [];
 		games.manche += 1;
@@ -338,7 +347,7 @@ class Game {
 
 	decompte_points() {
 		for (let index = 0; index < pseudo.length; index++) {
-			if (((games.joueurs[index].score < games.croupier.score) || (games.joueurs[index].score > 21)) && (games.joueurs[index].vie > 0)) {
+			if (((games.joueurs[index].score < games.croupier.score) || (games.joueurs[index].score > 21)) && (games.joueurs[index].vie > 0) && (games.croupier.score < 21)) {
 				games.joueurs[index].vie -= 1;
 			}
 		}
@@ -361,7 +370,7 @@ class Game {
 	}
 
 	affichage(emplacement, contenu) {
-		emplacement.children[0].innerHTML = contenu.vie;
+		emplacement.children[0].innerHTML = contenu.vie + ' x ♥';
 		emplacement.children[2].innerHTML = contenu.identifiant + ' : ' + contenu.score;
 
 		emplacement.children[1].innerHTML = '';
@@ -370,6 +379,7 @@ class Game {
 				const new_carte_html = document.createElement('carte');
 				new_carte_html.innerHTML = contenu.inventaire[k].html;
 				emplacement.children[1].appendChild(new_carte_html);
+				emplacement.children[2].innerHTML = contenu.identifiant + ' : ' + contenu.score_affiche;
 			}
 		} else {
 			for (let k = 0; k < contenu.inventaire.length; k++) {
@@ -391,6 +401,7 @@ class Game {
 	}
 
 	conclusion() {
+		document.querySelector('.final').classList.remove('hide');
 		clearInterval(window.decompte);
 		let resultathtml = '';
 
@@ -429,6 +440,7 @@ class Game {
 		affichageFin.children[0].innerHTML = '';
 		affichageFin.children[1].innerHTML = '';
 		affichageFin.children[2].innerHTML = '';
+		document.querySelector('.final').classList.remove('hide');
 
 		resultathtml += `<div class="rang">
 			<div class="pseudo">Croupier</div>
@@ -475,6 +487,9 @@ function game() {
 	affichageJeu.classList.remove('hide');
 	affichageTransition.classList.remove('show-anim');
 	affichageFin.classList.remove('show-anim');
+	affichageCorps.innerHTML = games.croupier.html;
+	affichageCorps.classList.remove('hide');
+	document.querySelector('.final').classList.add('hide');
 
 	window.decompte = setInterval(() => {
 		games.time--;
@@ -492,9 +507,3 @@ function watch() {
 
 // Shuffle_FY(jeu.cards);
 
-// function shuffle_FY(array) {
-// 	for (let i = array.length - 1; i > 0; i--) {
-// 		const j = Math.floor(Math.random() * (i + 1));
-// 		[array[i], array[j]] = [array[j], array[i]];
-// 	}
-// }
