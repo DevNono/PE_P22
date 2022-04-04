@@ -505,5 +505,9 @@ function watch() {
 	console.log(games);
 }
 
+function() {
+	
+}
+
 // Shuffle_FY(jeu.cards);
 
