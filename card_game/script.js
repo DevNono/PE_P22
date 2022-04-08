@@ -479,13 +479,13 @@ class Game {
 }
 
 function game() {
-	menu.classList.remove('start-menu-overlay');
-	games = new Game();
-	games.distribution(games.joueurs);
-	games.tour_croupier();
-	games.transition('');
-	affichageJeu.classList.remove('hide');
-	affichageTransition.classList.remove('show-anim');
+	menu.classList.remove('start-menu-overlay'); // On retire le menu
+	games = new Game(); // On crée une nouvelle partie
+	games.distribution(games.joueurs); // On distribue les cartes
+	games.tour_croupier(); // On distribue les cartes au croupier
+	games.transition(''); // On affiche la transition
+	affichageJeu.classList.remove('hide'); // On affiche le jeu
+	affichageTransition.classList.remove('show-anim'); // On retire la transition
 	affichageFin.classList.remove('show-anim');
 	affichageCorps.innerHTML = games.croupier.html;
 	affichageCorps.classList.remove('hide');
@@ -504,10 +504,5 @@ function game() {
 function watch() {
 	console.log(games);
 }
-
-function() {
-	
-}
-
 // Shuffle_FY(jeu.cards);
 
