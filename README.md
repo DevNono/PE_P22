@@ -37,3 +37,7 @@ TailwindCSS IntelliSense
 Tailwind Docs
 Twig Language 2
 ```
+
+## Jeu
+
+Le code source du jeu est disponible dans le dossier `card_game`
