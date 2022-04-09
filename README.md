@@ -28,6 +28,7 @@ npm run start // Démarrage du projet
 
 ## Extensions VSCode recommandées
 ```
+Error Lens
 ESLint
 DotENV
 Headwind
