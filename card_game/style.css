@@ -165,17 +165,16 @@ button {
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    backdrop-filter: none;
   }
   81% {
     position: relative;
+    backdrop-filter: none;
   }
   100% {
     transform: initial;
     position: relative;
     backdrop-filter: none;
     border-radius: 0;
-    display: block;
     left: 0;
     top: 0;
   }
