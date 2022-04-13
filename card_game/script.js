@@ -354,8 +354,8 @@ class Game {
 	}
 
 	ajout_carte(emplacement, contenu) {
-		const new_carte_html = document.createElement('carte');
-		new_carte_html.classList.add('carte-anim');
+		const new_carte_html = document.createElement('div');
+		new_carte_html.classList.add('carte', 'carte-anim');
 		contenu.inventaire[contenu.inventaire.length - 1].verso();
 		new_carte_html.innerHTML = contenu.inventaire[contenu.inventaire.length - 1].html;
 		const carte_html = emplacement.children[1].appendChild(new_carte_html);
@@ -370,22 +370,22 @@ class Game {
 	}
 
 	affichage(emplacement, contenu) {
-		emplacement.children[0].innerHTML = contenu.vie + ' x ♥';
-		emplacement.children[2].innerHTML = contenu.identifiant + ' : ' + contenu.score;
+		emplacement.querySelector('.vie').innerHTML = contenu.vie + ' x ♥';
+		emplacement.querySelector('.score').innerHTML = contenu.identifiant + ' : ' + contenu.score;
 
-		emplacement.children[1].innerHTML = '';
+		emplacement.querySelector('.main').innerHTML = '';
 		if (contenu.identifiant === 'Croupier') {
 			for (let k = 0; k < 2; k++) {
-				const new_carte_html = document.createElement('carte');
+				const new_carte_html = document.createElement('div');
 				new_carte_html.innerHTML = contenu.inventaire[k].html;
-				emplacement.children[1].appendChild(new_carte_html);
-				emplacement.children[2].innerHTML = contenu.identifiant + ' : ' + contenu.score_affiche;
+				emplacement.querySelector('.main').appendChild(new_carte_html);
+				emplacement.querySelector('.score').innerHTML = contenu.identifiant + ' : ' + contenu.score_affiche;
 			}
 		} else {
 			for (let k = 0; k < contenu.inventaire.length; k++) {
-				const new_carte_html = document.createElement('carte');
+				const new_carte_html = document.createElement('div');
 				new_carte_html.innerHTML = contenu.inventaire[k].html;
-				emplacement.children[1].appendChild(new_carte_html);
+				emplacement.querySelector('.main').appendChild(new_carte_html);
 			}
 		}
 	}
@@ -407,8 +407,8 @@ class Game {
 
 		for (let index = 0; index < pseudo.length; index++) {
 			resultathtml += `<div class="rang">
-				<div class="pseudo">${games.joueurs[index].identifiant}</div>;
-				<div class="viefinal">${games.joueurs[index].vie}</div>;
+				<div class="pseudo">${games.joueurs[index].identifiant}</div>
+				<div class="viefinal">${games.joueurs[index].vie}</div>
 			</div>`;
 		}
 
@@ -429,7 +429,7 @@ class Game {
 			affichageFin.children[1].innerHTML = 'Le gagnant est : ' + gagnant;
 		}
 
-		affichageFin.children[2].innerHTML = '<input type="button" value="Lancement" id="button" onclick="game()"></input>';
+		affichageFin.children[2].innerHTML = '<button type="button" onclick="game()">Lancement</button>';
 	}
 
 	resultatTour() {
@@ -471,15 +471,16 @@ class Game {
 
 		console.log(games.nb_joueurs_en_vie);
 		if (games.nb_joueurs_en_vie < 2) {
-			affichageFin.children[2].innerHTML = '<input type="button" value="Suivant" id="button" onclick="games.conclusion()"></input>';
+			affichageFin.children[2].innerHTML = '<button type="button" onclick="games.conclusion()">Suivant</button>';
 		} else {
-			affichageFin.children[2].innerHTML = '<input type="button" value="Tour suivant" id="button" onclick="games.manche_suivante()"></input>';
+			affichageFin.children[2].innerHTML = '<button type="button" onclick="games.manche_suivante()">Tour suivant</button>';
 		}
 	}
 }
 
 function game() {
 	menu.classList.remove('start-menu-overlay'); // On retire le menu
+	menu.classList.add('hide');
 	games = new Game(); // On crée une nouvelle partie
 	games.distribution(games.joueurs); // On distribue les cartes
 	games.tour_croupier(); // On distribue les cartes au croupier
@@ -504,5 +505,3 @@ function game() {
 function watch() {
 	console.log(games);
 }
-// Shuffle_FY(jeu.cards);
-
