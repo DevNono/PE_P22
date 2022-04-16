@@ -72,14 +72,26 @@ const symboles = [
 const pseudo = [
 	{
 		id: 'nono',
+		type: 'human',
 	},
 	{
 		id: 'younsss',
+		type: 'human',
 	},
 	{
 		id: 'viet',
+		type: 'human',
+	},
+	{
+		id: 'robot',
+		type: 'bot',
 	},
 ];
+
+const settings = {
+	scoreToGet: 21,
+	timePerRound: 20,
+};
 
 // Variables initiales
 let games;
@@ -94,11 +106,11 @@ const affichageCorps = document.querySelector('.corps_croupier'); // Affiche Cor
 
 // Teste la meilleur combinaison
 function best_under_17(combinaison) {
-	if (Math.min(...combinaison) > 21) {
+	if (Math.min(...combinaison) > settings.scoreToGet) {
 		return Math.min(...combinaison);
 	}
 
-	const nouvel_combinaison = combinaison.filter(element => element <= 21);
+	const nouvel_combinaison = combinaison.filter(element => element <= settings.scoreToGet);
 	return Math.max(...nouvel_combinaison);
 }
 
@@ -133,11 +145,12 @@ class Card {
 
 // Classe du joueur
 class Joueur {
-	constructor(pseudo) {
+	constructor(pseudo, bot) {
 		this.identifiant = pseudo; // Identifiant du joueur
 		this.inventaire = []; // Inventaire du joueur
 		this.vie = 1; // Vie du joueur
 		this.score = 0; // Score du joueur
+		this.bot = bot === 'bot'; // Is this player a bot
 	}
 }
 
@@ -153,7 +166,7 @@ class Croupier {
 
 class Game {
 	constructor() {
-		this.time = 20; // Temps de jeu
+		this.time = settings.timePerRound; // Temps de jeu
 		this.joueurs = []; // Liste des joueurs
 		this.cards = []; // Liste des cartes
 		this.manche = 0; // Numéro de la manche
@@ -176,7 +189,8 @@ class Game {
 		// On crée les joueurs
 		for (let index = 0; index < pseudo.length; index++) {
 			const nom = pseudo[index].id; // Identifiant du joueur
-			this.joueurs.push(new Joueur(nom)); // On ajoute le joueur
+			const {type} = pseudo[index]; // Type du joueur
+			this.joueurs.push(new Joueur(nom, type)); // On ajoute le joueur
 		}
 	}
 
@@ -260,7 +274,7 @@ class Game {
 
 	// Piocher une carte
 	pioche(joueur_en_cours) {
-		if (games.joueurs[joueur_en_cours].score > 21) { // Si le score du joueur est supérieur à 21
+		if (games.joueurs[joueur_en_cours].score > settings.scoreToGet) { // Si le score du joueur est supérieur à settings.scoreToGet
 			return;
 		}
 
@@ -268,13 +282,13 @@ class Game {
 		const position = games.joueurs[joueur_en_cours].inventaire.length - 1; // On calcule la position de la carte
 		games.joueurs[joueur_en_cours].score += games.joueurs[joueur_en_cours].inventaire[position].valeur; // On calcule le score du joueur
 		games.ajout_carte(affichageJoueur, games.joueurs[joueur_en_cours]); // On affiche le joueur
-		if (games.joueurs[joueur_en_cours].score > 21) { // Si le score du joueur est supérieur à 21
+		if (games.joueurs[joueur_en_cours].score > settings.scoreToGet) { // Si le score du joueur est supérieur à settings.scoreToGet
 			games.time += 4; // On augmente le temps
 			setTimeout(() => { // On attend 2,7 secondes
 				games.tour_suivant(joueur_en_cours); // On passe au tour suivant
 			}, 2700);
 		} else {
-			games.time = 20; // On remet le temps à 20
+			games.time = settings.timePerRound; // On remet le temps à settings.timePerRound
 		}
 	}
 
@@ -292,25 +306,23 @@ class Game {
 
 			games.nb_joueurs_en_vie = nb_joueurs_en_vie; // On met à jour le nombre de joueur en vie
 
-			if (nb_joueurs_en_vie > 1) {
-				games.resultatTour();
-			} else {
-				games.resultatTour();
-			}
+			games.resultatTour();
 		} else if (games.joueurs[joueur_en_cours + 1].vie <= 0) {
 			games.tour_suivant(joueur_en_cours + 1);
+		} else if (games.joueurs[joueur_en_cours + 1].bot) {
+			// Todo : Add Bot logic
 		} else {
 			games.joueurs_en_cours = joueur_en_cours + 1;
-			games.affichage(affichageJoueur, games.joueurs[joueur_en_cours + 1]);
+			games.affichage(affichageJoueur, games.joueurs[games.joueurs_en_cours]);
 			games.transition('');
-			games.time = 20;
+			games.time = settings.timePerRound;
 		}
 	}
 
 	manche_suivante() {
 		document.querySelector('.final').classList.add('hide');
 		affichageJeu.classList.remove('hide');
-		games.time = 20;
+		games.time = settings.timePerRound;
 		games.cards = [];
 		games.manche += 1;
 		games.joueurs_en_cours = 0;
@@ -347,7 +359,7 @@ class Game {
 
 	decompte_points() {
 		for (let index = 0; index < pseudo.length; index++) {
-			if (((games.joueurs[index].score < games.croupier.score) || (games.joueurs[index].score > 21)) && (games.joueurs[index].vie > 0) && (games.croupier.score < 21)) {
+			if (((games.joueurs[index].score < games.croupier.score && (games.croupier.score < settings.scoreToGet)) || (games.joueurs[index].score > settings.scoreToGet)) && (games.joueurs[index].vie > 0) && (games.croupier.score < settings.scoreToGet)) {
 				games.joueurs[index].vie -= 1;
 			}
 		}
@@ -396,7 +408,7 @@ class Game {
 		setTimeout(() => {
 			affichageTransition.classList.remove('show-anim');
 			affichageTransition.children[0].innerHTML = '';
-			games.time = 20;
+			games.time = settings.timePerRound;
 		}, 1000);
 	}
 

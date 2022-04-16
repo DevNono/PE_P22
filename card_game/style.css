@@ -47,7 +47,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: bold;
   color: white;
 }
@@ -73,7 +73,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 15px;
   background-color: rgba(255, 255, 255, 0.1);
   -webkit-backdrop-filter: blur(2px) opacity(50%);
   backdrop-filter: blur(2px) opacity(50%);
@@ -101,13 +101,14 @@ body {
 }
 
 button {
-  width: 120px;
+  width: 200px;
   border: 0;
   border-radius: 10px;
-  background-color: #4195e4;
+  background-color: #1594dd;
   color: #fff;
+  font-size: 1.2rem;
   font-weight: bold;
-  padding: 5px 10px;
+  padding: 7px 15px;
   cursor: pointer;
 }
 
@@ -118,6 +119,7 @@ button {
   padding: 15px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  transition: all 0.5s;
 }
 
 .vie,
@@ -128,6 +130,7 @@ button {
   align-items: center;
   font-weight: bold;
   color: #fff;
+  transition: all 0.5s;
 }
 
 .title {
