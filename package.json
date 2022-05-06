@@ -5,16 +5,14 @@
   "main": "server.js",
   "scripts": {
     "build": "docker-compose build",
-	"build:production": "npm run prod && npm run start:production",
+    "build:dev": "mix && npm run start",
+    "build:production": "mix --production && npm run start:production",
     "clean:cache": "docker-compose rm -f",
     "start": "gulp build",
-	"start:production": "node server.js",
+    "start:production": "node server.js",
     "start:background": "docker-compose up -d",
-    "dev": "npm run development",
-    "development": "mix",
-    "watch": "mix watch",
-    "prod": "npm run production",
-    "production": "mix --production",
+    "dev": "concurrently \"mix watch\" \"npm run start\"",
+    "prod": "mix --production",
     "lint": "eslint . --fix"
   },
   "nodemonConfig": {
@@ -38,11 +36,12 @@
     "twig": "~0.10.3"
   },
   "devDependencies": {
-    "browser-sync": "^2.27.7",
+    "browser-sync": "^2.27.9",
+    "concurrently": "^7.1.0",
     "eslint": "^8.8.0",
     "eslint-config-xo": "^0.39.0",
     "gulp": "^4.0.2",
-    "gulp-nodemon": "^2.5.0",
+    "gulp-nodemon": "^2.2.1",
     "laravel-mix": "^6.0.41",
     "nodemon": "^2.0.15",
     "sequelize-cli": "^6.4.1"
