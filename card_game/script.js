@@ -494,6 +494,7 @@ function game() {
 	menu.classList.remove('start-menu-overlay'); // On retire le menu
 	menu.classList.add('hide');
 	games = new Game(); // On crée une nouvelle partie
+	console.log(games);
 	games.distribution(games.joueurs); // On distribue les cartes
 	games.tour_croupier(); // On distribue les cartes au croupier
 	games.transition(''); // On affiche la transition

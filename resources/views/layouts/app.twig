@@ -5,6 +5,31 @@
     <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
+  <header class={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${!top && 'bg-white backdrop-blur-sm shadow-lg'}`}>
+      <div class="max-w-6xl px-5 mx-auto sm:px-6">
+        <div class="flex items-center justify-between h-16 md:h-20">
+
+
+          <div class="flex-shrink-0 mr-4">
+          </div>
+
+          <nav class="flex flex-grow">
+            <ul class="flex flex-wrap items-center justify-end flex-grow">
+              <li>
+                <a href="/signin" class="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900 ">Sign in</a>
+              </li>
+              <li>
+                <a href="/signup" class="pt-2 pb-2 pl-4 pr-4 ml-3 text-gray-200 bg-gray-900 btn-sm hover:bg-gray-800">
+                  <span>Sign up</span>                
+                </a>
+              </li>
+            </ul>
+
+          </nav>
+
+        </div>
+      </div>
+    </header>
     {% block body %}{% endblock %}
   </body>
 </html>
