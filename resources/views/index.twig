@@ -7,14 +7,14 @@
 {% block body %}
   
 	<section class="relative flex items-center justify-center h-screen">
-    <div class="top-20 left-20 fixed scale-125">
+    {# <div class="top-20 left-20 fixed scale-125">
         <section class="card card--pique" value="2"><div class="card__inner card__inner--centered"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>
-    </div>
-    <div class="top-56 -z-20 absolute flex items-start justify-center w-full h-[13.75rem] overflow-hidden">
+    </div> #}
+    <div class="top-52 -z-20 absolute flex items-start justify-center w-full h-[13.75rem] overflow-hidden">
         <section class="card card--pique -rotate-12 translate-y-10 !-mr-32" value="2"><div class="card__inner card__inner--centered"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>
-        <section class="card card--coeur -rotate-6 translate-y-5 !-mr-32" value="8"><div class="card__inner card__inner--centered"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>
-        <section class="card card--pique !-mr-32 translate-y-2" value="1"><div class="card__inner card__inner--centered"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>
-        <section class="card card--trefle rotate-6 translate-y-5 !-mr-32" value="9"><div class="card__inner card__inner--centered"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>
+        <section class="card card--coeur -rotate-6 translate-y-5 !-mr-32" value="8"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol"></div></div><div class="card__column card__column--centered"><div class="card__symbol card__symbol--big"></div><div class="card__symbol card__symbol--big"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>
+        <section class="card card--pique !-mr-32 translate-y-2" value="A"><div class="card__inner card__inner--centered ace"><div class="card__symbol"></div></div></section>
+        <section class="card card--trefle rotate-6 translate-y-5 !-mr-32" value="5"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div><div class="card__column card__column--centered"><div class="card__symbol"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>
         <section class="card card--carreau rotate-12 translate-y-10" value="10"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol card__symbol--rotated"></div><div class="card__symbol"></div></div><div class="card__column card__column--centered"><div class="card__symbol card__symbol--big"></div><div class="card__symbol card__symbol--big"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol card__symbol--rotated"></div><div class="card__symbol"></div></div></div></section>
     </div>
 		<div class="sm:px-6 max-w-6xl px-4 mx-auto">
@@ -28,7 +28,7 @@
 					<div class=" max-w-3xl mx-auto">
 						<p class="mb-8 text-xl text-gray-600" data-aos="zoom-y-out" data-aos-delay="150">Découvrez ce langage au travers de la réalisation d'un jeu de cartes</p>
 						<div class="sm:flex-row sm:justify-center flex flex-col gap-5" data-aos="zoom-y-out" data-aos-delay="300">
-								<a class="hover:bg-blue-700 pt-2 pb-2 pl-6 pr-6 text-white bg-blue-600" href="#0">Apercu du jeu</a>
+								<a class="hover:bg-blue-700 pt-2 pb-2 pl-6 pr-6 text-white bg-blue-600" href="/game">Apercu du jeu</a>
 								<a class="hover:bg-gray-800 pt-2 pb-2 pl-6 pr-6 text-white bg-gray-900" href="#0">En savoir plus</a>
 						</div>
 					</div>
@@ -36,7 +36,8 @@
 			</div>
 		</div>
 	</div>
-  <div class="md:bottom-8 bottom-5 animate-bounce absolute text-gray-400">
+  <div class="md:bottom-8 bottom-5 animate-bounce absolute flex flex-col items-center justify-center text-gray-400">
+    <a href="" class="">Défiler la page</a>
     <svg xmlns="http://www.w3.org/2000/svg" class="md:w-8 md:h-8 w-6 h-6" fill="#323232" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
     </svg>
@@ -134,40 +135,4 @@
 	</div>
 </section>
 
-<footer class="body-font text-gray-600">
-	<div class="sm:flex-row container flex flex-col items-center px-5 py-8 mx-auto">
-		<a class="title-font md:justify-start flex items-center justify-center font-medium text-gray-900">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 p-2 text-white bg-purple-500 rounded-full" viewbox="0 0 24 24">
-				<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-			</svg>
-			<span class="ml-3 text-xl">Nom</span>
-		</a>
-		<p class="sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4 text-sm text-gray-500">© 2022 Nom —
-			<a href="https://twitter.com/knyttneve" class="ml-1 text-gray-600" rel="noopener noreferrer" target="_blank">Boutkrida  Landre  Le Hoang</a>
-		</p>
-		<span class="sm:ml-auto sm:mt-0 sm:justify-start inline-flex justify-center mt-4">
-			<a class="text-gray-500">
-				<svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewbox="0 0 24 24">
-					<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-				</svg>
-			</a>
-			<a class="ml-3 text-gray-500">
-				<svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewbox="0 0 24 24">
-					<path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-				</svg>
-			</a>
-			<a class="ml-3 text-gray-500">
-				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewbox="0 0 24 24">
-					<rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-					<path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-				</svg>
-			</a>
-			<a class="ml-3 text-gray-500">
-				<svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewbox="0 0 24 24">
-					<path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
-					<circle cx="4" cy="4" r="2" stroke="none"></circle>
-				</svg>
-			</a>
-		</span>
-	</div>
-</footer>{% endblock %}
+{% endblock %}

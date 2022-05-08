@@ -17,14 +17,18 @@ mix.js('resources/js/main.js', 'public/js')
 		require('autoprefixer'),
 	]);
 
-mix.js('card_game/script-jeu.js', 'public/js')
-	.js('card_game/docs.js', 'public/js')
-	.postCss('card_game/style-jeu.css', 'public/css', [
+mix.js('card_game/js/script-jeu.js', 'public/js')
+	.js('card_game/js/docs.js', 'public/js')
+	.postCss('card_game/css/style-jeu.css', 'public/css', [
 		require('autoprefixer'),
-	])
-	.postCss('card_game/croupier.css', 'public/css', [
+	]).options({
+		processCssUrls: false,
+	})
+	.postCss('card_game/css/croupier.css', 'public/css', [
 		require('autoprefixer'),
 	]);
+
+mix.copy('card_game/assets', 'public/assets');
 
 mix.disableSuccessNotifications();
 

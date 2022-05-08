@@ -1,7 +1,7 @@
 body.jeu {
   padding: 0;
   margin: 0;
-  background: url(assets/background/motif_table_2.jpg);
+  background: url("./../assets/background/motif_table_2.jpg");
   background-position: center;
   height: 100vh;
   width: 100%;

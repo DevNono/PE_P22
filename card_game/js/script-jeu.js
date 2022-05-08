@@ -138,7 +138,7 @@ class Card {
 		this.html = (window.listeCartes.filter(c => c.lettre === this.lettre)[0].html).replace('card--type', 'card--' + this.type); // Réaffiche le html des cartes
 
 		if (this.valeur === 10 && this.lettre !== '10') { // Si on est sur une carte "habillée"
-			this.html = this.html.replace('{{ svg }}', './assets/' + this.type + '_' + this.lettre + '.svg'); // On ajoute le bon svg
+			this.html = this.html.replace('{{ svg }}', './../assets/' + this.type + '_' + this.lettre + '.svg'); // On ajoute le bon svg
 		}
 	}
 }
@@ -490,11 +490,16 @@ class Game {
 	}
 }
 
-function game() {
+window.game = () => {
 	menu.classList.remove('start-menu-overlay'); // On retire le menu
 	menu.classList.add('hide');
 	games = new Game(); // On crée une nouvelle partie
-	console.log(games);
+
+	// Ajout des événements de boutons
+	const childs = document.querySelector('.boutons').children;
+	childs[0].addEventListener('click', () => games.pioche(games.joueurs_en_cours));
+	childs[1].addEventListener('click', () => games.tour_suivant(games.joueurs_en_cours));
+
 	games.distribution(games.joueurs); // On distribue les cartes
 	games.tour_croupier(); // On distribue les cartes au croupier
 	games.transition(''); // On affiche la transition
@@ -507,14 +512,13 @@ function game() {
 
 	window.decompte = setInterval(() => {
 		games.time--;
-		console.log(games.time);
 		document.querySelector('.chrono-text').innerHTML = games.time;
 		if (games.time === 0) {
 			games.tour_suivant(games.joueurs_en_cours);
 		}
 	}, 1000);
-}
+};
 
-function watch() {
+window.watch = () => {
 	console.log(games);
-}
+};

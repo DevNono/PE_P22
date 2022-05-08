@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack.js</title>
-    <link rel="stylesheet" href="croupier.css">
-    <link rel="stylesheet" href="style-jeu.css">
-	<script defer src="docs.js"></script>
-    <script defer src="script-jeu.js"></script>
+    <link rel="stylesheet" href="css/croupier.css">
+    <link rel="stylesheet" href="css/style-jeu.css">
+	<script defer src="js/docs.js"></script>
+    <script defer src="js/script-jeu.js"></script>
 </head>
 <body class="jeu">
     <div class="start-menu start-menu-overlay">
-        <button type="button" onclick="game()">Lancement</button>
-        <button type="button" onclick="watch()">Résultat</button>
+        <button type="button" onclick="window.game()">Lancement</button>
+        <button type="button" onclick="window.watch()">Résultat</button>
     </div>
 
 	<div class="jeu">
@@ -44,8 +44,8 @@
             </div>
 
             <div class="boutons">
-                <button type="button" onclick="games.pioche(games.joueurs_en_cours)">Piocher</button>
-                <button type="button" onclick="games.tour_suivant(games.joueurs_en_cours)">Terminer le tour</button>
+                <button type="button">Piocher</button>
+                <button type="button">Terminer le tour</button>
             </div>
             
         </div>
