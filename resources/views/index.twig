@@ -7,7 +7,7 @@
 {% block body %}
   
 	<section class="relative flex items-center justify-center h-screen">
-    {# <div class="top-20 left-20 fixed scale-125">
+    {# <div class="fixed scale-125 top-20 left-20">
         <section class="card card--pique" value="2"><div class="card__inner card__inner--centered"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>
     </div> #}
     <div class="top-52 -z-20 absolute flex items-start justify-center w-full h-[13.75rem] overflow-hidden">
@@ -15,62 +15,62 @@
         <section class="card card--coeur -rotate-6 translate-y-5 !-mr-32" value="8"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol"></div></div><div class="card__column card__column--centered"><div class="card__symbol card__symbol--big"></div><div class="card__symbol card__symbol--big"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>
         <section class="card card--pique !-mr-32 translate-y-2" value="A"><div class="card__inner card__inner--centered ace"><div class="card__symbol"></div></div></section>
         <section class="card card--trefle rotate-6 translate-y-5 !-mr-32" value="5"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div><div class="card__column card__column--centered"><div class="card__symbol"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>
-        <section class="card card--carreau rotate-12 translate-y-10" value="10"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol card__symbol--rotated"></div><div class="card__symbol"></div></div><div class="card__column card__column--centered"><div class="card__symbol card__symbol--big"></div><div class="card__symbol card__symbol--big"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol card__symbol--rotated"></div><div class="card__symbol"></div></div></div></section>
+        <section class="translate-y-10 card card--carreau rotate-12" value="10"><div class="card__inner"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol card__symbol--rotated"></div><div class="card__symbol"></div></div><div class="card__column card__column--centered"><div class="card__symbol card__symbol--big"></div><div class="card__symbol card__symbol--big"></div></div><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div><div class="card__symbol card__symbol--rotated"></div><div class="card__symbol"></div></div></div></section>
     </div>
-		<div class="sm:px-6 max-w-6xl px-4 mx-auto">
+		<div class="max-w-6xl px-4 mx-auto sm:px-6">
 
-			<div class="md:pt-40 md:pb-20 pt-32 pb-12">
+			<div class="pt-32 pb-12 md:pt-40 md:pb-20">
 
-				<div class="md:pb-16 pb-12 text-center">
-					<h1 class="md:text-6xl leading-tighter mb-4 text-5xl font-extrabold tracking-tighter" data-aos="zoom-y-out">Une introduction au
-						<span class="bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400 text-transparent">Javascript</span>
+				<div class="pb-12 text-center md:pb-16">
+					<h1 class="mb-4 text-5xl font-extrabold tracking-tighter md:text-6xl leading-tighter" data-aos="zoom-y-out">Une introduction au
+						<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400">Javascript</span>
 					</h1>
-					<div class=" max-w-3xl mx-auto">
+					<div class="max-w-3xl mx-auto ">
 						<p class="mb-8 text-xl text-gray-600" data-aos="zoom-y-out" data-aos-delay="150">Découvrez ce langage au travers de la réalisation d'un jeu de cartes</p>
-						<div class="sm:flex-row sm:justify-center flex flex-col gap-5" data-aos="zoom-y-out" data-aos-delay="300">
-								<a class="hover:bg-blue-700 pt-2 pb-2 pl-6 pr-6 text-white bg-blue-600" href="/game">Apercu du jeu</a>
-								<a class="hover:bg-gray-800 pt-2 pb-2 pl-6 pr-6 text-white bg-gray-900" href="#0">En savoir plus</a>
+						<div class="flex flex-col gap-5 sm:flex-row sm:justify-center" data-aos="zoom-y-out" data-aos-delay="300">
+								<a class="pt-2 pb-2 pl-6 pr-6 text-white bg-blue-600 hover:bg-blue-700" href="/game">Apercu du jeu</a>
+								<a class="pt-2 pb-2 pl-6 pr-6 text-white bg-gray-900 hover:bg-gray-800" href="#0">En savoir plus</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-  <div class="md:bottom-8 bottom-5 animate-bounce absolute flex flex-col items-center justify-center text-gray-400">
+  <div class="absolute flex flex-col items-center justify-center text-gray-400 md:bottom-8 bottom-5 animate-bounce">
     <a href="" class="">Défiler la page</a>
-    <svg xmlns="http://www.w3.org/2000/svg" class="md:w-8 md:h-8 w-6 h-6" fill="#323232" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 md:w-8 md:h-8" fill="#323232" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
     </svg>
   </div>
 </section>
 
-<section class="body-font text-gray-600">
+<section class="text-gray-600 body-font">
 	<div class="container flex flex-wrap px-5 py-24 mx-auto">
-		<div class="lg:w-1/2 lg:mb-0 w-full mb-10 overflow-hidden rounded-lg">
+		<div class="w-full mb-10 overflow-hidden rounded-lg lg:w-1/2 lg:mb-0">
 			<div class="flex flex-col w-full mb-12">
-				<h1 class="sm:text-3xl title-font mb-4 text-2xl font-medium text-gray-900">Qu'est ce que
-					<span class="bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400 text-transparent">JS.beginner ?</span>
+				<h1 class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">Qu'est ce que
+					<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400">JS.beginner ?</span>
 				</h1>
-				<p class=" text-base leading-relaxed">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun deep.</p>
+				<p class="text-base leading-relaxed ">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun deep.</p>
 				<div class="flex justify-center w-full mt-20">
-					<a class="btn hover:bg-gray-800 w-24 py-2 text-center text-white bg-blue-500" href="#0">Commencer</a>
+					<a class="w-24 py-2 text-center text-white bg-blue-500 btn hover:bg-gray-800" href="/modules">Commencer</a>
 				</div>
 
 			</div>
 		</div>
-		<div class="lg:py-6 lg:w-1/2 lg:pl-12 lg:text-left flex flex-col flex-wrap -mb-10 text-center">
-			<div class="lg:items-start flex items-center justify-center gap-5 mb-10">
+		<div class="flex flex-col flex-wrap -mb-10 text-center lg:py-6 lg:w-1/2 lg:pl-12 lg:text-left">
+			<div class="flex items-center justify-center gap-5 mb-10 lg:items-start">
 				<div class="inline-flex items-center justify-center w-12 h-12 mb-5 text-indigo-500 bg-indigo-100 rounded-full">
 					<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewbox="0 0 24 24">
 						<path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
 					</svg>
 				</div>
 				<div class="flex-grow">
-					<h2 class="title-font mb-3 text-lg font-medium text-gray-900">Un apprentissage ludique</h2>
+					<h2 class="mb-3 text-lg font-medium text-gray-900 title-font">Un apprentissage ludique</h2>
 					<p class="text-base leading-relaxed">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
 				</div>
 			</div>
-			<div class="lg:items-start flex items-center justify-center gap-5 mb-10">
+			<div class="flex items-center justify-center gap-5 mb-10 lg:items-start">
 				<div class="inline-flex items-center justify-center w-12 h-12 mb-5 text-indigo-500 bg-indigo-100 rounded-full">
 					<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewbox="0 0 24 24">
 						<circle cx="6" cy="6" r="3"></circle>
@@ -79,12 +79,12 @@
 					</svg>
 				</div>
 				<div class="flex-grow">
-					<h2 class="title-font mb-3 text-lg font-medium text-gray-900">Un apprentissage intéractif</h2>
+					<h2 class="mb-3 text-lg font-medium text-gray-900 title-font">Un apprentissage intéractif</h2>
 					<p class="text-base leading-relaxed">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
 
 				</div>
 			</div>
-			<div class="lg:items-start flex items-center justify-center gap-5 mb-10">
+			<div class="flex items-center justify-center gap-5 mb-10 lg:items-start">
 				<div class="inline-flex items-center justify-center w-12 h-12 mb-5 text-indigo-500 bg-indigo-100 rounded-full">
 					<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewbox="0 0 24 24">
 						<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
@@ -92,7 +92,7 @@
 					</svg>
 				</div>
 				<div class="flex-grow">
-					<h2 class="title-font mb-3 text-lg font-medium text-gray-900">Un suivi</h2>
+					<h2 class="mb-3 text-lg font-medium text-gray-900 title-font">Un suivi</h2>
 					<p class="text-base leading-relaxed">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
 				</div>
 			</div>
@@ -100,34 +100,34 @@
 	</div>
 </section>
 
-<section class="body-font relative text-gray-600">
+<section class="relative text-gray-600 body-font">
 	<div class="container px-5 py-24 mx-auto">
 		<div class="flex flex-col w-full mb-12 text-center">
-			<h1 class="sm:text-3xl title-font mb-4 text-2xl font-medium text-gray-900">Nous Contacter</h1>
-			<p class="lg:w-2/3 mx-auto text-base leading-relaxed">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify.</p>
+			<h1 class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">Nous Contacter</h1>
+			<p class="mx-auto text-base leading-relaxed lg:w-2/3">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify.</p>
 		</div>
-		<div class="lg:w-1/2 md:w-2/3 mx-auto">
+		<div class="mx-auto lg:w-1/2 md:w-2/3">
 			<div class="flex flex-wrap -m-2">
 				<div class="w-1/2 p-2">
 					<div class="relative">
 						<label for="name" class="text-sm leading-7 text-gray-600">Name</label>
-						<input type="text" id="name" name="name" class="focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200 w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none">
+						<input type="text" id="name" name="name" class="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200">
 					</div>
 				</div>
 				<div class="w-1/2 p-2">
 					<div class="relative">
 						<label for="email" class="text-sm leading-7 text-gray-600">Email</label>
-						<input type="email" id="email" name="email" class="focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200 w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none">
+						<input type="email" id="email" name="email" class="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200">
 					</div>
 				</div>
 				<div class="w-full p-2">
 					<div class="relative">
 						<label for="message" class="text-sm leading-7 text-gray-600">Message</label>
-						<textarea id="message" name="message" class="focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200 w-full h-32 px-3 py-1 text-base leading-6 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none resize-none"></textarea>
+						<textarea id="message" name="message" class="w-full h-32 px-3 py-1 text-base leading-6 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none resize-none focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200"></textarea>
 					</div>
 				</div>
 				<div class="w-full p-2">
-					<button class="focus:outline-none hover:bg-purple-600 flex px-8 py-2 mx-auto text-lg text-white bg-purple-500 border-0 rounded">Button</button>
+					<button class="flex px-8 py-2 mx-auto text-lg text-white bg-purple-500 border-0 rounded focus:outline-none hover:bg-purple-600">Button</button>
 				</div>
 
 			</div>
