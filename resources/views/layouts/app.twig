@@ -1,35 +1,29 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>{{ title }}</title>
-    <link rel='stylesheet' href='/css/style.css' />
-  </head>
-  <body>
-  <header class={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${!top && 'bg-white backdrop-blur-sm shadow-lg'}`}>
-      <div class="max-w-6xl px-5 mx-auto sm:px-6">
-        <div class="flex items-center justify-between h-16 md:h-20">
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{ title }}</title>
+		<link rel='stylesheet' href='/css/style.css'/>
+    {% block css %}{% endblock %}
+	</head>
+	<body>
+		<header class="absolute w-full transition duration-300 ease-in-out">
+			<div class="sm:px-6 max-w-6xl px-5 mx-auto">
+				<div class="md:h-20 flex items-center justify-between h-16">
 
 
-          <div class="flex-shrink-0 mr-4">
-          </div>
+					<div class="flex-shrink-0 mr-4"></div>
 
-          <nav class="flex flex-grow">
-            <ul class="flex flex-wrap items-center justify-end flex-grow">
-              <li>
-                <a href="/signin" class="flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out hover:text-gray-900 ">Sign in</a>
-              </li>
-              <li>
-                <a href="/signup" class="pt-2 pb-2 pl-4 pr-4 ml-3 text-gray-200 bg-gray-900 btn-sm hover:bg-gray-800">
-                  <span>Sign up</span>                
-                </a>
-              </li>
-            </ul>
+					<nav class="flex flex-wrap items-center justify-end">
+						<a href="/signin" class="hover:text-gray-900 flex items-center px-5 py-3 font-medium text-gray-600 transition duration-150 ease-in-out">Sign in</a>
+						<a href="/signup" class="btn-sm hover:bg-gray-800 pt-2 pb-2 pl-4 pr-4 ml-3 text-gray-200 bg-gray-900">Sign up</a>
+					</nav>
 
-          </nav>
-
-        </div>
-      </div>
-    </header>
-    {% block body %}{% endblock %}
-  </body>
+				</div>
+			</div>
+		</header>
+		{% block body %}{% endblock %}
+	</body>
 </html>

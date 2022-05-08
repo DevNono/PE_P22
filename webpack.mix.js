@@ -11,9 +11,18 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/script.js', 'public/js')
+mix.js('resources/js/main.js', 'public/js')
 	.postCss('resources/css/style.css', 'public/css', [
 		require('tailwindcss'),
+		require('autoprefixer'),
+	]);
+
+mix.js('card_game/script-jeu.js', 'public/js')
+	.js('card_game/docs.js', 'public/js')
+	.postCss('card_game/style-jeu.css', 'public/css', [
+		require('autoprefixer'),
+	])
+	.postCss('card_game/croupier.css', 'public/css', [
 		require('autoprefixer'),
 	]);
 

@@ -1,11 +1,11 @@
-body {
+body.jeu {
   padding: 0;
   margin: 0;
   background: url(assets/background/motif_table_2.jpg);
   background-position: center;
   height: 100vh;
   width: 100%;
-  font-family: 'Calibri', sans-serif;
+  font-family: "Calibri", sans-serif;
 }
 
 /* CSS lié à l'affichage du jeu*/
@@ -241,7 +241,7 @@ button {
   color: white;
   font-weight: bold;
   background-color: rgba(255, 255, 255, 0.1);
-  -webkit-backdrop-filter: blur(3px) brightness(0.85);;
+  -webkit-backdrop-filter: blur(3px) brightness(0.85);
   backdrop-filter: blur(3px) brightness(0.85);
   padding: 20px;
   border-radius: 20px;
@@ -249,10 +249,10 @@ button {
 
 .rang > .cartes {
   display: flex;
-  transform: scale(0.90);
+  transform: scale(0.9);
 }
 
-.gagnant{
+.gagnant {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -389,7 +389,7 @@ button {
 
 /* Croupier setup - à remplacer par un scale() (bcp plus rapide et pratique)*/
 
-.croupier .card{
+.croupier .card {
   width: 120px;
   height: 167px;
   font: 16px;
@@ -411,7 +411,7 @@ button {
   line-height: 28px;
 }
 
-.croupier .card__symbol{
+.croupier .card__symbol {
   height: 28px;
 }
 
