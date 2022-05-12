@@ -23,10 +23,10 @@ router.get('/:id/:id2', (req, res) => {
 	const {id} = req.params;
 	const {id2} = req.params;
 
-	const section = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/modules/section${id}/section.json`)));
+	const section = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/courses/section${id}/section.json`)));
 	section.id = id;
 	// Load a json file in the resources folder and extract in a variable using fs
-	const module = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/modules/section${id}/module${id2}.json`)));
+	const module = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/courses/section${id}/module${id2}.json`)));
 	module.id = id2;
 	for (let i = 0; i < module.content.length; i++) {
 		if (module.content[i].type === 'code') {
@@ -34,7 +34,7 @@ router.get('/:id/:id2', (req, res) => {
 		}
 	}
 
-	res.render('courses', {title: 'courses', section, module});
+	res.render('course', {title: 'course', section, module});
 });
 
 module.exports = router;

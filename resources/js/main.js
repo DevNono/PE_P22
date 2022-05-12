@@ -7,7 +7,7 @@ const quizHandler = [];
 =============================================== */
 
 function quizInit(quizIndex, questions) {
-    const quizHandlerInstance = quizHandler[quizIndex];
+	const quizHandlerInstance = quizHandler[quizIndex];
 	quizHandlerInstance.isFinished = false;
 	quizHandlerInstance.result = 0;
 	quizHandlerInstance.questions = questions;
