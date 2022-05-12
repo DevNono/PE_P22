@@ -1,0 +1,54 @@
+{
+    "title": "The Lord of the Rings: The Fellowship of the Ring",
+    "description": "A memory of the One Ring, Frodo and his Companions, the Ring, and the Dark Lord Sauron.",
+    "content": [
+        "<rem>Ma remarque</rem>",
+        "The Fellowship of the Ring",
+        "<code> fdko,qdfjndfqjndfqndfqsjn </code>",
+        "The Return of the King"
+    ],
+    "exercices": [
+        {
+            "type": "quiz",
+            "questions": [
+                "What is the name of the ring?",
+                "What is the name of the One Ring?",
+                "What is the name of the Dark Lord Sauron?"
+            ],
+            "answers": [
+                [
+                    "The Ring",
+                    "The One Ring",
+                    "The Ring of Power"
+
+                ],
+                [
+                    "The One Ring",
+                    "The Ring of Power",
+                    "The Ring of Fire"
+                ],
+                [
+                    "Sauron",
+                    "Sauron the Dark Lord",
+                    "Sauron the Dark Lord of Mordor"
+                ]
+            ],
+            "correctAnswers": [
+                "The Ring",
+                "The One Ring",
+                "Sauron the Dark Lord"
+            ],
+            "explanation": [
+                "The Ring is the One Ring, the One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them. In the land of Mordor, where Sauron dwells, they will be broken. And the One Ring will be mine, when I am gone, my precious, as I am about to be. ",
+                "The One Ring is the One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them. In the land of Mordor, where Sauron dwells, they will be broken. And the One Ring will be mine, when I am gone, my precious, as I am about to be. ",
+                "Sauron the Dark Lord of Mordor is the One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them. In the land of Mordor, where Sauron dwells, they will be broken. And the One Ring will be mine, when I am gone, my precious, as I am about to be. "
+            ] 
+        },
+        {
+            "type": "gapfill"
+        },
+        {
+            "type": "writing"
+        }
+    ]
+}

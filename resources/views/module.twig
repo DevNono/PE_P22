@@ -1,0 +1,24 @@
+{% extends 'layouts/app.twig' %}
+{% block body %}
+
+{% for key, value in json %}
+    {{ key }}: {{ value }}
+{% endfor %}
+
+
+{% for exercice in json.exercices %}
+    {{ exercice.type }}
+    {% if exercice.type == 'quiz' %}
+        {# transform exercice object to string, replace each " by ' and print it #}
+
+		<div class="quiz" data-quiz="{{ exercice | json_encode | raw | replace({'"': "'"}) }}"></div>
+    {% elseif exercice.type == 'gapfill' %}
+        {# something else here #}
+    {% elseif exercice.type == 'writing' %}
+        {# something else here #}
+    {% endif %}
+    
+{% endfor %} 
+
+
+{% endblock %}
