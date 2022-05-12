@@ -1,13 +1,54 @@
 {% extends 'layouts/app.twig' %}
-{% block body %}
+{% block css %}
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+{% endblock %}
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script defer>hljs.highlightAll();</script>
+{% endblock %}
 
-{% for key, value in json %}
-    {{ key }}: {{ value }}
+{% block body %}
+{# Display a div with a bg gradient thanks to tailwindcss v3 #}
+<div class="bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 h-[50vh] flex px-20 py-28 justify-center clip-path flex-col text-white">
+    <p class="italic">Section {{ section.id }} - {{ section.title }}</p> 
+    <h1 class="text-3xl font-bold">Module {{ module.id }} - {{ module.title }}</h1>
+    <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1 information">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p class="">{{ module.time }} min</p>
+        </div>
+        <div class="flex items-center gap-1 information">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+            </svg>
+            <p class="">{{ module.exercices.length }} exercices</p>
+        </div>
+    </div>
+</div>
+
+{% for content in module.content %}
+    {% if content.type == 'text' %}
+        <div class="flex flex-col justify-center items-center h-[50vh]">
+            <p class="text-center text-white">{{ content.text }}</p>
+        </div>
+    {% elseif content.type == 'video' %}
+        <div class="flex flex-col justify-center items-center h-[50vh]">
+            <video class="w-full h-full" controls>
+                <source src="{{ content.video }}" type="video/mp4">
+            </video>
+        </div>
+    {% elseif content.type == 'image' %}
+        <div class="flex flex-col justify-center items-center h-[50vh]">
+            <img class="w-full h-full" src="{{ content.image }}" alt="">
+        </div>
+    {% endif %}
 {% endfor %}
 
 
-{% for exercice in json.exercices %}
-    {{ exercice.type }}
+{% for exercice in module.exercices %}
     {% if exercice.type == 'quiz' %}
         {# transform exercice object to string, replace each " by ' and print it #}
 

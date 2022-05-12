@@ -30,5 +30,5 @@ mix.js('card_game/js/script-jeu.js', 'public/js')
 
 mix.copy('card_game/assets', 'public/assets');
 
-mix.disableSuccessNotifications();
+mix.disableNotifications();
 

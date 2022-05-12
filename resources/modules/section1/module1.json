@@ -1,11 +1,20 @@
 {
     "title": "The Lord of the Rings: The Fellowship of the Ring",
     "description": "A memory of the One Ring, Frodo and his Companions, the Ring, and the Dark Lord Sauron.",
+    "time": 3,
     "content": [
-        "<rem>Ma remarque</rem>",
-        "The Fellowship of the Ring",
-        "<code> fdko,qdfjndfqjndfqndfqsjn </code>",
-        "The Return of the King"
+        {
+            "type": "text",
+            "text": "The Lord of the Rings: The Fellowship of the Ring"
+        },
+        {
+            "type": "text",
+            "text": "A memory of the One Ring, Frodo and his Companions, the Ring, and the Dark Lord Sauron."
+        },
+        {
+            "type": "code",
+            "code": "<p>HTML CODE</p>"
+        }
     ],
     "exercices": [
         {

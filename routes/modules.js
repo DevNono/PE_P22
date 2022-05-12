@@ -13,9 +13,13 @@ router.get('/', (req, res) => {
 router.get('/:id/:id2', (req, res) => {
 	const {id} = req.params;
 	const {id2} = req.params;
-	// Load a json file in the ressources folder and extract in a variable using fs
-	const json = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/modules/section${id}/module${id2}.json`)));
-	res.render('module', {title: 'Module', json});
+
+	const section = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/modules/section${id}/section.json`)));
+	section.id = id;
+	// Load a json file in the resources folder and extract in a variable using fs
+	const module = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/modules/section${id}/module${id2}.json`)));
+	module.id = id2;
+	res.render('module', {title: 'Module', section, module});
 });
 
 module.exports = router;
