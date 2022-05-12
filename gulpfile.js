@@ -14,10 +14,10 @@ gulp.task('sync', () => {
 	browserSync.init({
 		port: 3000, // This can be any port, it will show our app
 		proxy: `http://localhost:${process.env.APP_PORT}/`, // This is the port where express server works
-		ui: {port: 3000}, // UI, can be any port
-		reloadDelay: 1000, // Important, otherwise syncing will not work
+		ui: {port: 3001}, // UI, can be any port
+		reloadDelay: 500, // Important, otherwise syncing will not work
 	});
-	gulp.watch(['./**/*.js', './**/*.twig', './**/*.css']).on('change', browserSync.reload);
+	gulp.watch(['./**/*.js', './**/*.twig', './**/*.css', '!node_modules/**']).on('change', browserSync.reload);
 });
 
 exports.build = gulp.parallel(['gulp_nodemon', 'sync']);

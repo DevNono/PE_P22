@@ -4,7 +4,7 @@
     "time": 3,
     "content": [
         {
-            "type": "text",
+            "type": "title",
             "text": "The Lord of the Rings: The Fellowship of the Ring"
         },
         {
@@ -13,7 +13,8 @@
         },
         {
             "type": "code",
-            "code": "<p>HTML CODE</p>"
+            "code": "<p>HTML CODE</p>",
+            "description": "Html snippet to display in the page"
         }
     ],
     "exercices": [

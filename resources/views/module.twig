@@ -1,7 +1,6 @@
 {% extends 'layouts/app.twig' %}
 {% block css %}
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
 {% endblock %}
 {% block js %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
@@ -28,14 +27,18 @@
         </div>
     </div>
 </div>
-
+<div class="flex flex-col gap-3 px-10 pt-8 content">
 {% for content in module.content %}
     {% if content.type == 'text' %}
-        <div class="flex flex-col justify-center items-center h-[50vh]">
-            <p class="text-center text-white">{{ content.text }}</p>
+        <div class="flex flex-col">
+            <p class="">{{ content.text }}</p>
+        </div>
+    {% elseif content.type == 'title' %}
+        <div class="flex flex-col">
+            <h2 class="text-2xl font-bold">{{ content.text }}</h2>
         </div>
     {% elseif content.type == 'video' %}
-        <div class="flex flex-col justify-center items-center h-[50vh]">
+        <div class="flex flex-col items-center justify-center">
             <video class="w-full h-full" controls>
                 <source src="{{ content.video }}" type="video/mp4">
             </video>
@@ -44,22 +47,28 @@
         <div class="flex flex-col justify-center items-center h-[50vh]">
             <img class="w-full h-full" src="{{ content.image }}" alt="">
         </div>
+    {% elseif content.type == 'code' %}
+        <pre class="flex flex-col w-full gap-1">
+            <code id=code-html class="code xml" data-clipboard-target="#code-html">
+               {{ content.code }}
+            </code>
+            <p class="italic text-center">{{ content.description }}</p>
+        </pre>
     {% endif %}
 {% endfor %}
+</div>
 
-
-{% for exercice in module.exercices %}
-    {% if exercice.type == 'quiz' %}
-        {# transform exercice object to string, replace each " by ' and print it #}
-
-		<div class="quiz" data-quiz="{{ exercice | json_encode | raw | replace({'"': "'"}) }}"></div>
-    {% elseif exercice.type == 'gapfill' %}
-        {# something else here #}
-    {% elseif exercice.type == 'writing' %}
-        {# something else here #}
-    {% endif %}
-    
-{% endfor %} 
-
+<div class="flex flex-col gap-3 px-10 pt-8 exercices">
+    <h3 class="text-2xl font-bold text-gray-800">Exercices</h3>
+    {% for exercice in module.exercices %}
+        {% if exercice.type == 'quiz' %}
+            <div class="quiz" data-quiz="{{ exercice | json_encode | raw | replace({'"': "'"}) }}"></div>
+        {% elseif exercice.type == 'gapfill' %}
+            {# something else here #}
+        {% elseif exercice.type == 'writing' %}
+            {# something else here #}
+        {% endif %}
+    {% endfor %} 
+</div>
 
 {% endblock %}
