@@ -91,6 +91,7 @@ const pseudo = [
 const settings = {
 	scoreToGet: 21,
 	timePerRound: 20,
+	maxLife: 1,
 };
 
 // Variables initiales
@@ -148,7 +149,7 @@ class Joueur {
 	constructor(pseudo, bot) {
 		this.identifiant = pseudo; // Identifiant du joueur
 		this.inventaire = []; // Inventaire du joueur
-		this.vie = 1; // Vie du joueur
+		this.vie = settings.maxLife; // Vie du joueur
 		this.score = 0; // Score du joueur
 		this.bot = bot === 'bot'; // Is this player a bot
 	}
@@ -159,7 +160,7 @@ class Croupier {
 		this.identifiant = 'Croupier'; // Identifiant du croupier
 		this.inventaire = []; // Inventaire du croupier
 		this.score = 0; // Score du croupier
-		this.score_affiche = 0; // Score du croupier
+		this.score_affiche = 0; // Score du croupier affiché
 		this.html = '<div class="corps"> <div class="background-circle"> <div class="body"></div><div class="habit"><div class="bouttons"><div class="boutton"></div><div class="boutton"></div><div class="boutton"></div></div><div class="chemise"><div class="triangle_cravate"></div><div class="cravate_bout"></div></div><div class="bouttons"><div class="boutton"></div><div class="boutton"></div><div class="boutton"></div></div></div></div><div class="head"><div class="ear" id="left"></div><div class="ear" id="right"></div><div class="hair-main"><div class="sideburn" id="left"></div><div class="sideburn" id="right"></div><div class="hair-top"></div></div><div class="face"><div class="hair-bottom"></div><div class="nose"></div><div class="eye-shadow" id="left"><div class="eyebrow"></div><div class="eye"></div></div><div class="eye-shadow" id="right"><div class="eyebrow"></div><div class="eye"></div></div><div class="mouth"></div></div></div></div>';
 	}
 }
@@ -171,14 +172,12 @@ class Game {
 		this.cards = []; // Liste des cartes
 		this.manche = 0; // Numéro de la manche
 		this.joueurs_en_cours = 0; // Numéro du joueur en cours
-		this.joueurs_en_vie = 3; // Nombre de joueurs en vie
 		this.croupier = new Croupier(); // Croupier
 		this.nb_joueurs_en_vie = 0; // Nombre de joueurs en vie
 
 		// On crée le jeu de cartes
 		for (let i = 0; i < numeros.length; i++) {
-			const {valeur} = numeros[i]; // Valeur de la carte
-			const {lettre} = numeros[i]; // Lettre de la carte
+			const {lettre, valeur} = numeros[i]; // Lettre et valeur de la carte	
 			// On crée la carte pour chaque symbole
 			for (let j = 0; j < symboles.length; j++) {
 				const {type} = symboles[j]; // Type de la carte
