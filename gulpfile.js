@@ -17,7 +17,7 @@ gulp.task('sync', () => {
 		ui: {port: 3001}, // UI, can be any port
 		reloadDelay: 500, // Important, otherwise syncing will not work
 	});
-	gulp.watch(['./**/*.js', './**/*.twig', './**/*.css', '!node_modules/**']).on('change', browserSync.reload);
+	gulp.watch(['./**/*.js', './**/*.twig', './**/*.css', '!node_modules/**', '!public/**']).on('change', browserSync.reload);
 });
 
 exports.build = gulp.parallel(['gulp_nodemon', 'sync']);

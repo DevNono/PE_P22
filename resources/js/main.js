@@ -16,13 +16,13 @@ function quizInit(quizIndex, questions) {
 	quizHandlerInstance.actualQuestion = 1;
 	quizHandlerInstance.nbCorrect = 0;
 
-	document.querySelector('.progresstext .max').innerText = quizHandlerInstance.nbQuestions;
+	document.querySelectorAll('.progresstext .max')[quizIndex].innerText = quizHandlerInstance.nbQuestions;
 	buildQuestion(quizIndex, quizHandlerInstance.actualQuestion);
 }
 
 function calculateQuizResults(quizHandlerInstance) {
 	let count = 0;
-	for (let i = 0; i < quizHandlerInstance.questions.length; i++) {
+	for (let i = 0; i < quizHandlerInstance.nbQuestions; i++) {
 		if (quizHandlerInstance.answers[i] === quizHandlerInstance.questions[i].correct) {
 			count++;
 		}
@@ -43,8 +43,8 @@ function buildQuestion(quizIndex, nb) {
 	let template = '';
 	const letter = 65;
 	for (let i = 0; i < current.answers.length && i < 26; i++) {
-		template += `<input type="radio" name="answer" id="answer${i + 1}-check" value="${i + 1}">
-        <a data-aos="fade-${i % 2 === 0 ? 'left' : 'right'}" data-aos-delay="${i * 150}" data-for="answer${i + 1}-check" class="answer answer${i + 1}">
+		template += `<input type="radio" name="answer" id="quiz${quizIndex}answer${i + 1}-check" value="${i + 1}">
+        <a data-aos="fade-${i % 2 === 0 ? 'left' : 'right'}" data-aos-delay="${i * 150}" data-for="quiz${quizIndex}answer${i + 1}-check" class="answer answer${i + 1}">
             <span>${String.fromCharCode(letter + i)}</span>
             <p>${current.answers[i]}</p>
         </a>`;
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', e => {
 	document.querySelectorAll('.submit-quiz').forEach((el, i) => {
 		el.addEventListener('click', () => {
 			if (quizHandler[i].isFinished === true) {
-				document.querySelector('.submit-quiz').innerText = 'Vérifier';
+				el.innerText = 'Vérifier';
 				quizInit(i, quizHandler[i].questions);
 			} else {
 				quizHandler[i].answers[quizHandler[i].actualQuestion - 1] = parseInt(document.querySelector('input[type=\'radio\'][name=\'answer\']:checked').value, 10);
@@ -107,16 +107,16 @@ document.addEventListener('DOMContentLoaded', e => {
 						quizHandler[i].actualQuestion += 1;
 						buildQuestion(i, quizHandler[i].actualQuestion);
 					} else {
-						document.querySelector('.progresstext .min').innerText = quizHandler[i].nbQuestions;
-						document.querySelector('.progressbar .bar1').style.width = '100%';
+						document.querySelectorAll('.quiz')[i].querySelector('.progresstext .min').innerText = quizHandler[i].nbQuestions;
+						document.querySelectorAll('.quiz')[i].querySelector('.progressbar .bar1').style.width = '100%';
 
-						calculateQuizResults(i);
+						calculateQuizResults(quizHandler[i]);
 
-						document.querySelector('.quiz .question').innerText = 'Résultats';
-						document.querySelector('.submit-quiz').innerText = 'Rejouer';
+						document.querySelectorAll('.quiz')[i].querySelector('.question').innerText = 'Résultats';
+						document.querySelectorAll('.quiz')[i].querySelector('.submit-quiz').innerText = 'Rejouer';
 						quizHandler[i].isFinished = true;
 
-						document.querySelector('.quiz .answers').innerHTML = `<div id="circle-container"></div><p>Vous avez obtenu &nbsp;<span>${quizHandler[i].nbCorrect} / ${quizHandler[i].nbQuestions}</span></p>`;
+						document.querySelectorAll('.quiz')[i].querySelector('.answers').innerHTML = `<div id="circle-container"></div><p>Vous avez obtenu &nbsp;<span>${quizHandler[i].nbCorrect} / ${quizHandler[i].nbQuestions}</span></p>`;
 					}
 				});
 			}
