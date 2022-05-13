@@ -59,10 +59,18 @@
             ]
         },
         {
-            "type": "gapfill"
+            "type": "gapfill",
+            "text": "Complete that %gap% to make it %gap%.",
+            "gaps": [
+                "code",
+                "work"
+            ]
+
         },
         {
-            "type": "writing"
+            "type": "writing",
+            "question": "What is the heck of the movie?",
+            "answer": "fjjfijfijdqfijdfjfjqjfiqfdij"
         }
     ]
 }
