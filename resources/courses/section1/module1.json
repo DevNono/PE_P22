@@ -13,7 +13,7 @@
         },
         {
             "type": "code",
-            "code": "<p>HTML CODE</p>",
+            "code": "<p>HTML CODE</p>\n<h1>Title</h1>",
             "description": "Html snippet to display in the page"
         }
     ],
@@ -69,8 +69,9 @@
         },
         {
             "type": "writing",
-            "question": "What is the heck of the movie?",
-            "answer": "fjjfijfijdqfijdfjfjqjfiqfdij"
+            "title": "The Lord of the Rings: The Fellowship of the Ring",
+            "question": "Coder une boucle allant de 0 à 10 qui affiche l'index de la boucle",
+            "answer": "fjjfijfijdqfijdfjfjqjfiqfdij\nazeazeaz\n"
         }
     ]
 }

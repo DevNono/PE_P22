@@ -1,4 +1,9 @@
 import Swal from 'sweetalert2';
+
+import Prism from './prism.js';
+
+import './../css/prism.css';
+
 // Manage Quiz State
 const quizHandler = [];
 
@@ -61,6 +66,67 @@ function buildQuestion(quizIndex, nb) {
 	});
 }
 
+/* ===============================================
+            Ending of Quiz
+=============================================== */
+
+/* ===============================================
+            Beginning of Writing
+=============================================== */
+
+const inputarea = document.querySelectorAll('.writing .input');
+const outputarea = document.querySelectorAll('.writing .output');
+
+function escapeHtml(unsafe) {
+	return unsafe
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#039;');
+}
+
+function sync_scroll(input, output) {
+	// Get and set x and y
+	output.scrollTop = input.scrollTop;
+	output.scrollLeft = input.scrollLeft;
+}
+
+function writing_update(el) {
+	let code = escapeHtml(el.value);
+	console.log(code);
+	if (code[code.length - 1] === '\n') {
+		code += ' ';
+	}
+
+	el.parentElement.querySelector('.output').innerHTML = code;
+
+	Prism.highlightElement(el.parentElement.querySelector('.output'));
+	sync_scroll(el, el.parentElement.querySelector('.output'));
+}
+
+function writing_check_tab(el, event) {
+	const code = el.value;
+	if (event.key === 'Tab') {
+		/* Tab key pressed */
+		event.preventDefault(); // Stop normal
+		const before_tab = code.slice(0, el.selectionStart); // Text before tab
+		const after_tab = code.slice(el.selectionEnd, el.value.length); // Text after tab
+		const cursor_pos = el.selectionEnd + 1; // Where cursor moves after tab - moving forward by 1 char to after tab
+		el.value = before_tab + '\t' + after_tab; // Add tab char
+		// move cursor
+		el.selectionStart = cursor_pos;
+		el.selectionEnd = cursor_pos;
+		writing_update(el); // Update text to include indent
+	}
+}
+
+Prism.highlightAll();
+
+/* ===============================================
+            Ending of Writing
+=============================================== */
+
 // Add Events and OnStart functions
 document.addEventListener('DOMContentLoaded', e => {
 	document.querySelectorAll('.quiz').forEach((el, i) => {
@@ -122,7 +188,25 @@ document.addEventListener('DOMContentLoaded', e => {
 			}
 		});
 	});
+
+	// Add writing click event handler
+	inputarea.forEach(el => {
+		el.addEventListener('input', event => {
+			writing_update(el);
+		}, false);
+
+		el.addEventListener('keydown', event => {
+			writing_check_tab(el, event);
+		}, false);
+
+		// Refresh highlighting when blured focus from textarea.
+		el.addEventListener('blur', event => {
+			Prism.highlightElement(el.parentElement.querySelector('.output'));
+		}, false);
+
+		el.addEventListener('scroll', event => {
+			sync_scroll(el, el.parentElement.querySelector('.output'));
+		}, false);
+	});
 });
-/* ===============================================
-            Ending of Quiz
-=============================================== */
+

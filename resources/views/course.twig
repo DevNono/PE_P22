@@ -2,12 +2,6 @@
 {% block css %}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
 {% endblock %}
-{% block js %}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-	<script defer>
-		hljs.highlightAll();
-	</script>
-{% endblock %}
 
 {% block body %}
 	{# Display a div with a bg gradient thanks to tailwindcss v3 #}
@@ -59,16 +53,14 @@
 				</div>
 			{% elseif content.type == 'code' %}
 				<pre class="flex flex-col w-full gap-1">
-            <code id=code-html class="code xml" data-clipboard-target="#code-html">
-               {{ content.code }}
-            </code>
-            <p class="italic text-center">{{ content.description }}</p>
-        </pre>
+					<code class="language-html" data-clipboard-target="#code-html">{{ content.code }}</code>
+					<p class="italic text-center">{{ content.description }}</p>
+				</pre>
 			{% endif %}
 		{% endfor %}
 	</div>
 
-	<div class="flex flex-col gap-3 px-10 pt-8 exercices">
+	<div class="flex flex-col gap-4 px-10 pt-8 exercices">
 		<h3 class="text-2xl font-bold text-gray-900">Exercices</h3>
 		{% for exercice in module.exercices %}
 			{% if exercice.type == 'quiz' %}
@@ -87,9 +79,21 @@
 					<a class="submit-quiz button">Suivant</a>
 				</div>
 			{% elseif exercice.type == 'gapfill' %}
-				{# something else here #}
-				{% elseif exercice.type == 'writing' %}
-				{# something else here #}
+				<h3 class="text-xl font-bold text-gray-900">Writing - {{ exercice.title }}</h3>
+				<p class="">{{ exercice.question }}</p>
+				<div class="gap-fill flex flex-col relative w-full rounded-2xl justify-start items-start">
+					
+				</div>
+			{% elseif exercice.type == 'writing' %}
+				<h3 class="text-xl font-bold text-gray-900">Writing - {{ exercice.title }}</h3>
+				<p class="">{{ exercice.question }}</p>
+				<div class="writing flex flex-col relative w-full rounded-2xl justify-start items-start">
+					<textarea spellcheck="false" class="overflow-auto whitespace-nowrap outline-none absolute w-full z-20 input p-4 text-transparent bg-transparent caret-white resize-none"></textarea>
+					<pre class="w-full h-full">
+						<code class="overflow-auto whitespace-nowrap left-0 top-0 absolute w-full z-10 output preview language-javascript p-4">
+						</code>
+					</pre>
+				</div>
 			{% endif %}
 		{% endfor %}
 	</div>
