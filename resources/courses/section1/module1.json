@@ -60,10 +60,17 @@
         },
         {
             "type": "gapfill",
-            "text": "Complete that %gap% to make it %gap%.",
+            "title": "Complete this code",
+            "text": "for ( %gap% i; i < a.length; %gap%)",
             "gaps": [
-                "code",
-                "work"
+                {
+                    "text": "let",
+                    "correct": 1
+                },
+                {
+                    "text": "i++",
+                    "correct": 2
+                }
             ]
 
         },
@@ -72,6 +79,12 @@
             "title": "The Lord of the Rings: The Fellowship of the Ring",
             "question": "Coder une boucle allant de 0 à 10 qui affiche l'index de la boucle",
             "answer": "fjjfijfijdqfijdfjfjqjfiqfdij\nazeazeaz\n"
+        },
+        {
+            "type": "writing",
+            "title": "Peter Pan - The Return of the King",
+            "question": "Code with our friends the following code :",
+            "answer": "function deny(true):\nreturn Help me\n"
         }
     ]
 }

@@ -34,6 +34,7 @@ router.get('/:id/:id2', (req, res) => {
 		}
 	}
 
+	// TODO: shuffle gap fill words before send to page
 	res.render('course', {title: 'course', section, module});
 });
 

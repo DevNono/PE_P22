@@ -127,6 +127,145 @@ Prism.highlightAll();
             Ending of Writing
 =============================================== */
 
+/* ===============================================
+            Beginning of Gap Fill
+=============================================== */
+
+function gapInitDragElement(el) {
+	el.addEventListener('dragstart', gapDragStart, false);
+	el.addEventListener('dragend', gapDragEnd, false);
+
+	// Set draggable elements to draggable
+	el.setAttribute('draggable', 'true');
+}
+
+function gapDragStart(e) {
+	console.log('dragstart: ' + this.innerText);
+	e.stopPropagation();
+
+	this.classList.add('is-dragged');
+	e.dataTransfer.effectAllowed = 'copy';
+	e.dataTransfer.setData('text', this.innerText);
+}
+
+function gapDragEnd(e) {
+	e.stopPropagation();
+	this.classList.remove('is-dragged');
+}
+
+function gapDragEnter(e) {
+	if (e.stopPropagation) {
+		e.stopPropagation();
+	}
+
+	this.classList.add('gap-dropover');
+}
+
+function gapDragLeave(e) {
+	if (e.stopPropagation) {
+		e.stopPropagation();
+	}
+
+	this.classList.remove('gap-dropover');
+}
+
+function gapDragOver(e) {
+	if (e.stopPropagation) {
+		e.stopPropagation();
+	}
+
+	e.preventDefault();
+	e.dataTransfer.dropEffect = 'copy';
+	return false;
+}
+
+function gapDrop(e) {
+	if (e.stopPropagation) {
+		e.stopPropagation();
+	}
+
+	const removeEl = e.dataTransfer.getData('text');
+	const boxes = document.querySelectorAll('.gap-fill .word-drag');
+	const dropZone = this;
+
+	this.classList.remove('gap-dropover');
+	// Remove the dragged element
+	boxes.forEach(el => {
+		if (el.innerText === removeEl) {
+			if (dropZone.innerHTML === '&nbsp;____&nbsp;') {
+				dropZone.innerHTML = `&nbsp;${removeEl}&nbsp;`;
+				dropZone.classList.add('cursor-pointer');
+				dropZone.dataset.text = removeEl;
+
+				dropZone.addEventListener('click', function gapClickEvent(event) {
+					const div = document.createElement('div');
+					div.className = 'px-2 py-1 transition-all duration-200 bg-red-700 cursor-move rounded-xl word-drag hover:bg-red-800';
+					div.innerText = `${this.dataset.text}`;
+					gapInitDragElement(div);
+					document.querySelector('.word-container').append(div);
+
+					this.innerHTML = '&nbsp;____&nbsp;';
+					this.classList.remove('cursor-pointer');
+					gapUpdate();
+					this.removeEventListener('click', gapClickEvent);
+				});
+
+				gapUpdate();
+				el.remove();
+
+				if (document.querySelectorAll('.gap-fill .word-drag').length === 0) {
+					const answers = JSON.parse(document.querySelector('.gap-fill').dataset.answers.replaceAll('\'', '"'));
+					const userAnswers = document.querySelectorAll('.gap-fill .word-drop');
+
+					let count = 0;
+
+					for (let i = 0; i < userAnswers.length; i++) {
+						if (gapFindCorrect(answers, i + 1).text === userAnswers[i].innerText.replace(/\s/g, '')) {
+							count++;
+						}
+					}
+
+					// Display sweetalert displaying the score
+					Swal.fire({
+						title: 'Bien joué !',
+						html: `Vous avez obtenu ${count} sur ${userAnswers.length} réponses correctes !`,
+						icon: 'success',
+					}).then(() => {
+						userAnswers.forEach(el => {
+							el.click();
+						});
+					});
+				}
+			} else {
+				el.innerText = dropZone.innerHTML.replaceAll('&nbsp;', '');
+				dropZone.innerHTML = `&nbsp;${removeEl}&nbsp;`;
+				dropZone.dataset.text = removeEl;
+
+				gapUpdate();
+			}
+		}
+	});
+}
+
+function gapFindCorrect(obj, nb) {
+	// Find the correct answer form an object list when key correct = nb
+	for (let i = 0; i < obj.length; i++) {
+		if (obj[i].correct === nb) {
+			return obj[i];
+		}
+	}
+}
+
+function gapUpdate() {
+	const code = document.querySelector('.gap-fill code');
+	code.innerHTML = document.querySelector('.gap-container').innerHTML.replaceAll(/(<div [^>]*>)/gm, '').replaceAll(/<\/div>/g, '').replaceAll('&nbsp;', '');
+	Prism.highlightElement(code);
+}
+
+/* ===============================================
+            Ending of Gap Fill
+=============================================== */
+
 // Add Events and OnStart functions
 document.addEventListener('DOMContentLoaded', e => {
 	document.querySelectorAll('.quiz').forEach((el, i) => {
@@ -207,6 +346,43 @@ document.addEventListener('DOMContentLoaded', e => {
 		el.addEventListener('scroll', event => {
 			sync_scroll(el, el.parentElement.querySelector('.output'));
 		}, false);
+
+		el.parentElement.querySelector('.close').addEventListener('click', event => {
+			el.parentElement.querySelector('.answer').classList.toggle('hidden');
+
+			el.parentElement.querySelector('textarea').classList.add('w-full');
+			el.parentElement.querySelector('textarea').classList.remove('w-1/2');
+
+			el.parentElement.querySelector('pre').classList.add('w-full', 'rounded-lg');
+			el.parentElement.querySelector('pre').classList.remove('!w-1/2', 'rounded-l-lg');
+
+			el.parentElement.querySelector('.close').classList.add('hidden');
+			el.parentElement.querySelector('.verify').classList.remove('hidden');
+		});
+
+		el.parentElement.querySelector('.verify').addEventListener('click', event => {
+			el.parentElement.querySelector('.answer').classList.toggle('hidden');
+
+			el.parentElement.querySelector('textarea').classList.add('w-1/2');
+			el.parentElement.querySelector('textarea').classList.remove('w-full');
+
+			el.parentElement.querySelector('pre').classList.add('!w-1/2', 'rounded-l-lg');
+			el.parentElement.querySelector('pre').classList.remove('w-full', 'rounded-lg');
+
+			el.parentElement.querySelector('.verify').classList.add('hidden');
+			el.parentElement.querySelector('.close').classList.remove('hidden');
+		});
+	});
+
+	document.querySelectorAll('.gap-fill .word-drag').forEach((el, i) => {
+		gapInitDragElement(el);
+	});
+
+	document.querySelectorAll('.gap-fill .word-drop').forEach((el, i) => {
+		el.addEventListener('dragenter', gapDragEnter, false);
+		el.addEventListener('dragleave', gapDragLeave, false);
+		el.addEventListener('dragover', gapDragOver, false);
+		el.addEventListener('drop', gapDrop, false);
 	});
 });
 

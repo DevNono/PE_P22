@@ -3,7 +3,6 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
 code[class*="language-"],
 pre[class*="language-"]{
   color: #ccc;
-  background: 0 0;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   font-size: 1rem;
   text-align: left;
@@ -23,11 +22,6 @@ pre[class*="language-"]{
 pre[class*="language-"] {
   padding: 1rem;
   overflow: auto;
-}
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-  background: #2d2d2d;
-  border-radius: 0.5rem;
 }
 :not(pre) > code[class*="language-"] {
   padding: 0.1rem;
@@ -95,9 +89,6 @@ pre[class*="language-"] {
 }
 .token.inserted {
   color: green;
-}
-div.code-toolbar {
-  position: relative;
 }
 div.code-toolbar > .toolbar {
   position: absolute;

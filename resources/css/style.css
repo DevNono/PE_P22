@@ -174,12 +174,13 @@
 * Writing
 */
 
-.writing textarea {
+.writing textarea,
+.gap-fill .gap-container {
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   font-size: 1rem;
 }
 
-.writing .pre,
+.writing pre,
 .writing > div {
   @apply w-full;
   height: 400px;
@@ -187,6 +188,23 @@
 
 .writing .output,
 .writing .input {
-  @apply absolute left-0 top-0;
+  @apply absolute top-0 left-0;
   height: 400px;
+}
+
+.code-snippet .code-toolbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.is-dragged {
+  opacity: 0.5;
+  transform: scale(0.8);
+  transition: opacity 0.25s ease-out, transform 0.15s ease-out;
+}
+
+.gap-dropover {
+    @apply bg-gray-800;
 }
