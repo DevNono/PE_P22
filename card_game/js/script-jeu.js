@@ -177,7 +177,7 @@ class Game {
 
 		// On crée le jeu de cartes
 		for (let i = 0; i < numeros.length; i++) {
-			const {lettre, valeur} = numeros[i]; // Lettre et valeur de la carte	
+			const {lettre, valeur} = numeros[i]; // Lettre et valeur de la carte
 			// On crée la carte pour chaque symbole
 			for (let j = 0; j < symboles.length; j++) {
 				const {type} = symboles[j]; // Type de la carte
