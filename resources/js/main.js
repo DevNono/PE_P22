@@ -58,12 +58,14 @@ function buildQuestion(quizIndex, nb) {
 	document.querySelectorAll('.quiz .answers')[quizIndex].innerHTML = template;
 
 	// Add answer click
-	document.querySelectorAll('.quiz')[quizIndex].querySelectorAll('.answer').forEach(el => {
-		el.addEventListener('click', () => {
-			const fordata = el.dataset.for;
-			document.querySelector('#' + fordata).checked = true;
+	document
+		.querySelectorAll('.quiz')[quizIndex].querySelectorAll('.answer')
+		.forEach(el => {
+			el.addEventListener('click', () => {
+				const fordata = el.dataset.for;
+				document.querySelector('#' + fordata).checked = true;
+			});
 		});
-	});
 }
 
 /* ===============================================
@@ -78,12 +80,7 @@ const inputarea = document.querySelectorAll('.writing .input');
 const outputarea = document.querySelectorAll('.writing .output');
 
 function escapeHtml(unsafe) {
-	return unsafe
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;')
-		.replace(/'/g, '&#039;');
+	return unsafe.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
 function sync_scroll(input, output) {
@@ -94,7 +91,6 @@ function sync_scroll(input, output) {
 
 function writing_update(el) {
 	let code = escapeHtml(el.value);
-	console.log(code);
 	if (code[code.length - 1] === '\n') {
 		code += ' ';
 	}
@@ -140,7 +136,6 @@ function gapInitDragElement(el) {
 }
 
 function gapDragStart(e) {
-	console.log('dragstart: ' + this.innerText);
 	e.stopPropagation();
 
 	this.classList.add('is-dragged');
@@ -185,8 +180,9 @@ function gapDrop(e) {
 	}
 
 	const removeEl = e.dataTransfer.getData('text');
-	const boxes = document.querySelectorAll('.gap-fill .word-drag');
+	const boxes = this.parentElement.parentElement.parentElement.querySelectorAll('.word-drag');
 	const dropZone = this;
+	const mainEl = dropZone.parentElement.parentElement.parentElement;
 
 	this.classList.remove('gap-dropover');
 	// Remove the dragged element
@@ -202,20 +198,20 @@ function gapDrop(e) {
 					div.className = 'px-2 py-1 transition-all duration-200 bg-red-700 cursor-move rounded-xl word-drag hover:bg-red-800';
 					div.innerText = `${this.dataset.text}`;
 					gapInitDragElement(div);
-					document.querySelector('.word-container').append(div);
+					mainEl.querySelector('.word-container').append(div);
 
 					this.innerHTML = '&nbsp;____&nbsp;';
 					this.classList.remove('cursor-pointer');
-					gapUpdate();
+					gapUpdate(mainEl);
 					this.removeEventListener('click', gapClickEvent);
 				});
 
-				gapUpdate();
+				gapUpdate(mainEl);
 				el.remove();
 
-				if (document.querySelectorAll('.gap-fill .word-drag').length === 0) {
-					const answers = JSON.parse(document.querySelector('.gap-fill').dataset.answers.replaceAll('\'', '"'));
-					const userAnswers = document.querySelectorAll('.gap-fill .word-drop');
+				if (mainEl.querySelectorAll('.word-drag').length === 0) {
+					const answers = JSON.parse(mainEl.dataset.answers.replaceAll('\'', '"'));
+					const userAnswers = mainEl.querySelectorAll('.word-drop');
 
 					let count = 0;
 
@@ -241,7 +237,7 @@ function gapDrop(e) {
 				dropZone.innerHTML = `&nbsp;${removeEl}&nbsp;`;
 				dropZone.dataset.text = removeEl;
 
-				gapUpdate();
+				gapUpdate(mainEl);
 			}
 		}
 	});
@@ -256,10 +252,20 @@ function gapFindCorrect(obj, nb) {
 	}
 }
 
-function gapUpdate() {
-	const code = document.querySelector('.gap-fill code');
-	code.innerHTML = document.querySelector('.gap-container').innerHTML.replaceAll(/(<div [^>]*>)/gm, '').replaceAll(/<\/div>/g, '').replaceAll('&nbsp;', '');
+function gapUpdate(el) {
+	const code = el.querySelector('code');
+	code.innerHTML = el
+		.querySelector('.gap-container')
+		.innerHTML.replaceAll(/(<div [^>]*>)/gm, '')
+		.replaceAll(/<\/div>/g, '')
+		.replaceAll('&nbsp;', '');
 	Prism.highlightElement(code);
+}
+
+function writingReveal() {
+	this.parentElement.querySelector('.writing-blurred').classList.remove('writing-blurred');
+	this.parentElement.querySelector('.reveal-text').classList.add('hidden');
+	this.removeEventListener('click', writingReveal);
 }
 
 /* ===============================================
@@ -330,48 +336,42 @@ document.addEventListener('DOMContentLoaded', e => {
 
 	// Add writing click event handler
 	inputarea.forEach(el => {
-		el.addEventListener('input', event => {
-			writing_update(el);
-		}, false);
+		el.addEventListener(
+			'input',
+			event => {
+				writing_update(el);
+			},
+			false,
+		);
 
-		el.addEventListener('keydown', event => {
-			writing_check_tab(el, event);
-		}, false);
+		el.addEventListener(
+			'keydown',
+			event => {
+				writing_check_tab(el, event);
+			},
+			false,
+		);
 
 		// Refresh highlighting when blured focus from textarea.
-		el.addEventListener('blur', event => {
-			Prism.highlightElement(el.parentElement.querySelector('.output'));
-		}, false);
+		el.addEventListener(
+			'blur',
+			event => {
+				Prism.highlightElement(el.parentElement.querySelector('.output'));
+			},
+			false,
+		);
 
-		el.addEventListener('scroll', event => {
-			sync_scroll(el, el.parentElement.querySelector('.output'));
-		}, false);
+		el.addEventListener(
+			'scroll',
+			event => {
+				sync_scroll(el, el.parentElement.querySelector('.output'));
+			},
+			false,
+		);
+	});
 
-		el.parentElement.querySelector('.close').addEventListener('click', event => {
-			el.parentElement.querySelector('.answer').classList.toggle('hidden');
-
-			el.parentElement.querySelector('textarea').classList.add('w-full');
-			el.parentElement.querySelector('textarea').classList.remove('w-1/2');
-
-			el.parentElement.querySelector('pre').classList.add('w-full', 'rounded-lg');
-			el.parentElement.querySelector('pre').classList.remove('!w-1/2', 'rounded-l-lg');
-
-			el.parentElement.querySelector('.close').classList.add('hidden');
-			el.parentElement.querySelector('.verify').classList.remove('hidden');
-		});
-
-		el.parentElement.querySelector('.verify').addEventListener('click', event => {
-			el.parentElement.querySelector('.answer').classList.toggle('hidden');
-
-			el.parentElement.querySelector('textarea').classList.add('w-1/2');
-			el.parentElement.querySelector('textarea').classList.remove('w-full');
-
-			el.parentElement.querySelector('pre').classList.add('!w-1/2', 'rounded-l-lg');
-			el.parentElement.querySelector('pre').classList.remove('w-full', 'rounded-lg');
-
-			el.parentElement.querySelector('.verify').classList.add('hidden');
-			el.parentElement.querySelector('.close').classList.remove('hidden');
-		});
+	document.querySelectorAll('.writing .reveal').forEach((el, i) => {
+		el.addEventListener('click', writingReveal, false);
 	});
 
 	document.querySelectorAll('.gap-fill .word-drag').forEach((el, i) => {
@@ -385,4 +385,3 @@ document.addEventListener('DOMContentLoaded', e => {
 		el.addEventListener('drop', gapDrop, false);
 	});
 });
-

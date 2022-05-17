@@ -75,6 +75,22 @@
 
         },
         {
+            "type": "gapfill",
+            "title": "Complete this code",
+            "text": "for ( %gap% i; i < a.length; %gap%)",
+            "gaps": [
+                {
+                    "text": "let",
+                    "correct": 1
+                },
+                {
+                    "text": "i++",
+                    "correct": 2
+                }
+            ]
+
+        },
+        {
             "type": "writing",
             "title": "The Lord of the Rings: The Fellowship of the Ring",
             "question": "Coder une boucle allant de 0 à 10 qui affiche l'index de la boucle",

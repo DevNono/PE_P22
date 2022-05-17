@@ -180,7 +180,7 @@
   font-size: 1rem;
 }
 
-.writing pre,
+.writing pre.input,
 .writing > div {
   @apply w-full;
   height: 400px;
@@ -190,6 +190,19 @@
 .writing .input {
   @apply absolute top-0 left-0;
   height: 400px;
+}
+
+.writing .correction-text > div{
+  width: 100%;
+  height: 100%;
+}
+
+.writing-blurred {
+  @apply blur-[6px] hover:blur-[4px];
+}
+
+.writing-blurred > *{
+  @apply pointer-events-none;
 }
 
 .code-snippet .code-toolbar {

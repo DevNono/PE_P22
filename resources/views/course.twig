@@ -85,7 +85,8 @@
 							</div>
 						</div>
 					{% elseif exercice.type == 'gapfill' %}
-						<h3 class="text-xl font-bold text-gray-900">Gap Fill - {{ exercice.title }}</h3>
+						<h3 class="text-xl font-bold text-gray-900">Gap Fill -
+							{{ exercice.title }}</h3>
 						<p class="">{{ exercice.question }}</p>
 						<div class="relative flex flex-col w-full gap-2 px-10 py-8 text-white bg-gray-800 gap-fill rounded-2xl" data-answers="{{ exercice.gaps | json_encode | raw | replace({'"': "'"}) }}">
 							<div class="flex">
@@ -101,23 +102,29 @@
 							</div>
 						</div>
 					{% elseif exercice.type == 'writing' %}
-						<h3 class="text-xl font-bold text-gray-900">Writing - {{ exercice.title }}</h3>
+						<h3 class="text-xl font-bold text-gray-900">Writing -
+							{{ exercice.title }}</h3>
 						<p class="">{{ exercice.question }}</p>
 						<div class="relative flex flex-col items-start justify-start w-full writing rounded-2xl">
-							<textarea spellcheck="false" class="absolute z-20 w-full p-4 overflow-auto text-transparent bg-transparent outline-none resize-none whitespace-nowrap input caret-white"></textarea>
-							<pre class="w-full h-full bg-gray-800 rounded-lg">
-								<code class="absolute top-0 left-0 z-10 w-full p-4 overflow-auto whitespace-nowrap output preview language-javascript">
+							<textarea spellcheck="false" placeholder="Vous pouvez écrire votre code ici.&#10;&#10;Une fois terminé, vous pouvez regarder la correction de l'exercice en cliquant sur le cadre de droite.&#10;&#10;Ce cadre vous permet de bénéficier de la colorisation syntaxique (for, let, ...).&#10;&#10;Enjoy :)" class="absolute z-20 w-1/2 p-4 overflow-auto text-transparent break-words whitespace-pre-wrap bg-transparent outline-none resize-none input caret-white"></textarea>
+							<pre class="w-1/2 h-full bg-gray-800 rounded-lg input">
+								<code class="absolute top-0 left-0 z-10 w-full p-4 overflow-auto break-words whitespace-pre-wrap output preview language-javascript">
 								</code>
 							</pre>
-							<a class="absolute z-40 px-2 py-1 font-bold text-white transition-all duration-200 bg-green-600 cursor-pointer verify rounded-2xl hover:bg-green-700 bottom-2 right-2">Correction</a>
-							<a class="absolute z-40 hidden px-2 py-1 font-bold text-white transition-all duration-200 bg-red-600 cursor-pointer close rounded-2xl hover:bg-red-700 bottom-2 right-2">Fermer</a>
-
-							<div class="z-30 right-0 top-0 absolute !w-1/2 h-full rounded-r-lg bg-gray-600 p-4 answer hidden">
-								<p class="text-xl font-bold text-white">Correction</p>
-								<pre class="">
-									<code class="z-10 p-4 pt-12 overflow-auto whitespace-nowrap output preview language-javascript">{{ exercice.answer }}</code>
-								</pre>
+							<div class="bg-gray-700 z-30 right-0 top-0 absolute !w-1/2 h-full rounded-r-lg">
+								<div class="flex flex-col w-full h-full gap-3 p-4 answer">
+									<p class="text-xl font-bold text-white">Correction</p>
+									<a class="relative flex items-center justify-center w-full h-full cursor-pointer reveal">
+										<div class="flex w-full h-full transition-all duration-200 correction-text writing-blurred">
+											<pre class="flex w-full h-full bg-white rounded-lg bg-opacity-30 backdrop-blur-3xl backdrop-filter">
+												<code class="z-10 w-full h-full overflow-auto whitespace-nowrap language-javascript">{{ exercice.answer }}</code>
+											</pre>
+										</div>
+										<p class="absolute font-bold reveal-text">Cliquer ici pour dévoiler la correction</p>
+									</a>
+								</div>
 							</div>
+
 						</div>
 					{% endif %}
 				{% endfor %}
