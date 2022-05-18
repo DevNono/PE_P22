@@ -51,7 +51,7 @@
 						</div>
 					{% elseif content.type == 'image' %}
 						<div class="flex flex-col justify-center items-center h-[50vh]">
-							<img class="w-full h-full" src="{{ content.image }}" alt="">
+							<img crossorigin="anonymous" class="w-full h-full" src="{{ content.image }}" alt="">
 						</div>
 					{% elseif content.type == 'code' %}
 						<div class="flex flex-col items-center justify-center w-full code-snippet">
