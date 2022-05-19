@@ -17,7 +17,7 @@ function escapeHtml(unsafe) {
 /* GET home page. */
 router.get('/', (req, res) => {
 	const sections = [];
-	for (let i = 0; i < fs.readdirSync(path.join(__dirname, '../resources/courses')).length; i++) {
+	for (let i = 0; i < fs.readdirSync(path.join(__dirname, '../resources/courses')).length - 1; i++) {
 		const section = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/courses/section${i + 1}/section.json`)));
 		section.id = i + 1;
 		section.modules = [];
