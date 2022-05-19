@@ -89,6 +89,8 @@ const pseudo = [
 ];
 
 const settings = {
+	botMinScore: 17,
+	croupierMinScore: 17,
 	scoreToGet: 21,
 	timePerRound: 20,
 	maxLife: 1,
@@ -225,7 +227,7 @@ class Game {
 		}
 
 		let a = 1; // Nombre de tour de boucle
-		while (somme_croupier < 17) { // Tant que le score du croupier est inférieur à 17
+		while (somme_croupier < settings.croupierMinScore) { // Tant que le score du croupier est inférieur à 17
 			a += 1; // On incrémente le nombre de tour de boucle
 			this.croupier.inventaire.push(this.cards.shift()); // On ajoute une carte au croupier
 			if (this.croupier.inventaire[a].valeur === 1) { // Si on a un as
@@ -309,7 +311,8 @@ class Game {
 		} else if (games.joueurs[joueur_en_cours + 1].vie <= 0) {
 			games.tour_suivant(joueur_en_cours + 1);
 		} else if (games.joueurs[joueur_en_cours + 1].bot) {
-			// Todo : Add Bot logic
+			games.tour_bot(joueur_en_cours + 1);
+			games.tour_suivant(joueur_en_cours + 1);
 		} else {
 			games.joueurs_en_cours = joueur_en_cours + 1;
 			games.affichage(affichageJoueur, games.joueurs[games.joueurs_en_cours]);
@@ -346,7 +349,6 @@ class Game {
 			}
 		}
 
-		console.log(liste_joueurs);
 		games.distribution(liste_joueurs);
 		games.tour_croupier();
 		if (games.joueurs[games.joueurs_en_cours].vie <= 0) {
@@ -440,7 +442,7 @@ class Game {
 			affichageFin.children[1].innerHTML = 'Le gagnant est : ' + gagnant;
 		}
 
-		affichageFin.children[2].innerHTML = '<button type="button" onclick="game()">Lancement</button>';
+		affichageFin.children[2].innerHTML = '<button type="button" onclick="window.game()">Lancement</button>';
 	}
 
 	resultatTour() {
@@ -466,25 +468,40 @@ class Game {
 		</div>`;
 
 		for (let index = 0; index < pseudo.length; index++) {
-			resultathtml += `<div class="rang">
-				<div class="pseudo">${games.joueurs[index].identifiant}</div>
-				<div class="cartes">`;
-			for (let k = 0; k < games.joueurs[index].inventaire.length; k++) {
-				resultathtml += games.joueurs[index].inventaire[k].html;
-			}
+			if (games.joueurs[index].vie > 0) {
+				resultathtml += `<div class="rang">
+					<div class="pseudo">${games.joueurs[index].identifiant}</div>
+					<div class="cartes">`;
+				for (let k = 0; k < games.joueurs[index].inventaire.length; k++) {
+					resultathtml += games.joueurs[index].inventaire[k].html;
+				}
 
-			resultathtml += `</div>
-				<div class="scorefinal">${games.joueurs[index].score}</div>
-			</div>`;
+				resultathtml += `</div>
+					<div class="scorefinal">${games.joueurs[index].score}</div>
+				</div>`;
+			}
 		}
 
 		affichageFin.children[0].innerHTML = resultathtml;
 
-		console.log(games.nb_joueurs_en_vie);
 		if (games.nb_joueurs_en_vie < 2) {
-			affichageFin.children[2].innerHTML = '<button type="button" onclick="games.conclusion()">Suivant</button>';
+			affichageFin.children[2].innerHTML = '<button type="button">Suivant</button>';
+			setTimeout(() => {
+				affichageFin.querySelector('button').addEventListener('click', () => games.conclusion());
+			}, 200);
 		} else {
-			affichageFin.children[2].innerHTML = '<button type="button" onclick="games.manche_suivante()">Tour suivant</button>';
+			affichageFin.children[2].innerHTML = '<button type="button">Tour suivant</button>';
+			setTimeout(() => {
+				affichageFin.querySelector('button').addEventListener('click', () => games.manche_suivante());
+			}, 200);
+		}
+	}
+
+	tour_bot(bot) {
+		while (games.joueurs[bot].score < settings.botMinScore) {
+			games.joueurs[bot].inventaire.push(games.cards.shift()); // On ajoute une carte au joueur
+			const position = games.joueurs[bot].inventaire.length - 1;
+			games.joueurs[bot].score += games.joueurs[bot].inventaire[position].valeur;
 		}
 	}
 }
