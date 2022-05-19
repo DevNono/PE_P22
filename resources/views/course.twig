@@ -1,6 +1,8 @@
 {% extends 'layouts/app.twig' %}
 {% block css %}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+	<link rel="preconnect" href="https://api.fonts.coollabs.io" crossorigin="anonymous">
+	<link href="https://api.fonts.coollabs.io/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
 {% endblock %}
 
 {% block body %}
@@ -32,16 +34,16 @@
 		</div>
 	</div>
 	<div class="flex items-center justify-center w-full main-container">
-		<div class="flex main-content max-w-[1280px] w-full flex-col gap-3 px-10 pt-8">
-			<div class="flex flex-col gap-3 px-10 pt-8 content">
+		<div class="flex main-content max-w-[1280px] w-full flex-col gap-3 px-10 pt-8 article">
+			<div class="flex flex-col gap-3 px-10 content">
 				{% for content in module.content %}
 					{% if content.type == 'text' %}
 						<div class="flex flex-col">
-							<p class="">{{ content.text }}</p>
+							<p class="text">{{ content.text }}</p>
 						</div>
 					{% elseif content.type == 'title' %}
-						<div class="flex flex-col">
-							<h2 class="text-2xl font-bold">{{ content.text }}</h2>
+						<div class="flex flex-col mt-6 mb-2">
+							<h2 class="text-2xl font-bold title">{{ content.text }}</h2>
 						</div>
 					{% elseif content.type == 'video' %}
 						<div class="flex flex-col items-center justify-center">
@@ -51,7 +53,7 @@
 						</div>
 					{% elseif content.type == 'image' %}
 						<div class="flex flex-col justify-center items-center h-[50vh]">
-							<img crossorigin="anonymous" class="w-full h-full" src="{{ content.image }}" alt="">
+							<img crossorigin="anonymous" class="object-cover w-full h-full" src="{{ content.image }}" alt="">
 						</div>
 					{% elseif content.type == 'code' %}
 						<div class="flex flex-col items-center justify-center w-full code-snippet">
@@ -69,7 +71,7 @@
 				{% for exercice in module.exercices %}
 					{% if exercice.type == 'quiz' %}
 						<div class="flex items-center justify-center">
-							<div class="py-10 rounded-2xl quiz bg-slate-800" data-quiz="{{ exercice.questions | json_encode | raw | replace({'"': "'"}) }}">
+							<div class="py-10 rounded-2xl quiz bg-slate-800" data-quiz="{{ exercice.questions | json_encode | raw | replace({'"': '§'}) }}">
 								<div class="progress" data-aos="zoom-in">
 									<div class="progressbar">
 										<div class="bar1"></div>
@@ -88,7 +90,7 @@
 						<h3 class="text-xl font-bold text-gray-900">Gap Fill -
 							{{ exercice.title }}</h3>
 						<p class="">{{ exercice.question }}</p>
-						<div class="relative flex flex-col w-full gap-2 px-10 py-8 text-white bg-gray-800 gap-fill rounded-2xl" data-answers="{{ exercice.gaps | json_encode | raw | replace({'"': "'"}) }}">
+						<div class="relative flex flex-col w-full gap-2 px-10 py-8 text-white bg-gray-800 gap-fill rounded-2xl" data-answers="{{ exercice.gaps | json_encode | raw | replace({'"': "§"}) }}">
 							<div class="flex">
 								<pre class="relative w-full h-full bg-gray-800 rounded-lg pointer-events-none">
 									<code class="absolute top-0 left-0 z-10 w-full overflow-auto whitespace-nowrap output preview language-javascript">{{ exercice.text | replace({'%gap%': '____'}) }}</code>

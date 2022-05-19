@@ -210,7 +210,7 @@ function gapDrop(e) {
 				el.remove();
 
 				if (mainEl.querySelectorAll('.word-drag').length === 0) {
-					const answers = JSON.parse(mainEl.dataset.answers.replaceAll('\'', '"'));
+					const answers = JSON.parse(mainEl.dataset.answers.replaceAll('§', '"'));
 					const userAnswers = mainEl.querySelectorAll('.word-drop');
 
 					let count = 0;
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', e => {
 			nbCorrect: 0,
 		});
 
-		const questions = JSON.parse(el.dataset.quiz.replaceAll('\'', '"'));
+		const questions = JSON.parse(el.dataset.quiz.replaceAll('§', '"'));
 		quizInit(i, questions);
 	});
 	// Add quiz click event handler

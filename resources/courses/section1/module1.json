@@ -9,19 +9,27 @@
     "content": [
         {
             "type": "title",
-            "text": "I] Introduction"
+            "text": "Introduction"
         },
         {
             "type": "text",
-            "text": "Ce projet va se reposer sur 3 technologies : HTML, CSS et JS. Celles-ci sont majoritairement utilisées pour le développement de site internet. Pour les utiliser, il vous suffit de disposer d'un navigateur web récent."
+            "text": "Ce projet va se reposer sur 3 technologies : <h>HTML, CSS et JS</h>. Celles-ci sont majoritairement utilisées pour le développement de site internet."
+        },
+        {
+            "type": "title",
+            "text": "Outils"
         },
         {
             "type": "text",
-            "text": "Pour éditer le code, vous pouvez utiliser un éditeur de texte comme notepad ou notepad++. Cependant, nous vous conseillons de télécharger un IDE comme <a href=\"https://code.visualstudio.com/\">Visual Studio Code</a>, <a href=\"https://atom.io/\">Atom</a> ou <a href=\"https://www.sublimetext.com/\">Sublime Text</a>."
+            "text": "Pour bien pouvoir commencer, il vous suffit de disposer d'un navigateur web récent."
+        },
+        {
+            "type": "text",
+            "text": "Pour éditer le code, vous pouvez utiliser un éditeur de texte comme Notepad ou <a target=\"_blank\" href=\"https://notepad-plus-plus.org/downloads/\">Notepad++</a>. Cependant, nous vous conseillons de télécharger un IDE comme <a target=\"_blank\" href=\"https://code.visualstudio.com/\">Visual Studio Code</a>, <a href=\"https://atom.io/\" target=\"_blank\">Atom</a> ou <a href=\"https://www.sublimetext.com/\" target=\"_blank\">Sublime Text</a>."
         },
         {
             "type": "image",
-            "image": "https://picsum.photos/2000/3000"
+            "image": "https://picsum.photos/800/800"
         }
     ],
     "exercices": [
