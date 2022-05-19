@@ -6,243 +6,46 @@
 
 {% block body %}
 	<section class="overflow-hidden text-gray-600 body-font">
-		<div class="container px-5 py-24 mx-auto">
-			<div class="flex flex-col w-full mb-20 ">
-				<h1 class="mb-2 font-medium text-gray-900 text-9xl sm:text-6xl title-font">Modules</h1>
+		<div class="container flex flex-col gap-12 px-5 py-24 mx-auto">
+			<div class="flex flex-col w-full ">
+				<h1 class="mb-2 text-5xl font-medium text-gray-900 sm:text-3xl title-font">Modules</h1>
 				<p class="text-base leading-relaxed text-gray-500 lg:w-2/3">Whatever crdigan tote bag tumblr hexagon brooklyn asymmetrical.</p>
 				<div class="flex w-full mt-6 overflow-hidden border-4 border-indigo-500 rounded"></div>
 			</div>
 
-
-			<div class="flex flex-col">
-				<h1 class="mb-2 font-medium text-gray-900 sm:text-3xl title-font">Construction des cartes</h1>
-				<p class="py-3 text-base leading-relaxed text-gray-500 lg:w-2/3">Whatever crdigan tote bag tumblr hexagon brooklyn asymmetrical.</p>
-				<div class="flex w-full mt-2 overflow-hidden border-indigo-500 rounded border-1"></div>
-				<div class="flex flex-wrap -m-4 bg-gray-300 border-4 rounded-xl">
-
-
-					<div class="w-full m-4 bg-white xl:w-1/4 md:w-1/2 rounded-xl">
-						<div class="relative flex flex-col h-full p-6 overflow-hidden border-2 border-black rounded-xl">
-							<h1 class="pb-4 mb-4 text-3xl leading-none text-gray-900 border-b border-gray-200">Constitution HTML/CSS</h1>
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Retour sur les bases
-							</p>
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Utilisation de Flex
-							</p>
-							<p class="flex items-center mb-6 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Quelques classes CSS
-							</p>
-							<button class="flex items-center w-full px-4 py-2 mt-auto text-white bg-gray-400 border-0 rounded focus:outline-none hover:bg-gray-500">Commencer
-								<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewbox="0 0 24 24">
-									<path d="M5 12h14M12 5l7 7-7 7"></path>
-								</svg>
-							</button>
-							<p class="mt-3 text-xs text-gray-500">Literally you probably haven't heard of them jean shorts.</p>
-						</div>
+			{% for section in sections %}
+				<div class="flex flex-col">
+					<h1 class="mb-2 font-medium text-gray-900 sm:text-3xl title-font">{{ section.title }}</h1>
+					<p class="py-1 text-base leading-relaxed text-gray-500 lg:w-2/3">{{ section.description }}</p>
+					<div class="flex w-full mt-2 overflow-hidden border-indigo-500 rounded border-1"></div>
+					<div class="flex flex-wrap -m-4 rounded-xl">
+						{% for module in section.modules %}
+							<div class="w-full m-4 bg-white xl:w-1/4 md:w-1/2 rounded-xl">
+								<div class="relative flex flex-col h-full gap-3 p-6 overflow-hidden border-2 shadow-lg rounded-xl border-gray-50">
+									<h1 class="pb-4 mb-2 text-2xl font-semibold text-gray-900 border-b border-gray-100">{{ module.title }}</h1>
+									{% for tag in module.tags %}
+										<p class="flex items-center text-gray-600">
+											<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
+												<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
+													<path d="M20 6L9 17l-5-5"></path>
+												</svg>
+											</span>
+											{{ tag }}
+										</p>
+									{% endfor %}
+									
+									
+									<a href="/courses/{{section.id}}/{{ module.id }}" class="flex items-center w-full px-4 py-2 mt-2 text-white bg-gray-400 border-0 rounded focus:outline-none hover:bg-gray-500">Commencer
+										<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewbox="0 0 24 24">
+											<path d="M5 12h14M12 5l7 7-7 7"></path>
+										</svg>
+									</a>
+								</div>
+							</div>
+						{% endfor %}
 					</div>
-
-
-					<div class="w-full m-4 bg-white xl:w-1/4 md:w-1/2 rounded-xl">
-						<div class="relative flex flex-col h-full p-6 overflow-hidden border-2 border-black rounded-xl">
-							<h1 class="pb-4 mb-4 text-3xl leading-none text-gray-900 border-b border-gray-200">Constitution HTML/CSS</h1>
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Retour sur les bases
-							</p>
-
-							<p class="flex items-center mb-6 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Quelques classes CSS
-							</p>
-							<button class="flex items-center w-full px-4 py-2 mt-auto text-white bg-gray-400 border-0 rounded focus:outline-none hover:bg-gray-500">Commencer
-								<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewbox="0 0 24 24">
-									<path d="M5 12h14M12 5l7 7-7 7"></path>
-								</svg>
-							</button>
-							<p class="mt-3 text-xs text-gray-500">Literally you probably haven't heard of them jean shorts.</p>
-						</div>
-					</div>
-
-
-					<div class="w-full m-4 bg-white xl:w-1/4 md:w-1/2 rounded-xl">
-						<div class="relative flex flex-col h-full p-6 overflow-hidden border-2 border-black rounded-xl">
-							<h1 class="pb-4 mb-4 text-3xl leading-none text-gray-900 border-b border-gray-200">Stockage HTML</h1>
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Retour sur les bases
-							</p>
-
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Quelques classes CSS
-							</p>
-
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Quelques classes CSS
-							</p>
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Quelques classes CSS
-							</p>
-							<button class="flex items-center w-full px-4 py-2 mt-auto text-white bg-gray-400 border-0 rounded focus:outline-none hover:bg-gray-500">Commencer
-								<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewbox="0 0 24 24">
-									<path d="M5 12h14M12 5l7 7-7 7"></path>
-								</svg>
-							</button>
-							<p class="mt-3 text-xs text-gray-500">Literally you probably haven't heard of them jean shorts.</p>
-						</div>
-					</div>
-
 				</div>
-			</div>
-
-
-			<div class="flex flex-col mt-16">
-				<h1 class="mb-2 font-medium text-gray-900 sm:text-3xl title-font">Construction des cartes</h1>
-				<p class="py-3 text-base leading-relaxed text-gray-500 lg:w-2/3">Whatever crdigan tote bag tumblr hexagon brooklyn asymmetrical.</p>
-				<div class="flex w-full mt-2 overflow-hidden border-indigo-500 rounded border-1"></div>
-				<div class="flex flex-wrap -m-4 bg-gray-300 border-4 rounded-xl">
-
-
-					<div class="w-full m-4 bg-white xl:w-1/4 md:w-1/2 rounded-xl">
-						<div class="relative flex flex-col h-full p-6 overflow-hidden border-2 border-black rounded-xl">
-							<h1 class="pb-4 mb-4 text-3xl leading-none text-gray-900 border-b border-gray-200">Constitution HTML/CSS</h1>
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Retour sur les bases
-							</p>
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Utilisation de Flex
-							</p>
-							<p class="flex items-center mb-6 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Quelques classes CSS
-							</p>
-							<button class="flex items-center w-full px-4 py-2 mt-auto text-white bg-gray-400 border-0 rounded focus:outline-none hover:bg-gray-500">Commencer
-								<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewbox="0 0 24 24">
-									<path d="M5 12h14M12 5l7 7-7 7"></path>
-								</svg>
-							</button>
-							<p class="mt-3 text-xs text-gray-500">Literally you probably haven't heard of them jean shorts.</p>
-						</div>
-					</div>
-
-
-					<div class="w-full m-4 bg-white xl:w-1/4 md:w-1/2 rounded-xl">
-						<div class="relative flex flex-col h-full p-6 overflow-hidden border-2 border-black rounded-xl">
-							<h1 class="pb-4 mb-4 text-3xl leading-none text-gray-900 border-b border-gray-200">Constitution HTML/CSS</h1>
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Retour sur les bases
-							</p>
-
-							<p class="flex items-center mb-6 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Quelques classes CSS
-							</p>
-							<button class="flex items-center w-full px-4 py-2 mt-auto text-white bg-gray-400 border-0 rounded focus:outline-none hover:bg-gray-500">Commencer
-								<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewbox="0 0 24 24">
-									<path d="M5 12h14M12 5l7 7-7 7"></path>
-								</svg>
-							</button>
-							<p class="mt-3 text-xs text-gray-500">Literally you probably haven't heard of them jean shorts.</p>
-						</div>
-					</div>
-
-
-					<div class="w-full m-4 bg-white xl:w-1/4 md:w-1/2 rounded-xl">
-						<div class="relative flex flex-col h-full p-6 overflow-hidden border-2 border-black rounded-xl">
-							<h1 class="pb-4 mb-4 text-3xl leading-none text-gray-900 border-b border-gray-200">Stockage HTML</h1>
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Retour sur les bases
-							</p>
-
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Quelques classes CSS
-							</p>
-
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Quelques classes CSS
-							</p>
-							<p class="flex items-center mb-2 text-gray-600">
-								<span class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-400 rounded-full">
-									<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewbox="0 0 24 24">
-										<path d="M20 6L9 17l-5-5"></path>
-									</svg>
-								</span>Quelques classes CSS
-							</p>
-							<button class="flex items-center w-full px-4 py-2 mt-auto text-white bg-gray-400 border-0 rounded focus:outline-none hover:bg-gray-500">Commencer
-								<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewbox="0 0 24 24">
-									<path d="M5 12h14M12 5l7 7-7 7"></path>
-								</svg>
-							</button>
-							<p class="mt-3 text-xs text-gray-500">Literally you probably haven't heard of them jean shorts.</p>
-						</div>
-					</div>
-
-				</div>
-			</div>
-
-
-		</section>
-	{% endblock %}
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}

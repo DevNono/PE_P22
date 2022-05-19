@@ -2,6 +2,13 @@
     "title": "The Lord of the Rings: The Fellowship of the Ring",
     "description": "A memory of the One Ring, Frodo and his Companions, the Ring, and the Dark Lord Sauron.",
     "time": 3,
+    "tags": [
+        "Le Seigneur des Anneaux",
+        "Frodo",
+        "The Lord of the Rings",
+        "The Fellowship of the Ring",
+        "The Ring"
+    ],
     "content": [
         {
             "type": "title",

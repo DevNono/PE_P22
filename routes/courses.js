@@ -16,7 +16,21 @@ function escapeHtml(unsafe) {
 
 /* GET home page. */
 router.get('/', (req, res) => {
-	res.render('courses', {title: 'courses'});
+	const sections = [];
+	for (let i = 0; i < fs.readdirSync(path.join(__dirname, '../resources/courses')).length; i++) {
+		const section = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/courses/section${i + 1}/section.json`)));
+		section.id = i + 1;
+		section.modules = [];
+		for (let j = 1; j < fs.readdirSync(path.join(__dirname, `../resources/courses/section${i + 1}`)).length; j++) {
+			const module = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/courses/section${i + 1}/module${j}.json`)));
+			module.id = j;
+			section.modules.push(module);
+		}
+
+		sections.push(section);
+	}
+
+	res.render('courses', {title: 'Courses', sections});
 });
 
 router.get('/:id/:id2', (req, res) => {
@@ -35,7 +49,7 @@ router.get('/:id/:id2', (req, res) => {
 	}
 
 	// TODO: shuffle gap fill words before send to page
-	res.render('course', {title: 'course', section, module});
+	res.render('course', {title: 'Course', section, module});
 });
 
 module.exports = router;
