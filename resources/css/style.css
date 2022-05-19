@@ -222,7 +222,11 @@
     @apply bg-gray-800;
 }
 
-.article .text, .article .title{
+.information{
+  font-family: 'Work Sans', sans-serif;
+}
+
+.article .text, .article .title, .article .list{
   @apply text-neutral-700;
   font-family: 'Work Sans', sans-serif;
 }
@@ -230,6 +234,15 @@
 .article h{
   @apply p-0.5 text-white bg-neutral-700;
 }
+
+.article m{
+  @apply font-medium;
+}
+
+.article sb{
+  @apply font-semibold;
+}
+
 
 .article .text a, .article .list a{
   @apply font-medium underline cursor-pointer text-neutral-900 hover:text-black;

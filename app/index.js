@@ -24,6 +24,7 @@ app.use(express.json());
 const helmet = require('helmet');
 app.use(helmet({
 	contentSecurityPolicy: false,
+	crossOriginEmbedderPolicy: false,
 }));
 
 app.use(compression());

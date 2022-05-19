@@ -3,7 +3,7 @@
     "description": "Ce module va permettre de débuter la mise en place d'un projet de développement web. Il va vous permettre de découvrir les différents outils et les différentes techniques de développement web.",
     "time": 3,
     "tags": [
-        "Comprendre HTML/CSS/JS",
+        "Comprendre HTML/CSS/JavaScript",
         "Mise en place d'un projet"
     ],
     "content": [
@@ -13,7 +13,27 @@
         },
         {
             "type": "text",
-            "text": "Ce projet va se reposer sur 3 technologies : <h>HTML, CSS et JS</h>. Celles-ci sont majoritairement utilisées pour le développement de site internet."
+            "text": "Bienvenue dans ce cours qui va vous apprendre et vous amener à comprtendre comment réaliser un projet web. Ce projet va se reposer sur 3 technologies : <h>HTML, CSS et JavaScript</h>. Celles-ci sont majoritairement utilisées pour le développement de site internet."
+        },
+        {
+            "type": "list",
+            "content": [
+                "<sb>HTML (HyperText Markup Language) :</sb> C'est le langage de balisage utilisé pour décrire la structure pages web.",
+                "<sb>CSS (Cascading Style Sheet) :</sb> C'est le langage de mise en forme utilisé pour styliser et designer les pages web en utilisant la structure HTML.",
+                "<sb>JavaScript (ECMAScript) :</sb> C'est le langage de programmation utilisé pour développer les actions d'une page web."
+            ]
+        },
+        {
+            "type": "text",
+            "text": "Nous allons à travers ce cours nous concentrer sur le côté JavaScript du projet. Ce projet consiste à réaliser un jeu de cartes dans le style du BlackJack. Pour cela nous allons couvrir les étapes les plus importantes menant à la mise en place de ce jeu."
+        },
+        {
+            "type": "title",
+            "text": "Règles du jeu à mettre en place"
+        },
+        {
+            "type": "text",
+            "text": "[Ecrire les règles ici]"
         },
         {
             "type": "title",
@@ -25,11 +45,12 @@
         },
         {
             "type": "text",
-            "text": "Pour éditer le code, vous pouvez utiliser un éditeur de texte comme Notepad ou <a target=\"_blank\" href=\"https://notepad-plus-plus.org/downloads/\">Notepad++</a>. Cependant, nous vous conseillons de télécharger un IDE comme <a target=\"_blank\" href=\"https://code.visualstudio.com/\">Visual Studio Code</a>, <a href=\"https://atom.io/\" target=\"_blank\">Atom</a> ou <a href=\"https://www.sublimetext.com/\" target=\"_blank\">Sublime Text</a>."
+            "text": "Pour éditer le code, vous pouvez utiliser un éditeur de texte comme Notepad ou <a target=\"_blank\" href=\"https://notepad-plus-plus.org/downloads/\">Notepad++</a>. Cependant, nous vous conseillons de télécharger un IDE comme <a target=\"_blank\" href=\"https://code.visualstudio.com/\">Visual Studio Code</a>, <a href=\"https://atom.io/\" target=\"_blank\">Atom</a> ou <a href=\"https://www.sublimetext.com/\" target=\"_blank\">Sublime Text</a>. Celui-ci va vous permttre de bénéficier de fonctionnalités plus avancées comme la gestion de dossier, la gestion d'historique, l'auto-complétion, etc."
         },
         {
             "type": "image",
-            "image": "https://picsum.photos/800/800"
+            "image": "https://picsum.photos/1280/720",
+            "height": "20vh"
         }
     ],
     "exercices": [

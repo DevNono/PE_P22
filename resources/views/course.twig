@@ -1,14 +1,14 @@
 {% extends 'layouts/app.twig' %}
 {% block css %}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-	<link rel="preconnect" href="https://api.fonts.coollabs.io" crossorigin="anonymous">
-	<link href="https://api.fonts.coollabs.io/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
+	<link rel="preconnect" href="https://api.fonts.coollabs.io">
+	<link href="https://api.fonts.coollabs.io/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
 	{# Display a div with a bg gradient thanks to tailwindcss v3 #}
 	<div class="bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 h-[40vh] mb-4 flex px-20 py-28 justify-center clip-path flex-col text-white">
-		<p class="italic">Section
+		<p class="-mb-1.5 italic information">Section
 			{{ section.id }}
 			-
 			{{ section.title }}</p>
@@ -16,20 +16,22 @@
 			{{ module.id }}
 			-
 			{{ module.title }}</h1>
-		<div class="flex items-center gap-3">
+		<div class="flex items-center gap-3 mt-1">
 			<div class="flex items-center gap-1 information">
 				<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
 				</svg>
-				<p class="">{{ module.time }}
-					min</p>
+				<p class="text-[15px]">{{ module.time }} min</p>
 			</div>
 			<div class="flex items-center gap-1 information">
 				<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
 				</svg>
-				<p class="">{{ module.exercices.length }}
-					exercices</p>
+				<p class="text-[15px]">{% if  module.exercices.length > 1  %}
+					{{ module.exercices.length }} exercices
+				{% else %}
+					{{ module.exercices.length }} exercice
+				{% endif %}</p>
 			</div>
 		</div>
 	</div>
@@ -45,6 +47,12 @@
 						<div class="flex flex-col mt-6 mb-2">
 							<h2 class="text-2xl font-bold title">{{ content.text }}</h2>
 						</div>
+					{% elseif content.type == 'list' %}
+						<ul class="flex flex-col justify-center gap-4 pl-10 mt-6 mb-2 list-disc list">
+							{% for item in content.content %}
+								<li class="list-item">{{ item }}</li>
+							{% endfor %}
+						</ul>
 					{% elseif content.type == 'video' %}
 						<div class="flex flex-col items-center justify-center">
 							<video class="w-full h-full" controls>
@@ -52,8 +60,8 @@
 							</video>
 						</div>
 					{% elseif content.type == 'image' %}
-						<div class="flex flex-col justify-center items-center h-[50vh]">
-							<img crossorigin="anonymous" class="object-cover w-full h-full" src="{{ content.image }}" alt="">
+						<div class="flex flex-col justify-center items-center h-[50vh] my-4" style="height: {{ content.height }}">
+							<img crossorigin="anonymous" class="object-cover object-center w-full h-full" src="{{ content.image }}" alt="">
 						</div>
 					{% elseif content.type == 'code' %}
 						<div class="flex flex-col items-center justify-center w-full code-snippet">
@@ -130,6 +138,10 @@
 						</div>
 					{% endif %}
 				{% endfor %}
+			</div>
+
+			<div class="flex items-center justify-center w-full my-4 buttons">
+				<a href="/{{ section.next }}/{{ module.next }}" class="px-2 py-1 text-white transition-all duration-200 bg-blue-600 cursor-pointer hover:bg-blue-700">Cours Suivant</a>
 			</div>
 		</div>
 	</div>
