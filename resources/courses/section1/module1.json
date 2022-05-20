@@ -58,10 +58,10 @@
                         "Microsoft Word",
                         "Notion",
                         "Bloc-Notes",
-                        "Microsoft Visual Studio Code"
+                        "Visual Studio Code"
                     ],
                     "correct": 4,
-                    "explanation": "Microsoft Word fait partie de la suite de bureautique Microsoft Office, un ensemble de logiciels dont un traitement de texte, un tableur...<br/>Notion permet de prendre des notes, entre autres.<br/>Le bloc-notes permet certes d'éditer du code, mais n'est pas adapté car ne possède pas de colorisation syntaxique.<br/>Microsoft Visual Studio Code est un IDE, donc adapté à l'édition de code."
+                    "explanation": "Microsoft Word fait partie de la suite de bureautique Microsoft Office, un ensemble de logiciels dont un traitement de texte, un tableur...<br/>Notion permet de prendre des notes, entre autres.<br/>Le bloc-notes permet certes d'éditer du code, mais n'est pas adapté car ne possède pas de colorisation syntaxique.<br/>Visual Studio Code est un IDE, donc adapté à l'édition de code."
                 }
             ]
         }
