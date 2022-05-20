@@ -139,10 +139,16 @@
 					{% endif %}
 				{% endfor %}
 			</div>
-
-			<div class="flex items-center justify-center w-full my-4 buttons">
-				<a href="/{{ section.next }}/{{ module.next }}" class="px-2 py-1 text-white transition-all duration-200 bg-blue-600 cursor-pointer hover:bg-blue-700">Cours Suivant</a>
-			</div>
+			{% if section.next != null and module.next != null %}
+				<div class="flex items-center justify-center w-full my-4 buttons">
+					<a href="/{{ section.next }}/{{ module.next }}" class="px-2 py-1 text-white transition-all duration-200 bg-blue-600 cursor-pointer hover:bg-blue-700">Cours Suivant</a>
+				</div>
+			{% else %}
+				<div class="flex items-center justify-center w-full mt-8 mb-4">
+					<p class="font-medium text-center text-gray-800 information">Vous avez terminé ce cours et vous êtes désormais capable de construire un jeu de carte du type du BlackJack en JavaScript. <br /><b>Félicitations !</b></p>
+				</div>
+			{% endif %}
+			
 		</div>
 	</div>
 {% endblock %}

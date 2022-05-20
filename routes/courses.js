@@ -39,6 +39,7 @@ router.get('/:id/:id2', (req, res) => {
 
 	const section = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/courses/section${id}/section.json`)));
 	section.id = id;
+
 	// Load a json file in the resources folder and extract in a variable using fs
 	const module = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/courses/section${id}/module${id2}.json`)));
 	module.id = id2;
@@ -46,6 +47,19 @@ router.get('/:id/:id2', (req, res) => {
 		if (module.content[i].type === 'code') {
 			module.content[i].code = escapeHtml(module.content[i].code);
 		}
+	}
+
+	if ((fs.readdirSync(path.join(__dirname, `../resources/courses/section${id}`)).length - 1) === parseInt(id2, 10)) {
+		if ((fs.readdirSync(path.join(__dirname, '../resources/courses')).length - 1) > parseInt(id, 10)) {
+			section.next = parseInt(id, 10) + 1;
+			module.next = 1;
+		} else {
+			section.next = null;
+			module.next = null;
+		}
+	} else {
+		section.next = parseInt(id, 10);
+		module.next = parseInt(id2, 10) + 1;
 	}
 
 	// TODO: shuffle gap fill words before send to page

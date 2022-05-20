@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const compression = require('compression');
 const cors = require('cors');
+const http = require('http');
 
 const authMiddleware = require('./auth-middleware');
 
@@ -49,14 +50,16 @@ app.use((req, res, next) => {
 });
 
 // Error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
 	// Set locals, only providing error in development
-	res.locals.message = err.message;
-	res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+	const error = req.app.get('env') === 'development' ? err : {};
+	const status = {
+		number: err.status || 500,
+		text: err.statusText || 'Internal Server Error',
+	};
 	// Render the error page
-	res.status(err.status || 500);
-	res.render('error');
+	res.status(status.number);
+	res.render('error', {message: err.message, status, error});
 });
 
 module.exports = app;
