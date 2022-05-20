@@ -45,7 +45,7 @@
         },
         {
             "type": "text",
-            "text": "Pour éditer le code, vous pouvez utiliser un éditeur de texte comme Notepad ou <a target=\"_blank\" href=\"https://notepad-plus-plus.org/downloads/\">Notepad++</a>. Cependant, nous vous conseillons de télécharger un IDE comme <a target=\"_blank\" href=\"https://code.visualstudio.com/\">Visual Studio Code</a>, <a href=\"https://atom.io/\" target=\"_blank\">Atom</a> ou <a href=\"https://www.sublimetext.com/\" target=\"_blank\">Sublime Text</a>. Celui-ci va vous permettre de bénéficier de fonctionnalités plus avancées comme la gestion de dossier, la gestion d'historique, l'auto-complétion, etc."
+            "text": "Pour éditer le code, vous pouvez utiliser un éditeur de texte comme Notepad ou <a target=\"_blank\" href=\"https://notepad-plus-plus.org/downloads/\">Notepad++</a>. Cependant, nous vous conseillons de télécharger un IDE comme <a target=\"_blank\" href=\"https://code.visualstudio.com/\">Visual Studio Code</a>, <a href=\"https://atom.io/\" target=\"_blank\">Atom</a> ou <a href=\"https://www.sublimetext.com/\" target=\"_blank\">Sublime Text</a>. Celui-ci va vous permettre de bénéficier de fonctionnalités plus avancées comme la gestion de dossier, la gestion d'historique, l'auto-complétion, la colorisation syntaxique, etc."
         }
     ],
     "exercices": [
@@ -53,15 +53,15 @@
             "type": "quiz",
             "questions": [
                 {
-                    "question": "Lequel de ces logiciels est utilisé pour éditer le code ?",
+                    "question": "Lequel de ces logiciels est utilisé pour éditer le code avec colorisation syntaxique ?",
                     "answers": [
                         "Microsoft Word",
-                        "Microsoft Excel",
-                        "Microsoft PowerPoint",
-                        "Visual Studio Code"
+                        "Notion",
+                        "Bloc-Notes",
+                        "Microsoft Visual Studio Code"
                     ],
                     "correct": 4,
-                    "explanation": "La suite de bureautique Microsoft Office est un ensemble de logiciels de traitement de texte, de tableur, de présentation, de graphisme et de bureautique. Cependant, celle-ci s'adapte très mal pour écrire du code."
+                    "explanation": "Microsoft Word fait partie de la suite de bureautique Microsoft Office, un ensemble de logiciels dont un traitement de texte, un tableur...<br/>Notion permet de prendre des notes, entre autres.<br/>Le bloc-notes permet certes d'éditer du code, mais n'est pas adapté car ne possède pas de colorisation syntaxique.<br/>Microsoft Visual Studio Code est un IDE, donc adapté à l'édition de code."
                 }
             ]
         }

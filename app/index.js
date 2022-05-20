@@ -8,6 +8,8 @@ const logger = require('morgan');
 const compression = require('compression');
 const cors = require('cors');
 
+const authMiddleware = require('./auth-middleware');
+
 const indexRouter = require('../routes/index');
 const usersRouter = require('../routes/users');
 const coursesRouter = require('../routes/courses');
@@ -33,6 +35,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(cors());
+
+app.use(authMiddleware);
 
 // Routes
 app.use('/', indexRouter);
