@@ -18,14 +18,14 @@
         {
             "type": "list",
             "content": [
-                "<sb>HTML (HyperText Markup Language) :</sb> C'est le langage de balisage utilisé pour décrire la structure pages web.",
+                "<sb>HTML (HyperText Markup Language) :</sb> C'est le langage de balisage utilisé pour décrire la structure des pages web.",
                 "<sb>CSS (Cascading Style Sheet) :</sb> C'est le langage de mise en forme utilisé pour styliser et designer les pages web en utilisant la structure HTML.",
-                "<sb>JavaScript (ECMAScript) :</sb> C'est le langage de programmation utilisé pour développer les actions d'une page web."
+                "<sb>JavaScript (ECMAScript) :</sb> C'est le langage de programmation utilisé pour développer les interactions d'une page web (exemple : réaliser une action au clic de l'utilisateur)."
             ]
         },
         {
             "type": "text",
-            "text": "Nous allons à travers ce cours nous concentrer sur le côté JavaScript du projet. Ce projet consiste à réaliser un jeu de cartes dans le style du BlackJack. Pour cela nous allons couvrir les étapes les plus importantes menant à la mise en place de ce jeu."
+            "text": "Nous allons à travers ce cours nous concentrer sur le côté JavaScript du projet. Ce projet consiste à réaliser un jeu de cartes dans le style du BlackJack. Pour cela nous allons couvrir les étapes les plus importantes menant à la mise en place de celui-ci."
         },
         {
             "type": "title",
@@ -41,16 +41,11 @@
         },
         {
             "type": "text",
-            "text": "Pour bien pouvoir commencer, il vous suffit de disposer d'un navigateur web récent."
+            "text": "Pour bien démarrer, il vous suffit de disposer d'un ordinateur et d'un navigateur web récent tel que (Brave, Mozilla Firefox, Google Chrome, etc.)."
         },
         {
             "type": "text",
-            "text": "Pour éditer le code, vous pouvez utiliser un éditeur de texte comme Notepad ou <a target=\"_blank\" href=\"https://notepad-plus-plus.org/downloads/\">Notepad++</a>. Cependant, nous vous conseillons de télécharger un IDE comme <a target=\"_blank\" href=\"https://code.visualstudio.com/\">Visual Studio Code</a>, <a href=\"https://atom.io/\" target=\"_blank\">Atom</a> ou <a href=\"https://www.sublimetext.com/\" target=\"_blank\">Sublime Text</a>. Celui-ci va vous permttre de bénéficier de fonctionnalités plus avancées comme la gestion de dossier, la gestion d'historique, l'auto-complétion, etc."
-        },
-        {
-            "type": "image",
-            "image": "https://picsum.photos/1280/720",
-            "height": "20vh"
+            "text": "Pour éditer le code, vous pouvez utiliser un éditeur de texte comme Notepad ou <a target=\"_blank\" href=\"https://notepad-plus-plus.org/downloads/\">Notepad++</a>. Cependant, nous vous conseillons de télécharger un IDE comme <a target=\"_blank\" href=\"https://code.visualstudio.com/\">Visual Studio Code</a>, <a href=\"https://atom.io/\" target=\"_blank\">Atom</a> ou <a href=\"https://www.sublimetext.com/\" target=\"_blank\">Sublime Text</a>. Celui-ci va vous permettre de bénéficier de fonctionnalités plus avancées comme la gestion de dossier, la gestion d'historique, l'auto-complétion, etc."
         }
     ],
     "exercices": [

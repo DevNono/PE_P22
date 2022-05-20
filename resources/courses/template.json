@@ -25,7 +25,8 @@
         },
         {
             "type": "image",
-            "image": "https://picsum.photos/2000/3000"
+            "image": "https://picsum.photos/1280/720",
+            "height": "20vh"
         }
     ],
     "exercices": [
