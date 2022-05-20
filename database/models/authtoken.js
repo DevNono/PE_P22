@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
 		const possibleCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
       + 'abcdefghijklmnopqrstuvwxyz0123456789';
 
-		for (let i = 0; i < 15; i++) {
+		for (let i = 0; i < 24; i++) {
 			token += possibleCharacters.charAt(
 				Math.floor(Math.random() * possibleCharacters.length),
 			);

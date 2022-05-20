@@ -76,7 +76,11 @@ router.post('/login', async (req, res) => {
 	try {
 		const user = await User.authenticate(userName, password);
 
-		return res.json(user);
+		res.cookie('auth_token', user.authToken, {
+			maxAge: 3600 * 24 * 30,
+			httpOnly: true,
+		});
+		return res.redirect('/me');
 	} catch (err) {
 		return res.status(400).send('invalid username or password');
 	}
@@ -89,7 +93,10 @@ router.get('/logout', async (req, res) => {
 	// authorization we should have access to the user
 	// on the req object, so we will try to find it and
 	// call the model method logout
-	const {user, cookies: {auth_token: authToken}} = req;
+	const {
+		user,
+		cookies: {auth_token: authToken},
+	} = req;
 
 	// We only want to attempt a logout if the user is
 	// present in the req object, meaning it already
