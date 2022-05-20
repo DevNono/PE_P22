@@ -1,10 +1,9 @@
+/* global db */
 'use strict';
 const express = require('express');
 const fs = require('fs');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-
-const {User} = require('../database/models');
 
 const MailazyClient = require('mailazy-node');
 const client = new MailazyClient({accessKey: '', accessSecret: ''});
@@ -15,56 +14,70 @@ router.get('/', (req, res) => {
 });
 
 router.post('/contact', async (req, res) => {
-	const {name, email, message} = req.body;
+	const {name, email, subject, message} = req.body;
 	try {
 		const resp = await client.send({
-			to: process.env.EMAIL_ADDRESS, // Required
-			from: email, // Use domain you verified, required
-			subject: '', // Required
+			to: process.env.EMAIL_ADDRESS_CONTACT, // Required
+			from: process.env.EMAIL_ADDRESS, // Use domain you verified, required
+			subject: 'Contact - Site PE P22', // Required
 			text: message,
-			html: message,
+			html: fs.readFile(__dirname + '/../resources/mails/contact.html', 'utf8', (err, text) => {
+				res.send(text);
+			}).replace('{{ name }}', name).replace('{{ email }}', email).replace('{{ subject }}', subject).replace('{{ message }}', message),
 		});
-		console.log('resp: ' + resp);
+
+		res.send('Mail envoyé avec succès !');
 	} catch (e) {
-		console.log('er ror: ' + e);
+		console.log('error: ' + e);
 	}
 });
 
 /* Register Route
 ========================================================= */
 router.get('/register', (req, res) => {
+	if (req.user !== undefined) {
+		res.redirect('/me');
+	}
+
 	res.render('register', {title: 'Register'});
 });
 
 router.post('/register', async (req, res) => {
+	if (req.user !== undefined) {
+		res.redirect('/me');
+	}
+
 	// Hash the password provided by the user with bcrypt so that
 	// we are never storing plain text passwords. This is crucial
 	// for keeping your db clean of sensitive data
 	const hash = bcrypt.hashSync(req.body.password, 10);
 
-	try {
-		// Create a new user with the password hash from bcrypt
-		const user = await User.create(Object.assign(req.body, {password: hash}));
+	// Create a new user with the password hash from bcrypt
+	const user = await db.User.create(Object.assign(req.body, {password: hash}));
+	// Data will be an object with the user and it's authToken
+	const data = await user.authorize();
+	// Send back the new user and auth token to the
+	// client { user, authToken }
 
-		// Data will be an object with the user and it's authToken
-		const data = await user.authorize();
-
-		// Send back the new user and auth token to the
-		// client { user, authToken }
-		return res.json(data);
-	} catch (err) {
-		return res.status(400).send(err);
-	}
+	return res.redirect('/login');
 });
 
 /* Login Route
   ========================================================= */
 
 router.get('/login', (req, res) => {
+	if (req.user !== undefined) {
+		res.redirect('/me');
+	}
+
 	res.render('login', {title: 'Login'});
 });
 
 router.post('/login', async (req, res) => {
+	if (req.user !== undefined) {
+		res.redirect('/me');
+	}
+
 	const {userName, password} = req.body;
 
 	// If the username / password is missing, we use status code 400
@@ -74,15 +87,15 @@ router.post('/login', async (req, res) => {
 	}
 
 	try {
-		const user = await User.authenticate(userName, password);
+		const user = await db.User.authenticate(userName, password);
 
-		res.cookie('auth_token', user.authToken, {
+		res.cookie('auth_token', user.authToken.token, {
 			maxAge: 3600 * 24 * 30,
 			httpOnly: true,
 		});
 		return res.redirect('/me');
 	} catch (err) {
-		return res.status(400).send('invalid username or password');
+		return res.render('error', {message: 'Unauthorized', status: {number: 401, text: 'Invalid Login Creditentials'}});
 	}
 });
 
@@ -104,13 +117,13 @@ router.get('/logout', async (req, res) => {
 	// the authToken should be missing at this point, check anyway
 	if (user && authToken) {
 		await req.user.logout(authToken);
-		return res.status(204).send();
+		return res.redirect('/');
 	}
 
 	// If the user missing, the user is not logged in, hence we
 	// use status code 400 indicating a bad request was made
 	// and send back a message
-	return res.status(400).send({errors: [{message: 'not authenticated'}]});
+	return res.render('error', {message: 'Already Logged Out', status: {number: 401, text: 'Bad Request'}});
 });
 
 /* Me Route - get the currently logged in user
