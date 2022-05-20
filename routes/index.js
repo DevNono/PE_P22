@@ -32,6 +32,10 @@ router.post('/contact', async (req, res) => {
 
 /* Register Route
 ========================================================= */
+router.get('/register', (req, res) => {
+	res.render('register', {title: 'Register'});
+});
+
 router.post('/register', async (req, res) => {
 	// Hash the password provided by the user with bcrypt so that
 	// we are never storing plain text passwords. This is crucial
@@ -55,19 +59,22 @@ router.post('/register', async (req, res) => {
 
 /* Login Route
   ========================================================= */
+
+router.get('/login', (req, res) => {
+	res.render('login', {title: 'Login'});
+});
+
 router.post('/login', async (req, res) => {
-	const {username, password} = req.body;
+	const {userName, password} = req.body;
 
 	// If the username / password is missing, we use status code 400
 	// indicating a bad request was made and send back a message
-	if (!username || !password) {
-		return res.status(400).send('Request missing username or password param');
+	if (!userName || !password) {
+		return res.status(400).send('Missing username or password');
 	}
 
 	try {
-		let user = await User.authenticate(username, password);
-
-		user = await user.authorize();
+		const user = await User.authenticate(userName, password);
 
 		return res.json(user);
 	} catch (err) {
@@ -77,7 +84,7 @@ router.post('/login', async (req, res) => {
 
 /* Logout Route
   ========================================================= */
-router.delete('/logout', async (req, res) => {
+router.get('/logout', async (req, res) => {
 	// Because the logout request needs to be send with
 	// authorization we should have access to the user
 	// on the req object, so we will try to find it and
