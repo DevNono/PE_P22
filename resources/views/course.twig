@@ -66,7 +66,7 @@
 					{% elseif content.type == 'code' %}
 						<div class="flex flex-col items-center justify-center w-full code-snippet">
 							<pre class="flex flex-col w-full gap-1 bg-gray-800 rounded-t-lg">
-								<code class="language-html" data-clipboard-target="#code-html">{{ content.code }}</code>
+								<code class="language-{{ content.language }}">{{ content.code }}</code>
 							</pre>
 							<p class="w-full py-2 italic text-center text-gray-200 bg-gray-900 rounded-b-lg">{{ content.description }}</p>
 						</div>

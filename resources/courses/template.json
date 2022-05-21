@@ -20,6 +20,7 @@
         },
         {
             "type": "code",
+            "language": "html",
             "code": "<p>HTML CODE</p>\n<h1>Title</h1>",
             "description": "Html snippet to display in the page"
         },
