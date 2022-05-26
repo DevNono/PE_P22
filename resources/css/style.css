@@ -130,7 +130,7 @@
 
 .quiz .question {
   font-weight: 600;
-  font-size: 2.075rem;
+  font-size: 1.5rem;
   color: var(--main-text-color);
   text-align: center;
 }
@@ -222,6 +222,10 @@
 
 .gap-dropover {
     @apply bg-gray-800;
+}
+
+.gap-container .line-break{
+  width: 100%;
 }
 
 .information{

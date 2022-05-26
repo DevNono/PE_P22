@@ -8,9 +8,6 @@
 
 	<section
 		class="relative flex items-center justify-center h-screen">
-		{# <div class="fixed scale-125 top-20 left-20">
-						        <section class="card card--pique" value="2"><div class="card__inner card__inner--centered"><div class="card__column"><div class="card__symbol"></div><div class="card__symbol"></div></div></div></section>
-						    </div> #}
 		<div class="-z-20 top-56 absolute flex items-start justify-center w-full h-[13.75rem] overflow-hidden">
 			<section class="card card--pique -rotate-12 translate-y-10 !-mr-32" value="2">
 				<div class="card__inner card__inner--centered">
@@ -85,14 +82,14 @@
 
 
 				<div class="max-w-6xl mx-auto text-center">
-					<h1 class="mb-4 text-5xl font-extrabold tracking-tighter md:text-6xl leading-tighter" data-aos="zoom-y-out">Une introduction au
+					<h1 class="mb-4 text-5xl font-extrabold tracking-tighter md:text-6xl leading-tighter">Une introduction au
 						<span class="text-transparent md:text-7xl from-rose-900 bg-clip-text to-red-500 bg-gradient-to-r">Javascript</span>
 					</h1>
 					<div class="max-w-3xl mx-auto ">
 						<p class="mb-8 text-xl text-gray-600" data-aos="zoom-y-out" data-aos-delay="150">Découvrez ce langage au travers de la réalisation d'un jeu de cartes</p>
 						<div class="flex flex-row justify-center gap-5" data-aos="zoom-y-out" data-aos-delay="300">
-							<a class="pt-2 pb-2 pl-6 pr-6 text-white bg-red-800 btn rounded-xl" href="/game">Apercu du jeu</a>
-							<a class="pt-2 pb-2 pl-6 pr-6 text-white bg-gray-900 rounded-xl" href="#ancre">En savoir plus</a>
+							<a class="px-4 py-2 font-bold text-white rounded-md bg-gradient-to-tr hover:opacity-80 from-rose-900 to-red-500 btn" href="/game">Apercu du jeu</a>
+							<a class="px-4 py-2 font-bold text-white bg-gray-900 rounded-md hover:opacity-80" href="#ancre">En savoir plus</a>
 						</div>
 					</div>
 				</div>
@@ -126,7 +123,7 @@
 		<div class="w-full mb-10 overflow-hidden rounded-lg lg:w-1/2 lg:mb-0 lg:pr-12">
 			<div class="flex flex-col content-center w-full">
 				<h1 id="ancre" class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">Qu'est ce que
-					<span class="text-transparent bg-gradient-to-r from-rose-900 bg-clip-text to-red-500">JS.beginner ?</span>
+					<span class="font-bold text-transparent bg-gradient-to-r from-rose-900 bg-clip-text to-red-500">JS.beginner ?</span>
 				</h1>
 				<p class="self-end py-3 text-base leading-relaxed">JS.beginner est une plateforme d'apprentissage du langage web Javascript. <br> Notre but est de vous offrir une première introduction au Javascript de manière ludique et simple à travers un fil conducteur : la création d'un jeu de carte qui est le Blackjack ! <br> <br>Notre plateforme est constituée de plusieurs modules, eux-mêmes divisés en notions qui permettent d'apprendre les notions de Javascript mais surtout de comprendre les principales parties du code du jeu. <br>À la fin de la formation, vous pouvez obtenir un code-source du jeu que nous avons réalisé et que vous pouvez modifier à votre guise.
 				</p>
@@ -175,35 +172,22 @@
 </div>
 <div class="container flex w-2/3 m-auto">
 			<div class="flex flex-col content-center justify-center w-full text-center">
-				<h1 class="mb-4 font-medium text-gray-900 sm:text-3xl title-font">Commencer votre premier module !</h1>
-				<div class="flex w-full mt-2 overflow-hidden border-indigo-500 rounded border-1"></div>
-				<div class="flex flex-wrap justify-center -m-4 bg-gray-900 border-4 md:p-4 rounded-xl">
-
-
-					<div class="w-full m-4 bg-white xl:w-1/2 rounded-xl">
-						<div class="relative flex flex-col h-full p-6 overflow-hidden border-2 border-black rounded-xl">
-							<h1 class="pb-4 mb-4 text-3xl leading-none text-gray-900 border-b border-gray-200">Page des modules</h1>
-							<a class="flex items-center w-full px-4 py-2 mt-auto font-bold text-white bg-red-800 border-0 rounded focus:outline-none hover:bg-gray-500" href="courses">Commencer
-								<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewbox="0 0 24 24">
-									<path d="M5 12h14M12 5l7 7-7 7"></path>
-								</svg>
-							</a>
-						</div>
-					</div>
+				<a href="/logout" class="px-2 py-2 mt-2 font-bold text-white rounded-lg bg-gradient-to-tr from-rose-900 to-red-500 sm:text-3xl">Cliquer ici pour commencer votre premier module !</a>
+			</div>
 		</div>
 </section>
 
-<section class="relative flex justify-center mb-4 text-gray-600 body-font">
+<section class="relative flex justify-center mb-4 overflow-hidden text-gray-600 body-font">
 
-	<div class="items-center justify-start hidden w-1/6 mr-8 lg:flex">
-		<section class="card card--pique -rotate-12 translate-y-10 !-mr-32" value="A">
+	<div class="items-center justify-start hidden mr-4 lg:flex">
+		<section class="translate-y-5 card card--pique -rotate-12" value="A">
 			<div class="flex items-center card__inner card__inner--centered ace">
 				<div class="card__symbol"></div>
 			</div>
 		</section>
 	</div>
 
-	<div class="container w-3/5 lg:w-3/5 ">
+	<div class="container w-full p-2 sm:w-4/5 lg:w-3/5">
 		<div class="w-full mb-12 text-center">
 			<h1 class="mb-4 text-2xl font-medium text-gray-900 sm:text-3xl title-font">Nous Contacter</h1>
 			<p class="mx-auto text-base leading-relaxed ">Nous sommes toujours à l'écoute aux retours que vous nous envoyez afin d'améliorer cet outil.</p>
@@ -236,15 +220,15 @@
 					</div>
 				</div>
 				<div class="w-full p-2 text-center">
-					<button class="flex mx-auto text-base text-center text-white bg-red-800 border-0 rounded focus:outline-none hover:bg-slate-800 w-fit">Envoyer le message</button>
+					<button class="flex mx-auto text-base text-center text-white border-0 rounded bg-gradient-to-r from-rose-900 to-red-500 focus:outline-none hover:opacity-80 w-fit">Envoyer le message</button>
 				</div>
 
 			</form>
 		</div>
 	</div>
 
-	<div class="items-center justify-center hidden w-1/6 lg:flex">
-		<section class="card card--carreau rotate-12 translate-y-10 !-mr-32" value="A">
+	<div class="items-center justify-center hidden ml-8 lg:flex">
+		<section class="translate-y-5 card card--carreau rotate-12" value="A">
 			<div class="flex items-center card__inner card__inner--centered ace">
 				<div class="card__symbol"></div>
 			</div>

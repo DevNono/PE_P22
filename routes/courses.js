@@ -62,8 +62,19 @@ router.get('/:id/:id2', (req, res) => {
 		module.next = parseInt(id2, 10) + 1;
 	}
 
-	// TODO: shuffle gap fill words before send to page
-	res.render('course', {title: 'Course', section, module});
+	for (let i = 0; i < module.exercices.length; i++) {
+		const exercice = module.exercices[i];
+		if (exercice.type === 'gapfill') {
+			for (let i = exercice.gaps.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[exercice.gaps[i], exercice.gaps[j]] = [exercice.gaps[j], exercice.gaps[i]];
+			}
+
+			module.exercices[i].gaps = exercice.gaps;
+		}
+	}
+
+	res.render('course', {title: 'Course', section, module, whitenav: true});
 });
 
 module.exports = router;

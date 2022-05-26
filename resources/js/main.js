@@ -117,6 +117,12 @@ function writing_check_tab(el, event) {
 	}
 }
 
+function writingReveal() {
+	this.parentElement.querySelector('.writing-blurred').classList.remove('writing-blurred');
+	this.parentElement.querySelector('.reveal-text').classList.add('hidden');
+	this.removeEventListener('click', writingReveal);
+}
+
 Prism.highlightAll();
 
 /* ===============================================
@@ -221,11 +227,19 @@ function gapDrop(e) {
 						}
 					}
 
+					let success = true;
+
+					if ((count / userAnswers.length) < 0.5) {
+						success = false;
+					}
+
+					console.log((count / userAnswers.length));
+
 					// Display sweetalert displaying the score
 					Swal.fire({
-						title: 'Bien joué !',
+						title: success ? 'Bien joué !' : 'Bien tenté',
 						html: `Vous avez obtenu ${count} sur ${userAnswers.length} réponses correctes !`,
-						icon: 'success',
+						icon: success ? 'success' : 'error',
 					}).then(() => {
 						userAnswers.forEach(el => {
 							el.click();
@@ -258,14 +272,9 @@ function gapUpdate(el) {
 		.querySelector('.gap-container')
 		.innerHTML.replaceAll(/(<div [^>]*>)/gm, '')
 		.replaceAll(/<\/div>/g, '')
-		.replaceAll('&nbsp;', '');
+		.replaceAll('&nbsp;', '')
+		.replaceAll('££££', '    ');
 	Prism.highlightElement(code);
-}
-
-function writingReveal() {
-	this.parentElement.querySelector('.writing-blurred').classList.remove('writing-blurred');
-	this.parentElement.querySelector('.reveal-text').classList.add('hidden');
-	this.removeEventListener('click', writingReveal);
 }
 
 /* ===============================================

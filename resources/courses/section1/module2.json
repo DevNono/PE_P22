@@ -172,7 +172,7 @@
         {
             "type": "gapfill",
             "title": "Complete this code",
-            "text": "%gap% maFonction ( %gap% ) {\n    %gap%(parametre)%gap% \n%gap%",
+            "text": " %gap% maFonction ( %gap% ) {\n     %gap% (parametre) %gap%  \n %gap% ",
             "gaps": [
                 {
                     "text": "function",

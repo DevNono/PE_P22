@@ -7,7 +7,7 @@
 
 {% block body %}
 	{# Display a div with a bg gradient thanks to tailwindcss v3 #}
-	<div class="bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 h-[40vh] mb-4 flex px-20 py-28 justify-center clip-path flex-col text-white">
+	<div class="bg-gradient-to-r from-rose-900 to-red-500 h-[40vh] mb-4 flex px-8 md:px-20 py-28 justify-center clip-path flex-col text-white">
 		<p class="-mb-1.5 italic information">Section
 			{{ section.id }}
 			-
@@ -36,7 +36,7 @@
 		</div>
 	</div>
 	<div class="flex items-center justify-center w-full main-container">
-		<div class="flex main-content max-w-[1280px] w-full flex-col gap-3 px-10 pt-8 article">
+		<div class="flex main-content max-w-[1280px] w-full flex-col gap-3 md:px-10 pt-8 article">
 			<div class="flex flex-col gap-3 px-10 content">
 				{% for content in module.content %}
 					{% if content.type == 'text' %}
@@ -103,7 +103,7 @@
 								<pre class="relative w-full h-full bg-gray-800 rounded-lg pointer-events-none">
 									<code class="absolute top-0 left-0 z-10 w-full overflow-auto whitespace-nowrap output preview language-javascript">{{ exercice.text | replace({'%gap%': '____'}) }}</code>
 								</pre>
-								<div class="absolute flex text-transparent gap-container">{{ exercice.text | replace({'%gap%': '<div class="transition-all duration-200 bg-gray-700 gap word-drop">&nbsp;____&nbsp;</div>'}) }}</div>
+								<div class="absolute flex flex-wrap text-transparent gap-container">{{ exercice.text | replace({ '    ': '££££' }) | nl2br | raw | replace({ '<br />' : '<div class="line-break"></div>' }) | replace({'%gap%': '<div class="transition-all duration-200 bg-gray-700 gap word-drop">&nbsp;____&nbsp;</div>'})  }}</div>
 							</div>
 							<div class="flex gap-2 word-container">
 								{% for gap in exercice.gaps %}
@@ -116,12 +116,12 @@
 							{{ exercice.title }}</h3>
 						<p class="">{{ exercice.question }}</p>
 						<div class="relative flex flex-col items-start justify-start w-full writing rounded-2xl">
-							<textarea spellcheck="false" placeholder="Vous pouvez écrire votre code ici.&#10;&#10;Une fois terminé, vous pouvez regarder la correction de l'exercice en cliquant sur le cadre de droite.&#10;&#10;Ce cadre vous permet de bénéficier de la colorisation syntaxique (for, let, ...).&#10;&#10;Enjoy :)" class="absolute z-20 w-1/2 p-4 overflow-auto text-transparent break-words whitespace-pre-wrap bg-transparent outline-none resize-none input caret-white"></textarea>
-							<pre class="w-1/2 h-full bg-gray-800 rounded-lg input">
+							<textarea spellcheck="false" placeholder="Vous pouvez écrire votre code ici.&#10;&#10;Une fois terminé, vous pouvez regarder la correction de l'exercice en cliquant sur le cadre de droite.&#10;&#10;Ce cadre vous permet de bénéficier de la colorisation syntaxique (for, let, ...).&#10;&#10;Enjoy :)" class="absolute z-20 w-full p-4 overflow-auto text-transparent break-words whitespace-pre-wrap bg-transparent outline-none resize-none md:w-1/2 input caret-white"></textarea>
+							<pre class="w-full h-full bg-gray-800 rounded-t-lg md:rounded-lg md:w-1/2 input">
 								<code class="absolute top-0 left-0 z-10 w-full p-4 overflow-auto break-words whitespace-pre-wrap output preview language-javascript">
 								</code>
 							</pre>
-							<div class="bg-gray-700 z-30 right-0 top-0 absolute !w-1/2 h-full rounded-r-lg">
+							<div class="bg-gray-700 z-30 rounded-b-lg right-0 top-0 md:absolute w-full md:!w-1/2 h-full md:rounded-r-lg">
 								<div class="flex flex-col w-full h-full gap-3 p-4 answer">
 									<p class="text-xl font-bold text-white">Correction</p>
 									<a class="relative flex items-center justify-center w-full h-full cursor-pointer reveal">
@@ -141,7 +141,7 @@
 			</div>
 			{% if section.next != null and module.next != null %}
 				<div class="flex items-center justify-center w-full my-4 buttons">
-					<a href="/{{ section.next }}/{{ module.next }}" class="px-2 py-1 text-white transition-all duration-200 bg-blue-600 cursor-pointer hover:bg-blue-700">Cours Suivant</a>
+					<a href="/courses/{{ section.next }}/{{ module.next }}" class="px-2 py-1 text-white transition-all duration-200 bg-blue-600 rounded-md cursor-pointer hover:bg-blue-700">Cours Suivant</a>
 				</div>
 			{% else %}
 				<div class="flex items-center justify-center w-full mt-8 mb-4">
