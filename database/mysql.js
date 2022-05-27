@@ -21,7 +21,7 @@ async function testConnectionToDB() {
 	}
 }
 
-testConnectionToDB();
+// testConnectionToDB();
 
 fs
 	.readdirSync(path.join(__dirname, '/models'))
