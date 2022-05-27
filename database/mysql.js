@@ -6,8 +6,8 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const db = {};
 
-const sequelize = new Sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
-	host: process.env.MYSQL_HOST,
+const sequelize = new Sequelize(process.env.MYSQLDATABASE, process.env.MYSQLUSER, process.env.MYSQLPASSWORD, {
+	host: process.env.MYSQLHOST,
 	port: 3306,
 	dialect: 'mysql',
 });
@@ -21,7 +21,7 @@ async function testConnectionToDB() {
 	}
 }
 
-// TestConnectionToDB();
+testConnectionToDB();
 
 fs
 	.readdirSync(path.join(__dirname, '/models'))
