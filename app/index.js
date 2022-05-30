@@ -13,7 +13,6 @@ const http = require('http');
 global.db = require('../database/mysql');
 
 const indexRouter = require('../routes/index');
-const usersRouter = require('../routes/users');
 const coursesRouter = require('../routes/courses');
 
 const app = express();
@@ -65,7 +64,6 @@ app.use(async (req, res, next) => {
 
 // Routes
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/courses', coursesRouter);
 
 // Catch 404 and forward to error handler
