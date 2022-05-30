@@ -6,8 +6,6 @@
 
 require('dotenv').config();
 
-const mysql = require('./database/mysql');
-
 const app = require('./app/index');
 const debug = require('debug')('pe:server');
 const http = require('http');

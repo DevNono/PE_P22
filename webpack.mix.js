@@ -11,11 +11,24 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/script.js', 'public/js')
+mix.js('resources/js/main.js', 'public/js')
 	.postCss('resources/css/style.css', 'public/css', [
 		require('tailwindcss'),
 		require('autoprefixer'),
 	]);
 
-mix.disableSuccessNotifications();
+mix.js('card_game/js/script-jeu.js', 'public/js')
+	.js('card_game/js/docs.js', 'public/js')
+	.postCss('card_game/css/style-jeu.css', 'public/css', [
+		require('autoprefixer'),
+	]).options({
+		processCssUrls: false,
+	})
+	.postCss('card_game/css/croupier.css', 'public/css', [
+		require('autoprefixer'),
+	]);
+
+mix.copy('card_game/assets', 'public/assets');
+
+mix.disableNotifications();
 

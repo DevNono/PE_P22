@@ -1,0 +1,69 @@
+{
+    "title": "Bien démarrer le projet",
+    "description": "Ce module va permettre de débuter la mise en place d'un projet de développement web. Il va vous permettre de découvrir les différents outils et les différentes techniques de développement web.",
+    "time": 3,
+    "tags": [
+        "Comprendre HTML/CSS/JavaScript",
+        "Mise en place d'un projet"
+    ],
+    "content": [
+        {
+            "type": "title",
+            "text": "Introduction"
+        },
+        {
+            "type": "text",
+            "text": "Bienvenue dans ce cours qui va vous apprendre et vous amener à comprendre comment réaliser un projet web. Ce projet va se reposer sur 3 technologies : <h>HTML, CSS et JavaScript</h>. Celles-ci sont majoritairement utilisées pour le développement de site internet."
+        },
+        {
+            "type": "list",
+            "content": [
+                "<sb>HTML (HyperText Markup Language) :</sb> C'est le langage de balisage utilisé pour décrire la structure des pages web.",
+                "<sb>CSS (Cascading Style Sheet) :</sb> C'est le langage de mise en forme utilisé pour styliser et designer les pages web en utilisant la structure HTML.",
+                "<sb>JavaScript (ECMAScript) :</sb> C'est le langage de programmation utilisé pour développer les interactions d'une page web (exemple : réaliser une action au clic de l'utilisateur)."
+            ]
+        },
+        {
+            "type": "text",
+            "text": "Nous allons à travers ce cours nous concentrer sur le côté JavaScript du projet. Ce projet consiste à réaliser un jeu de cartes dans le style du BlackJack. Pour cela nous allons couvrir les étapes les plus importantes menant à la mise en place de celui-ci."
+        },
+        {
+            "type": "title",
+            "text": "Règles du jeu à mettre en place"
+        },
+        {
+            "type": "text",
+            "text": "[Ecrire les règles ici]"
+        },
+        {
+            "type": "title",
+            "text": "Outils"
+        },
+        {
+            "type": "text",
+            "text": "Pour bien démarrer, il vous suffit de disposer d'un ordinateur et d'un navigateur web récent tel que (Brave, Mozilla Firefox, Google Chrome, etc.)."
+        },
+        {
+            "type": "text",
+            "text": "Pour éditer le code, vous pouvez utiliser un éditeur de texte comme Notepad ou <a target=\"_blank\" href=\"https://notepad-plus-plus.org/downloads/\">Notepad++</a>. Cependant, nous vous conseillons de télécharger un IDE comme <a target=\"_blank\" href=\"https://code.visualstudio.com/\">Visual Studio Code</a>, <a href=\"https://atom.io/\" target=\"_blank\">Atom</a> ou <a href=\"https://www.sublimetext.com/\" target=\"_blank\">Sublime Text</a>. Celui-ci va vous permettre de bénéficier de fonctionnalités plus avancées comme la gestion de dossier, la gestion d'historique, l'auto-complétion, la colorisation syntaxique, etc."
+        }
+    ],
+    "exercices": [
+        {
+            "type": "quiz",
+            "questions": [
+                {
+                    "question": "Lequel de ces logiciels est utilisé pour éditer le code avec colorisation syntaxique ?",
+                    "answers": [
+                        "Microsoft Word",
+                        "Notion",
+                        "Bloc-Notes",
+                        "Visual Studio Code"
+                    ],
+                    "correct": 4,
+                    "explanation": "<b>Microsoft Word</b> fait partie de la suite de bureautique Microsoft Office, un ensemble de logiciels dont un traitement de texte, un tableur...<br/><b>Notion</b> permet de prendre des notes, entre autres.<br/>Le <b>Bloc-Notes (Notepad)</b> permet certes d'éditer du code, mais n'est pas adapté car ne possède pas de colorisation syntaxique.<br/><b>Visual Studio Code</b> est un IDE, donc adapté à l'édition de code."
+                }
+            ]
+        }
+    ]
+}
