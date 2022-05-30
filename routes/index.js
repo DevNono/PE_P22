@@ -10,7 +10,7 @@ const MailazyClient = require('mailazy-node');
 
 /* GET home page. */
 router.get('/', (req, res) => {
-	res.render('index', {title: 'Express'});
+	res.render('index', {title: 'Accueil'});
 });
 
 router.post('/contact', async (req, res) => {
@@ -39,7 +39,7 @@ router.get('/register', (req, res) => {
 		res.redirect('/me');
 	}
 
-	res.render('register', {title: 'Register'});
+	res.render('register', {title: 'Inscription'});
 });
 
 router.post('/register', async (req, res) => {
@@ -70,7 +70,7 @@ router.get('/login', (req, res) => {
 		res.redirect('/me');
 	}
 
-	res.render('login', {title: 'Login'});
+	res.render('login', {title: 'Connexion'});
 });
 
 router.post('/login', async (req, res) => {

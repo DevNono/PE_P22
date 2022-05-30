@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 		sections.push(section);
 	}
 
-	res.render('courses', {title: 'Courses', sections});
+	res.render('courses', {title: 'Liste des cours', sections});
 });
 
 router.get('/:id/:id2', (req, res) => {
@@ -74,7 +74,7 @@ router.get('/:id/:id2', (req, res) => {
 		}
 	}
 
-	res.render('course', {title: 'Course', section, module, whitenav: true});
+	res.render('course', {title: 'Cours', section, module, whitenav: true});
 });
 
 module.exports = router;
