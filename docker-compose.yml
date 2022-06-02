@@ -6,8 +6,8 @@ services:
     container_name: db
     restart: unless-stopped
     environment:
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
-      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_PASSWORD: $MYSQLPASSWORD
+      MYSQL_DATABASE: $MYSQLDATABASE
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     command:
       - --character-set-server=utf8mb4

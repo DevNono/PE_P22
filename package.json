@@ -4,7 +4,8 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "build": "docker-compose build",
+    "build:docker": "docker-compose build",
+    "build": "npm run prod && npx sequelize-cli db:migrate",
     "build:dev": "mix && npm run start",
     "build:production": "mix --production && npm run start:production",
     "clean:cache": "docker-compose rm -f",
