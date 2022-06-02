@@ -1,7 +1,7 @@
 {
     "title": "Ajout des joueurs",
     "description": "Dans ce module, nous allons utiliser la classe game créée précédemment pour créer notre système de joueur.",
-    "time": 3,
+    "time": 15,
     "tags": [
         "Revoir l'utilisation des classes en Javascript",
         "Utilisation de paramètres dans des fonctions"
@@ -13,7 +13,7 @@
         },
         {
             "type": "text",
-            "text": "Bienvenue dans ce cours qui va vous apprendre et vous amener à comprendre comment ajouter des joueurs dans notre jeu et de voir comment lui créer un système d'inventaire."
+            "text": "Bienvenue dans ce cours qui va vous apprendre et vous amener à comprendre comment ajouter des joueurs dans notre jeu et leurs caractéristiques avec une instance de classe."
         },
         {
             "type": "title",
