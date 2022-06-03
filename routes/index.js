@@ -24,7 +24,7 @@ router.post('/contact', async (req, res) => {
 				console.error(err);
 			}
 
-			return text.replace('{{name}}', name).replaceAll('{{email}}', email).replace('{{subject}}', subject).replace('{{message}}', message);
+			return text;
 		});
 
 		const resp = await client.send({
@@ -32,7 +32,7 @@ router.post('/contact', async (req, res) => {
 			from: process.env.EMAIL_ADDRESS,
 			subject: 'Contact - Site PE P22',
 			text: message,
-			html,
+			html: html.replace('{{name}}', name).replaceAll('{{email}}', email).replace('{{subject}}', subject).replace('{{message}}', message),
 		});
 
 		console.log('resp: ' + resp);
