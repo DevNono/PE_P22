@@ -26,6 +26,7 @@ router.post('/contact', async (req, res) => {
 
 			return text.replace('{{name}}', name).replaceAll('{{email}}', email).replace('{{subject}}', subject).replace('{{message}}', message);
 		});
+
 		const resp = await client.send({
 			to: process.env.EMAIL_ADDRESS_CONTACT, // Required
 			from: process.env.EMAIL_ADDRESS, // Use domain you verified, required
