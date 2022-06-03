@@ -28,9 +28,9 @@ router.post('/contact', async (req, res) => {
 		});
 
 		const resp = await client.send({
-			to: process.env.EMAIL_ADDRESS_CONTACT, // Required
-			from: process.env.EMAIL_ADDRESS, // Use domain you verified, required
-			subject: 'Contact - Site PE P22', // Required
+			to: process.env.EMAIL_ADDRESS_CONTACT,
+			from: process.env.EMAIL_ADDRESS,
+			subject: 'Contact - Site PE P22',
 			text: message,
 			html,
 		});
