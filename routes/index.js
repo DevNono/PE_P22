@@ -27,8 +27,6 @@ router.post('/contact', async (req, res) => {
 			return text;
 		});
 
-		console.log('html: ' + html);
-
 		const resp = await client.send({
 			to: process.env.EMAIL_ADDRESS_CONTACT,
 			from: process.env.EMAIL_ADDRESS,
