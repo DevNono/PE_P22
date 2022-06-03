@@ -6,7 +6,10 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 
 const MailazyClient = require('mailazy-node');
-// const client = new MailazyClient({accessKey: '', accessSecret: ''});
+let client;
+if (process.env.MAIL_SECRET && process.env.MAIL_CLIENT) {
+	client = new MailazyClient({accessKey: process.env.MAIL_CLIENT, accessSecret: process.env.MAIL_SECRET});
+}
 
 /* GET home page. */
 router.get('/', (req, res) => {
@@ -16,15 +19,15 @@ router.get('/', (req, res) => {
 router.post('/contact', async (req, res) => {
 	const {name, email, subject, message} = req.body;
 	try {
-		// const resp = await client.send({
-		// 	to: process.env.EMAIL_ADDRESS_CONTACT, // Required
-		// 	from: process.env.EMAIL_ADDRESS, // Use domain you verified, required
-		// 	subject: 'Contact - Site PE P22', // Required
-		// 	text: message,
-		// 	html: fs.readFile(__dirname + '/../resources/mails/contact.html', 'utf8', (err, text) => {
-		// 		res.send(text);
-		// 	}).replace('{{ name }}', name).replace('{{ email }}', email).replace('{{ subject }}', subject).replace('{{ message }}', message),
-		// });
+		const resp = await client.send({
+			to: process.env.EMAIL_ADDRESS_CONTACT, // Required
+			from: process.env.EMAIL_ADDRESS, // Use domain you verified, required
+			subject: 'Contact - Site PE P22', // Required
+			text: message,
+			html: fs.readFile(__dirname + '/../resources/mails/contact.html', 'utf8', (err, text) => {
+				res.send(text);
+			}).replace('{{ name }}', name).replace('{{ email }}', email).replace('{{ subject }}', subject).replace('{{ message }}', message),
+		});
 
 		res.send('Mail envoyé avec succès !');
 	} catch (e) {
