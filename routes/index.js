@@ -24,9 +24,13 @@ router.post('/contact', async (req, res) => {
 			from: process.env.EMAIL_ADDRESS, // Use domain you verified, required
 			subject: 'Contact - Site PE P22', // Required
 			text: message,
-			html: fs.readFile(__dirname + '/../resources/mails/contact.html', 'utf8', (err, text) => {
-				res.send(text);
-			}).replace('{{ name }}', name).replace('{{ email }}', email).replace('{{ subject }}', subject).replace('{{ message }}', message),
+			html: fs.readFileSync(__dirname + '/../resources/mails/contact.html', 'utf8', (err, text) => {
+				if (err) {
+					console.error(err);
+				}
+
+				return text.replace('{{name}}', name).replace('{{email}}', email).replace('{{subject}}', subject).replace('{{message}}', message);
+			}),
 		});
 
 		res.send('Mail envoyé avec succès !');
