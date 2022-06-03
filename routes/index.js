@@ -24,7 +24,7 @@ router.post('/contact', async (req, res) => {
 				console.error(err);
 			}
 
-			return text.replace('{{name}}', name).replace('{{email}}', email).replace('{{subject}}', subject).replace('{{message}}', message);
+			return text.replace('{{name}}', name).replaceAll('{{email}}', email).replace('{{subject}}', subject).replace('{{message}}', message);
 		});
 		const resp = await client.send({
 			to: process.env.EMAIL_ADDRESS_CONTACT, // Required
