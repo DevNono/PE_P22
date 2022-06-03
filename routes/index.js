@@ -36,7 +36,7 @@ router.post('/contact', async (req, res) => {
 
 		console.log('resp: ' + resp);
 
-		res.send('Mail envoyé avec succès !');
+		res.redirect('/');
 	} catch (e) {
 		console.log('error: ' + e);
 	}
