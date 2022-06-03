@@ -1,0 +1,20 @@
+{
+    "title": "Système de pioche",
+    "description": "Dans ce module, nous allons voir comment créer un croupier dans notre jeu du Blackjack.",
+    "time": 15,
+    "tags": [
+        "Voir une fonction principale du jeu"
+    ],
+    "content": [
+        {
+            "type": "title",
+            "text": "Introduction"
+        },
+        {
+            "type": "text",
+            "text": "Bienvenue dans ce module qui va vous apprendre à créer un croupier dans notre jeu."
+        }
+    ],
+    "exercices": [
+    ]
+}
