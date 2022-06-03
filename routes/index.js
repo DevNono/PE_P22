@@ -19,19 +19,22 @@ router.get('/', (req, res) => {
 router.post('/contact', async (req, res) => {
 	const {name, email, subject, message} = req.body;
 	try {
+		const html = fs.readFileSync(__dirname + '/../resources/mails/contact.html', 'utf8', (err, text) => {
+			if (err) {
+				console.error(err);
+			}
+
+			return text.replace('{{name}}', name).replace('{{email}}', email).replace('{{subject}}', subject).replace('{{message}}', message);
+		});
 		const resp = await client.send({
 			to: process.env.EMAIL_ADDRESS_CONTACT, // Required
 			from: process.env.EMAIL_ADDRESS, // Use domain you verified, required
 			subject: 'Contact - Site PE P22', // Required
 			text: message,
-			html: fs.readFileSync(__dirname + '/../resources/mails/contact.html', 'utf8', (err, text) => {
-				if (err) {
-					console.error(err);
-				}
-
-				return text.replace('{{name}}', name).replace('{{email}}', email).replace('{{subject}}', subject).replace('{{message}}', message);
-			}),
+			html,
 		});
+
+		console.log('resp: ' + resp);
 
 		res.send('Mail envoyé avec succès !');
 	} catch (e) {
