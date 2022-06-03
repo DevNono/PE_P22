@@ -1,4 +1,4 @@
 {
-    "title": "Tirage des cartes",
-    "description": "Apprendre à créer un algorithme qui tire des cartes"
+    "title": "Système de Joueur et de Croupier",
+    "description": "Apprendre à intégrer les joueurs et le croupier dans notre jeu de Blackjack"
 }
