@@ -60,8 +60,7 @@
         {
             "type": "text",
             "text": "Désormais créons la fonction qui va générer le jeu de cartes."
-        },
-        
+        },   
         {
             "type": "code",
             "language": "javascript",

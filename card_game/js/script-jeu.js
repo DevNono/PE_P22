@@ -71,15 +71,15 @@ const symboles = [
 
 const pseudo = [
 	{
-		id: 'nono',
+		id: 'Joueur 1',
 		type: 'human',
 	},
 	{
-		id: 'younsss',
+		id: 'Joueur 2',
 		type: 'human',
 	},
 	{
-		id: 'viet',
+		id: 'Joueur 3',
 		type: 'human',
 	},
 	{
