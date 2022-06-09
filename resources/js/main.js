@@ -414,8 +414,12 @@ document.addEventListener('DOMContentLoaded', e => {
 
 			if (maxScroll !== 'unauthorized' && scrollPercentRounded > parseInt(maxScroll, 10) && lastRequestTimestamp + 3000 < Date.now()) {
 				maxScroll = scrollPercentRounded;
-				fetch(window.href + '/progress', {
+				fetch(window.location.href + '/progress', {
 					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
 					body: JSON.stringify({
 						progress: scrollPercentRounded,
 					}),

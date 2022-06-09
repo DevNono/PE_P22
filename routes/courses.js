@@ -15,9 +15,22 @@ function escapeHtml(unsafe) {
 		.replace(/'/g, '&#039;');
 }
 
+function groupBy(array, f) {
+	const groups = {};
+	array.forEach(o => {
+		const group = f(o).join('-');
+		groups[group] = groups[group] || [];
+		delete o.section;
+		delete o.module;
+		groups[group].push(o);
+	});
+	return groups;
+}
+
 /* GET home page. */
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
 	const sections = [];
+
 	for (let i = 0; i < fs.readdirSync(path.join(__dirname, '../resources/courses')).length - 1; i++) {
 		const section = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/courses/section${i + 1}/section.json`)));
 		section.id = i + 1;
@@ -31,11 +44,24 @@ router.get('/', (req, res) => {
 		sections.push(section);
 	}
 
-	res.render('courses', {title: 'Liste des cours', sections});
+	let listProgress = null;
+
+	if (req.user !== undefined) {
+		const progress = await db.User.getAllProgress(req.user.id);
+		listProgress = groupBy(progress, item => [item.section, item.module]);
+	}
+
+	res.render('courses', {title: 'Liste des cours', sections, listProgress});
 });
 
 router.get('/:id/:id2/next', async (req, res) => {
 	const {id, id2} = req.params;
+
+	const {section, module} = req.query;
+
+	db.User.updateProgress(req.user.id, parseInt(id, 10), parseInt(id2, 10), 100);
+
+	res.redirect(`/courses/${section}/${module}`);
 });
 
 router.get('/:id/:id2', async (req, res) => {
@@ -91,7 +117,7 @@ router.get('/:id/:id2', async (req, res) => {
 
 router.post('/:id/:id2/progress', (req, res) => {
 	const {id, id2} = req.params;
-	console.log(id, id2);
+	console.log(req.data);
 	const {progress} = req.body;
 
 	// Make sure the user is logged in

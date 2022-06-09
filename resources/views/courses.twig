@@ -22,6 +22,11 @@
 						{% for module in section.modules %}
 							<div class="w-full m-4 bg-white xl:w-1/4 md:w-1/2 rounded-xl">
 								<div class="relative flex flex-col h-full gap-3 p-6 overflow-hidden border-2 shadow-lg rounded-xl border-gray-50">
+									{% if auth and listProgress[(section.id ~ '-' ~ module.id)] != undefined %}
+										<div class="absolute top-0 left-0 flex w-full h-1 overflow-hidden" style="width: {{ listProgress[(section.id ~ '-' ~ module.id)][0].progress }}%;">
+											<div class="w-full h-full bg-gradient-to-r from-rose-900 to-red-500"></div>
+										</div>
+									{% endif %}
 									<h1 class="pb-4 mb-2 text-2xl font-semibold text-gray-900 border-b border-gray-100">{{ module.title }}</h1>
 									{% for tag in module.tags %}
 										<p class="flex items-center text-gray-600">

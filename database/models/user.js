@@ -70,6 +70,20 @@ module.exports = (sequelize, DataTypes) => {
 		);
 	};
 
+	User.getAllProgress = async function (UserId) {
+		const {Progress} = sequelize.models;
+
+		return Progress.findAll({where: {UserId}}).then(
+			objs => {
+				if (objs) {
+					return objs.map(obj => ({module: obj.module, section: obj.section, progress: obj.progress}));
+				}
+
+				return [];
+			},
+		);
+	};
+
 	// In order to define an instance method, we have to access
 	// the User model prototype. This can be found in the
 	// sequelize documentation
