@@ -1,3 +1,4 @@
+/* global db */
 'use strict';
 const express = require('express');
 const router = express.Router();
@@ -33,9 +34,12 @@ router.get('/', (req, res) => {
 	res.render('courses', {title: 'Liste des cours', sections});
 });
 
-router.get('/:id/:id2', (req, res) => {
-	const {id} = req.params;
-	const {id2} = req.params;
+router.get('/:id/:id2/next', async (req, res) => {
+	const {id, id2} = req.params;
+});
+
+router.get('/:id/:id2', async (req, res) => {
+	const {id, id2} = req.params;
 
 	const section = JSON.parse(fs.readFileSync(path.join(__dirname, `../resources/courses/section${id}/section.json`)));
 	section.id = id;
@@ -74,7 +78,29 @@ router.get('/:id/:id2', (req, res) => {
 		}
 	}
 
-	res.render('course', {title: 'Cours', section, module, whitenav: true});
+	let progress;
+
+	if (req.user === undefined) {
+		progress = 'unauthorized';
+	} else {
+		progress = await db.User.getProgress(req.user.id, id, id2);
+	}
+
+	res.render('course', {title: 'Cours', section, module, progress, whitenav: true});
+});
+
+router.post('/:id/:id2/progress', (req, res) => {
+	const {id, id2} = req.params;
+	console.log(id, id2);
+	const {progress} = req.body;
+
+	// Make sure the user is logged in
+	if (req.user !== undefined) {
+		res.redirect('/me');
+	}
+
+	// Make a request to the database to update the progress
+	return db.User.updateProgress(req.user.id, parseInt(id, 10), parseInt(id2, 10), progress);
 });
 
 module.exports = router;

@@ -393,4 +393,35 @@ document.addEventListener('DOMContentLoaded', e => {
 		el.addEventListener('dragover', gapDragOver, false);
 		el.addEventListener('drop', gapDrop, false);
 	});
+
+	const scrollBar = document.querySelector('#scrollbar');
+	let maxScroll = null;
+	const url = window.location.pathname.match(/(?<c>courses)\/(?<s>[1-9]+)\/(?<m>[1-9]+)/);
+
+	let lastRequestTimestamp = Date.now();
+	window.addEventListener('scroll', () => {
+		if (url !== null) {
+			if (maxScroll === null) {
+				maxScroll = scrollBar.dataset.scrollbar;
+			}
+
+			const scrollTop = window.scrollY;
+			const docHeight = document.body.offsetHeight;
+			const winHeight = window.innerHeight;
+			const scrollPercent = scrollTop / (docHeight - winHeight);
+			const scrollPercentRounded = Math.round(scrollPercent * 100);
+			scrollBar.style.width = scrollPercentRounded + '%';
+
+			if (maxScroll !== 'unauthorized' && scrollPercentRounded > parseInt(maxScroll, 10) && lastRequestTimestamp + 3000 < Date.now()) {
+				maxScroll = scrollPercentRounded;
+				fetch(window.href + '/progress', {
+					method: 'POST',
+					body: JSON.stringify({
+						progress: scrollPercentRounded,
+					}),
+				});
+				lastRequestTimestamp = Date.now();
+			}
+		}
+	});
 });
