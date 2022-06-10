@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
      */
 		static associate(models) {
 			User.hasMany(models.AuthToken);
+			User.hasMany(models.Progress);
 		}
 	}
 	User.init({
@@ -39,6 +40,48 @@ module.exports = (sequelize, DataTypes) => {
 		}
 
 		throw new Error('invalid password');
+	};
+
+	User.updateProgress = async function (UserId, section, module, progress) {
+		const {Progress} = sequelize.models;
+
+		return Progress.findOne({where: {UserId, section, module}}).then(
+			obj => {
+				if (obj) {
+					return obj.update({progress});
+				}
+
+				return Progress.create({UserId, section, module, progress});
+			},
+		);
+	};
+
+	User.getProgress = async function (UserId, section, module) {
+		const {Progress} = sequelize.models;
+
+		return Progress.findOne({where: {UserId, section, module}}).then(
+			obj => {
+				if (obj) {
+					return obj.progress;
+				}
+
+				return 0;
+			},
+		);
+	};
+
+	User.getAllProgress = async function (UserId) {
+		const {Progress} = sequelize.models;
+
+		return Progress.findAll({where: {UserId}}).then(
+			objs => {
+				if (objs) {
+					return objs.map(obj => ({module: obj.module, section: obj.section, progress: obj.progress}));
+				}
+
+				return [];
+			},
+		);
 	};
 
 	// In order to define an instance method, we have to access

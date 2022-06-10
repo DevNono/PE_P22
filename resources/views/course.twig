@@ -6,7 +6,9 @@
 {% endblock %}
 
 {% block body %}
-	{# Display a div with a bg gradient thanks to tailwindcss v3 #}
+	<div class="fixed top-0 flex w-0 h-1 overflow-hidden transition-all duration-100" data-scrollbar="{{progress}}" id="scrollbar">
+		<div class="w-full h-full bg-gradient-to-r from-rose-900 to-red-500"></div>
+	</div>
 	<div class="bg-gradient-to-r from-rose-900 to-red-500 h-[40vh] mb-4 flex px-8 md:px-20 py-28 justify-center clip-path flex-col text-white">
 		<p class="-mb-1.5 italic information">Section
 			{{ section.id }}
@@ -141,7 +143,7 @@
 			</div>
 			{% if section.next != null and module.next != null %}
 				<div class="flex items-center justify-center w-full my-4 buttons">
-					<a href="/courses/{{ section.next }}/{{ module.next }}" class="px-2 py-1 text-white transition-all duration-200 bg-blue-600 rounded-md cursor-pointer hover:bg-blue-700">Cours Suivant</a>
+					<a href="/courses/{{ section.id }}/{{ module.id }}/next?section={{ section.next }}&module={{ module.next }}" class="px-2 py-1 text-white transition-all duration-200 bg-blue-600 rounded-md cursor-pointer hover:bg-blue-700">Cours Suivant</a>
 				</div>
 			{% else %}
 				<div class="flex items-center justify-center w-full mt-8 mb-4">
