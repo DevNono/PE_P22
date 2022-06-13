@@ -129,6 +129,20 @@
             "language": "javascript",
             "code": "for (let index = 0; index < pseudo.length; index++) {\n    const nom = pseudo[index].id; // Identifiant du joueur\n    const {type} = pseudo[index]; // Type du joueur\n   this.joueurs.push(new Joueur(nom, type)); // On ajoute le joueur\n},",
             "description" : "Cette boucle est dans la fonction constructor de la classe Game pour initaliser les joueurs à chaque fois qu'on créé une variable de la classe Game..."
+        },
+        {
+            "type": "title",
+            "text": "Création d'une fonction pour gérer le tour d'un bot"
+        },
+        {
+            "type": "text",
+            "text": "Une fonction qui permet de jouer le tour d'un bot. Cette fonction va être utilisée dans la fonction constructor de la classe Game et va permettre de gérer le tour d'un bot."
+        },
+        {
+            "type": "code",
+            "language": "javascript",
+            "code": "tour_bot(bot) {\n    while (game.joueurs[bot].score < 18) {\n        game.joueurs[bot].inventaire.push(game.cards.shift()); // On ajoute une carte au joueur\n        const position = game.joueurs[bot].inventaire.length - 1; // On calcule la position de la carte\n        game.joueurs[bot].score += game.joueurs[bot].inventaire[position].valeur; // On calcule le score du joueur\n    }\n}",
+            "description": "Fonction permettant de gérer le tour d'un bot"
         }
     ],
     "exercices": [

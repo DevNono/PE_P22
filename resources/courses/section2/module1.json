@@ -1,10 +1,9 @@
 {
     "title": "Création de la classe principale",
-    "description": "",
+    "description": "Ce module permet d'apprendre à créer la classe principale du jeu",
     "time": 3,
     "tags": [
-        "",
-        ""
+        "Apprendre à créer une classe et à l'instancier"
     ],
     "content": [
         {
@@ -46,6 +45,20 @@
 
     ],
     "exercices": [
-        
+        {
+            "type": "quiz",
+            "questions": [
+                {
+                    "question": "Comment instancier une classe ?",
+                    "answers": [
+                        "var variable = nouv Class();",
+                        "let variable = new Class();",
+                        "const variable = new Class;"
+                    ],
+                    "correct": 2,
+                    "explanation": "On utilise le mot clé new suivi du nom de la classe puis de parenthèses avant de mettre un point virgule."
+                }
+            ]
+        }
     ]
 }
