@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 router.post('/contact', async (req, res) => {
 	const {name, email, subject, message} = req.body;
 	try {
-		const html = fs.readFileSync(__dirname + '/../resources/mails/contact.html', 'utf8', (err, text) => {
+		const html = await fs.readFile(__dirname + '/../resources/mails/contact.html', 'utf8', (err, text) => {
 			if (err) {
 				console.error(err);
 			}
