@@ -62,6 +62,11 @@ router.get('/:id/:id2/next', async (req, res) => {
 		db.User.updateProgress(req.user.id, parseInt(id, 10), parseInt(id2, 10), 100);
 	}
 
+	if (section === undefined || module === undefined) {
+		res.redirect(`/courses/${id}/${id2}`);
+		return;
+	}
+
 	res.redirect(`/courses/${section}/${module}`);
 });
 
