@@ -1,7 +1,7 @@
 {
     "title": "Tour d'un joueur",
     "description": "Apprendre à créer un tour d'un joueur",
-    "time": 3,
+    "time": 5,
     "tags": [
         "Apprendre à créer le tour d'un joueur"
     ],
@@ -52,6 +52,21 @@
         }
     ],
     "exercices": [
-        
+        {
+            "type": "quiz",
+            "questions": [
+                {
+                    "question": "Combien d'actions peut effectuer un joueur dans un tour ?",
+                    "answers": [
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                    ],
+                    "correct": 1,
+                    "explanation": "Il y a deux actions possibles : piocher une carte ou passer son tour."
+                }
+            ]
+        }
     ]
 }

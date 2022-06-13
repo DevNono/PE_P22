@@ -171,7 +171,7 @@
     "exercices": [
         {
             "type": "gapfill",
-            "title": "Complete this code",
+            "title": "Compléter ce code",
             "text": " %gap% maFonction ( %gap% ) {\n     %gap% (parametre) %gap%  \n %gap% ",
             "gaps": [
                 {

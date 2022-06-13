@@ -1,7 +1,7 @@
 {
     "title": "Système de pioche",
     "description": "Dans ce module, nous allons voir comment créer un système de pioche",
-    "time": 15,
+    "time": 3,
     "tags": [
         "Créer un système de pioche"
     ],
@@ -26,5 +26,20 @@
         }
     ],
     "exercices": [
+        {
+            "type": "quiz",
+            "questions": [
+                {
+                    "question": "Quand appelle-t-on la fonction pioche ?",
+                    "answers": [
+                        "Lorsque le joueur clique sur le bouton \"piocher\"",
+                        "Lorsque le joueur clique sur le bouton \"jouer\"",
+                        "Lorsque le joueur clique sur le bouton \"passer son tour\""
+                    ],
+                    "correct": 1,
+                    "explanation": "Lorsque le joueur clique sur le bouton piocher, on appelle la fonction pioche."
+                }
+            ]
+        }
     ]
 }

@@ -1,10 +1,9 @@
 {
     "title": "Génération des cartes",
     "description": "Apprendre à générer des cartes en JavaScript",
-    "time": 3,
+    "time": 8,
     "tags": [
-        "",
-        ""
+        "Générer des cartes à jouer en JavaScript"
     ],
     "content": [
         {
@@ -69,6 +68,21 @@
         }
     ],
     "exercices": [
-        
+        {
+            "type": "quiz",
+            "questions": [
+                {
+                    "question": "Quel est le nom de la fonction qui va générer le jeu de cartes ?",
+                    "answers": [
+                        "generer_cartes",
+                        "generer_jeu",
+                        "generer_jeu_cartes",
+                        "generer_jeu_cartes_52"
+                    ],
+                    "correct": 1,
+                    "explanation": "La fonction generer_cartes() va générer le jeu de cartes."
+                }
+            ]
+        }
     ]
 }

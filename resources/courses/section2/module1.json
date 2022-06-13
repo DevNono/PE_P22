@@ -1,7 +1,7 @@
 {
     "title": "Création de la classe principale",
     "description": "Ce module permet d'apprendre à créer la classe principale du jeu",
-    "time": 3,
+    "time": 5,
     "tags": [
         "Apprendre à créer une classe et à l'instancier"
     ],
@@ -45,6 +45,35 @@
 
     ],
     "exercices": [
+        {
+            "type": "gapfill",
+            "title": "Compléter ce code",
+            "text": " %gap% maClasse {\n     %gap% () {\n         %gap% = %gap% ; \n    }  \n %gap% ",
+            "gaps": [
+                {
+                    "text": "class",
+                    "correct": 1
+                },
+                {
+                    "text": "constructor",
+                    "correct": 2
+                },
+                {
+                    "text": "this.variable",
+                    "correct": 3
+                },
+                {
+                    "text": "valeur",
+                    "correct": 4
+                },
+                {
+                    "text": "}",
+                    "correct": 5
+                }
+            ],
+            "height": "120px"
+
+        },
         {
             "type": "quiz",
             "questions": [

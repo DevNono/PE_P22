@@ -1,6 +1,6 @@
 {
     "title": "Distribution initiale des cartes aux joueurs",
-    "description": "",
+    "description": "Comment distribuer les cartes aux joueurs ?",
     "time": 5,
     "tags": [
         "Manipulation de tableau"
@@ -59,5 +59,20 @@
         }
     ],
     "exercices": [
+        {
+            "type": "quiz",
+            "questions": [
+                {
+                    "question": "Quel est le résultat de la méthode <h>distribution()</h> ?",
+                    "answers": [
+                        "La méthode ne fait rien",
+                        "La méthode distribue les cartes aux joueurs",
+                        "La méthode distribue les cartes aux joueurs et retourne les cartes restantes"
+                    ],
+                    "correct": 2,
+                    "explanation": "La méthode distribution() distribue les cartes aux joueurs mais elle ne retourne rien."
+                }
+            ]
+        }
     ]
 }

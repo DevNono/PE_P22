@@ -1,7 +1,7 @@
 {
     "title": "Fin d'une manche",
     "description": "Apprendre à gérer la fin d'une manche",
-    "time": 3,
+    "time": 4,
     "tags": [
         "Créer une fonction permettant de gérer la fin d'une manche"
     ],
@@ -26,6 +26,20 @@
         }
     ],
     "exercices": [
-        
+        {
+            "type": "quiz",
+            "questions": [
+                {
+                    "question": "Comment appeller la fonction manche_suivante ?",
+                    "answers": [
+                        "game.manche_suivante();",
+                        "Game.manche_suivante();",
+                        "game.Game.manche_suivante();"
+                    ],
+                    "correct": 1,
+                    "explanation": "La fonction manche_suivante est appelée avec le mot clé \"game.\""
+                }
+            ]
+        }
     ]
 }
