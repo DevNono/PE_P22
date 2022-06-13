@@ -58,8 +58,9 @@ router.get('/:id/:id2/next', async (req, res) => {
 	const {id, id2} = req.params;
 
 	const {section, module} = req.query;
-
-	db.User.updateProgress(req.user.id, parseInt(id, 10), parseInt(id2, 10), 100);
+	if (req.user !== undefined) {
+		db.User.updateProgress(req.user.id, parseInt(id, 10), parseInt(id2, 10), 100);
+	}
 
 	res.redirect(`/courses/${section}/${module}`);
 });
