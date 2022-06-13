@@ -27,15 +27,13 @@ router.post('/contact', async (req, res) => {
 			return text;
 		});
 
-		const resp = await client.send({
+		client.send({
 			to: process.env.EMAIL_ADDRESS_CONTACT,
 			from: process.env.EMAIL_ADDRESS,
 			subject: 'Contact - Site PE P22',
 			text: message,
 			html: html.replace('{{name}}', name).replaceAll('{{email}}', email).replace('{{subject}}', subject).replace('{{message}}', message),
 		});
-
-		console.log('resp: ' + resp);
 
 		res.redirect('/');
 	} catch (e) {

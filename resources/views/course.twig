@@ -101,7 +101,8 @@
 							{{ exercice.title }}</h3>
 						<p class="">{{ exercice.question }}</p>
 						<div class="relative flex flex-col w-full gap-2 px-10 py-8 text-white bg-gray-800 gap-fill rounded-2xl" data-answers="{{ exercice.gaps | json_encode | raw | replace({'"': "§"}) }}">
-							<div class="flex">
+							<div class="flex" {% if exercice.height %}
+							 style="height: {{ exercice.height }}" {% endif %}>
 								<pre class="relative w-full h-full bg-gray-800 rounded-lg pointer-events-none">
 									<code class="absolute top-0 left-0 z-10 w-full overflow-auto whitespace-nowrap output preview language-javascript">{{ exercice.text | replace({'%gap%': '____'}) }}</code>
 								</pre>

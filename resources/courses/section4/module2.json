@@ -152,5 +152,32 @@
         }
     ],
     "exercices": [
+        {
+            "type": "quiz",
+            "questions": [
+                {
+                    "question": "Quelle est la stratégie du croupier dans l'algorithme ?",
+                    "answers": [
+                        "Tant que le croupier n'obtient pas un score de 17, il doit piocher une nouvelle carte",
+                        "Tant que le croupier obtient un score de 17, il doit piocher une nouvelle carte.",
+                        "Tant que le croupier obtient un score inférieur à 17, il doit piocher une nouvelle carte.",
+                        "Tant que le croupier obtient un score supérieur à 17, il doit piocher une nouvelle carte."
+                    ],
+                    "correct": 3,
+                    "explanation": "La stratégie du croupier est de piocher une carte tant que le croupier a un score inférieur à 17."
+                },
+                {
+                    "question": "Parmi ces affirmations laquelle est fausse ?",
+                    "answers": [
+                        "Le croupier fonctionne comme un bot",
+                        "La règle du stand soft 17 consiste à faire en sorte que le croupier obtienne un score de 17 au minimum.",
+                        "Le code du croupier est écrit en Javascript.",
+                        "Le croupier ne peut pas piocher deux fois de suite."
+                    ],
+                    "correct": 4,
+                    "explanation": "Le croupier peut piocher deux fois de suite."
+                }
+            ]
+        }
     ]
 } 

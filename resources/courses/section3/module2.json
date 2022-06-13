@@ -1,7 +1,7 @@
 {
     "title": "Mélange d'un deck de carte avec un algorithme",
     "description": "Dans ce module, nous allons voir comment on crée un algorithme pour distribuer des cartes d'un deck aléatoirement, comme si on reproduisait une distribution de carte d'un deck mélangé dans la vraie vie !",
-    "time": 3,
+    "time": 8,
     "tags": [
         "Voir un algorithme de mélange"
     ],
@@ -86,6 +86,21 @@
         }
     ],
     "exercices": [
-        
+        {
+            "type": "quiz",
+            "questions": [
+                {
+                    "question": "Quel est le nom de l'algorithme de mélange ?",
+                    "answers": [
+                        "L'algorithme de Poisson-Mate",
+                        "L'algorithme de Pêcheur-Pates",
+                        "L'algorithme de Fisher-Yates",
+                        "L'algorithme de Fish-Lates"
+                    ],
+                    "correct": 3,
+                    "explanation": "Fisher-Yates est le nom de l'algorithme de mélange."
+                }
+            ]
+        }
     ]
 }
