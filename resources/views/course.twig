@@ -147,8 +147,10 @@
 					<a href="/courses/{{ section.id }}/{{ module.id }}/next?section={{ section.next }}&module={{ module.next }}" class="px-2 py-1 text-white transition-all duration-200 bg-blue-600 rounded-md cursor-pointer hover:bg-blue-700">Cours Suivant</a>
 				</div>
 			{% else %}
-				<div class="flex items-center justify-center w-full mt-8 mb-4">
-					<p class="font-medium text-center text-gray-800 information">Vous avez terminé ce cours et vous êtes désormais capable de construire un jeu de carte du type du BlackJack en JavaScript. <br /><b>Félicitations !</b></p>
+				<div class="flex flex-col items-center justify-center w-full mt-8 mb-4 gap-1">
+					<p class="font-medium text-center text-gray-800 information">Vous avez terminé ce cours et vous êtes désormais capable de construire un jeu de carte du type du BlackJack en JavaScript. <br />
+					<b>Félicitations !</b></p>
+					<p class="font-medium text-center text-gray-800 information"><a href="/code_jeu.zip" download>Vous pouvez télécharger le code source complet du jeu en cliquant <b>ici</b></a></p>
 				</div>
 			{% endif %}
 			
