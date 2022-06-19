@@ -32,7 +32,7 @@
     "helmet": "^5.0.2",
     "http-errors": "~1.6.3",
     "mailazy-node": "^0.2.0",
-    "morgan": "~1.9.1",
+    "morgan": "~1.10.0",
     "mysql2": "^2.3.3",
     "sequelize": "^6.15.0",
     "sweetalert2": "^11.4.14",
