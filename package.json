@@ -30,7 +30,7 @@
     "express": "~4.16.1",
     "express-validator": "^6.14.0",
     "helmet": "^5.0.2",
-    "http-errors": "~1.6.3",
+    "http-errors": "~1.8.1",
     "mailazy-node": "^0.2.0",
     "morgan": "~1.9.1",
     "mysql2": "^2.3.3",
