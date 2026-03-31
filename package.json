@@ -34,7 +34,7 @@
     "mailazy-node": "^0.2.0",
     "morgan": "~1.9.1",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.15.0",
+    "sequelize": "^6.21.2",
     "sweetalert2": "^11.4.14",
     "tailwindcss": "^3.0.18",
     "twig": "^1.15.4"
